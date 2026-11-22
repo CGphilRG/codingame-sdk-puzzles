@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CodinGame SDK Puzzles Hub — 6 Jeux Multijoueurs &amp; RPG (PixiJS v4.7.7)</title>
+  <title>CodinGame SDK Puzzles Hub — FR / EN / DE / JP (PixiJS v4.7.7)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+JP:wght@400;500;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #0b0f19;
@@ -23,7 +23,7 @@
     * { box-sizing: border-box; }
     body {
       margin: 0;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: 'Inter', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
       background: radial-gradient(circle at 50% 0%, #17223b 0%, var(--bg) 55%);
       color: var(--text);
       line-height: 1.6;
@@ -32,9 +32,59 @@
     a:hover { text-decoration: underline; }
     code, pre { font-family: 'JetBrains Mono', monospace; }
 
+    /* Top Language Bar */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.65rem 1.5rem;
+      background: rgba(11, 15, 25, 0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .topbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-weight: 800;
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+    .lang-switcher {
+      display: flex;
+      gap: 0.4rem;
+    }
+    .lang-btn {
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.38rem 0.75rem;
+      border-radius: 0.5rem;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      font-weight: 700;
+      transition: all 0.15s ease;
+    }
+    .lang-btn:hover {
+      border-color: var(--accent-blue);
+      color: var(--text);
+    }
+    .lang-btn.active {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      border-color: #60a5fa;
+      color: #ffffff;
+      box-shadow: 0 0 14px rgba(59, 130, 246, 0.4);
+    }
+
     /* Header */
     .hero {
-      padding: 3.5rem 1.5rem 2.5rem;
+      padding: 2.8rem 1.5rem 2.3rem;
       text-align: center;
       border-bottom: 1px solid var(--border);
       background: linear-gradient(180deg, rgba(56,189,248,0.08) 0%, rgba(11,15,25,0) 100%);
@@ -54,8 +104,8 @@
     }
     .hero h1 {
       margin: 0 auto 0.8rem;
-      max-width: 960px;
-      font-size: clamp(1.9rem, 3.6vw, 3rem);
+      max-width: 980px;
+      font-size: clamp(1.8rem, 3.4vw, 2.85rem);
       font-weight: 800;
       letter-spacing: -0.02em;
       background: linear-gradient(90deg, #ffffff, #93c5fd, #fcd34d);
@@ -63,17 +113,17 @@
       -webkit-text-fill-color: transparent;
     }
     .hero p {
-      max-width: 820px;
+      max-width: 860px;
       margin: 0 auto 1.6rem;
       color: var(--text-muted);
-      font-size: 1.05rem;
+      font-size: 1.03rem;
     }
     .nav-pills {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 0.6rem;
-      max-width: 1100px;
+      max-width: 1120px;
       margin: 0 auto;
     }
     .nav-pill {
@@ -123,7 +173,7 @@
     }
     .theater-title h2 {
       margin: 0;
-      font-size: 1.35rem;
+      font-size: 1.32rem;
     }
     .live-dot {
       width: 11px;
@@ -217,7 +267,7 @@
     }
     .series-banner h2 {
       margin: 0 0 0.3rem;
-      font-size: 1.5rem;
+      font-size: 1.45rem;
     }
     .series-banner p {
       margin: 0;
@@ -289,7 +339,7 @@
 
     .puzzle-top h3 {
       margin: 0;
-      font-size: 1.6rem;
+      font-size: 1.55rem;
     }
     .btn-row {
       display: flex;
@@ -411,7 +461,7 @@
       font-size: 0.9rem;
       color: #cbd5e1;
     }
-    .rules-list li { margin-bottom: 0.4rem; }
+    .rules-list li { margin-bottom: 0.45rem; }
     .protocol-box {
       background: #090d16;
       border: 1px solid var(--border);
@@ -434,17 +484,31 @@
 </head>
 <body>
 
+  <!-- STICKY LANGUAGE BAR -->
+  <div class="topbar">
+    <div class="topbar-brand">
+      <span>🎮 CodinGame SDK Puzzles Hub</span>
+      <span style="color:var(--text-muted); font-weight:500; font-size:0.82rem;">(@codingame-team)</span>
+    </div>
+    <div class="lang-switcher" role="group" aria-label="Language Selector">
+      <button class="lang-btn active" data-lang="fr" onclick="setLanguage('fr')">🇫🇷 FR</button>
+      <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">🇬🇧 EN</button>
+      <button class="lang-btn" data-lang="de" onclick="setLanguage('de')">🇩🇪 DE</button>
+      <button class="lang-btn" data-lang="jp" onclick="setLanguage('jp')">🇯🇵 JP</button>
+    </div>
+  </div>
+
   <!-- HERO HEADER -->
   <header class="hero">
     <div class="hero-badge">CodinGame SDK v4.7.7 • Java 17 &amp; PixiJS v6</div>
-    <h1>Catalogue des 6 Puzzles CodinGame &amp; Lecteur de Replays PixiJS</h1>
-    <p>
+    <h1 data-i18n="hero_title">Catalogue des 6 Puzzles CodinGame &amp; Lecteur de Replays PixiJS</h1>
+    <p data-i18n="hero_sub">
       Retrouvez nos 6 créations communautaires développées avec le SDK officiel CodinGame :
       <b>3 puzzles algorithmiques multijoueurs</b> (graphes, flots, balistique inertielle) et
       <b>3 puzzles RPG tactiques</b> dotés d'un viewer PixiJS <b>Dual-Mode</b> (<i>RPG Sprites</i> vs <i>Geometric Debug</i>).
     </p>
     <nav class="nav-pills">
-      <a class="nav-pill" href="#replay-theater">🎬 Lecteur PixiJS Interactif</a>
+      <a class="nav-pill" href="#replay-theater" data-i18n="nav_theater">🎬 Lecteur PixiJS Interactif</a>
       <a class="nav-pill" href="#chrono-tactics">1. Chrono-Tactics</a>
       <a class="nav-pill" href="#quantum-relay">2. Quantum Relay</a>
       <a class="nav-pill" href="#corsairs-maelstrom">3. Corsairs of the Maelstrom</a>
@@ -461,9 +525,9 @@
       <div class="theater-header">
         <div class="theater-title">
           <span class="live-dot"></span>
-          <h2>Lecteur de Replays PixiJS en Direct (18 Matchs Embarqués)</h2>
+          <h2 data-i18n="theater_title">Lecteur de Replays PixiJS en Direct (18 Matchs Embarqués)</h2>
         </div>
-        <a id="open-full-inspector" class="btn btn-primary" href="replays/proving-grounds-werdna/test.html?replay=replay3.json" target="_blank" rel="noopener">
+        <a id="open-full-inspector" class="btn btn-primary" href="replays/proving-grounds-werdna/test.html?replay=replay3.json" target="_blank" rel="noopener" data-i18n="btn_inspector">
           🔍 Ouvrir l'Inspecteur Complet (Console &amp; Logs)
         </a>
       </div>
@@ -481,13 +545,13 @@
       <!-- Match Selector -->
       <div class="theater-subbar">
         <div class="match-group" id="theater-match-btns">
-          <span style="font-size:0.86rem; color:var(--text-muted); font-weight:600;">Sélectionner une partie :</span>
-          <button class="match-btn" data-match="1" onclick="switchMatch(1)">Match 1 (Ligue Bois 2 / Test 1)</button>
-          <button class="match-btn" data-match="2" onclick="switchMatch(2)">Match 2 (Ligue Bois 1 / Test 2)</button>
-          <button class="match-btn active" data-match="3" onclick="switchMatch(3)">Match 3 (Ligue Bronze+ / Test 3)</button>
+          <span style="font-size:0.86rem; color:var(--text-muted); font-weight:600;" data-i18n="select_match_lbl">Sélectionner une partie :</span>
+          <button class="match-btn" data-match="1" onclick="switchMatch(1)" data-i18n="match1_btn">Match 1 (Bois 2 / Test 1)</button>
+          <button class="match-btn" data-match="2" onclick="switchMatch(2)" data-i18n="match2_btn">Match 2 (Bois 1 / Test 2)</button>
+          <button class="match-btn active" data-match="3" onclick="switchMatch(3)" data-i18n="match3_btn">Match 3 (Bronze+ / Test 3)</button>
         </div>
         <span id="current-replay-label" style="font-size:0.85rem; color:#fcd34d; font-weight:600;">
-          Puzzle actif : Proving Grounds of Werdna — Match 3
+          Proving Grounds of Werdna — Match 3
         </span>
       </div>
 
@@ -497,8 +561,8 @@
       </div>
 
       <div class="theater-tip">
-        <span>💡 <b>Astuce Dual-Mode (Puzzles RPG 4, 5, 6) :</b> cliquez sur l'icône <b>⚙️ Engrenage</b> en bas à droite du lecteur PixiJS pour basculer en temps réel entre <code>RPG SPRITES</code> et <code>GEOMETRIC DEBUG</code> !</span>
-        <span>Contrôles : Lecture/Pause, Curseur tour par tour, Vitesse (1x à 10x) et Plein écran.</span>
+        <span data-i18n="theater_tip">💡 <b>Astuce Dual-Mode (Puzzles RPG 4, 5, 6) :</b> cliquez sur l'icône <b>⚙️ Engrenage</b> en bas à droite du lecteur PixiJS pour basculer en temps réel entre <code>RPG SPRITES</code> et <code>GEOMETRIC DEBUG</code> !</span>
+        <span data-i18n="theater_controls">Contrôles : Lecture/Pause, Curseur tour par tour, Vitesse (1x à 10x) et Plein écran.</span>
       </div>
     </section>
 
@@ -508,12 +572,12 @@
         <thead>
           <tr>
             <th>#</th>
-            <th>Puzzle</th>
-            <th>Catégorie</th>
-            <th>Thème &amp; Mécaniques Clés</th>
-            <th>Dépôt GitHub (<code>@codingame-team</code>)</th>
-            <th>Contribution CodinGame</th>
-            <th>Démo IDE</th>
+            <th data-i18n="th_puzzle">Puzzle</th>
+            <th data-i18n="th_category">Catégorie</th>
+            <th data-i18n="th_mechanics">Thème &amp; Mécaniques Clés</th>
+            <th>GitHub (<code>@codingame-team</code>)</th>
+            <th>CodinGame</th>
+            <th>IDE Demo</th>
           </tr>
         </thead>
         <tbody>
@@ -521,66 +585,64 @@
             <td><b>1</b></td>
             <td><a href="#chrono-tactics"><b>Chrono-Tactics</b></a></td>
             <td><span class="badge badge-multi">Bot Programming</span></td>
-            <td>Arène 11×11 à effondrement progressif, <code>BOMB</code>, <code>PUSH</code>, Voronoï &amp; MCTS</td>
+            <td data-i18n="td_desc_1">Arène 11×11 à effondrement progressif, <code>BOMB</code>, <code>PUSH</code>, Voronoï &amp; MCTS</td>
             <td><a href="https://github.com/codingame-team/codingame-chrono-tactics" target="_blank">codingame-chrono-tactics</a></td>
             <td><a href="https://www.codingame.com/contribute/view/15861375695065563529e288291b702e8df659" target="_blank">Contribution</a></td>
-            <td><a href="https://www.codingame.com/ide/demo/160565706ec1b3064e2be42d9cc50401b0ae417" target="_blank">Jouer IDE</a></td>
+            <td><a href="https://www.codingame.com/ide/demo/160565706ec1b3064e2be42d9cc50401b0ae417" target="_blank">IDE Demo</a></td>
           </tr>
           <tr>
             <td><b>2</b></td>
             <td><a href="#quantum-relay"><b>Quantum Relay</b></a></td>
             <td><span class="badge badge-multi">Bot Programming</span></td>
-            <td>Arbres de relais d'énergie (<code>LINK</code>), surcharge (<code>OVERCHARGE</code>) &amp; intersections</td>
+            <td data-i18n="td_desc_2">Arbres de relais d'énergie (<code>LINK</code>), surcharge (<code>OVERCHARGE</code>) &amp; intersections</td>
             <td><a href="https://github.com/codingame-team/codingame-quantum-relay" target="_blank">codingame-quantum-relay</a></td>
             <td><a href="https://www.codingame.com/contribute/view/15864612ee375b7372711a629aff1930a46f01" target="_blank">Contribution</a></td>
-            <td><a href="https://www.codingame.com/ide/demo/1605690daf156413f9393afba6e22199f0011bc" target="_blank">Jouer IDE</a></td>
+            <td><a href="https://www.codingame.com/ide/demo/1605690daf156413f9393afba6e22199f0011bc" target="_blank">IDE Demo</a></td>
           </tr>
           <tr>
             <td><b>3</b></td>
             <td><a href="#corsairs-maelstrom"><b>Corsairs of the Maelstrom</b></a></td>
             <td><span class="badge badge-multi">Bot Programming</span></td>
-            <td>Physique inertielle à masse variable, vortex du Maelström, <code>ANCHOR</code> &amp; <code>FIRE</code></td>
+            <td data-i18n="td_desc_3">Physique inertielle à masse variable, vortex du Maelström, <code>ANCHOR</code> &amp; <code>FIRE</code></td>
             <td><a href="https://github.com/codingame-team/codingame-corsairs-maelstrom" target="_blank">codingame-corsairs-maelstrom</a></td>
             <td><a href="https://www.codingame.com/contribute/view/158647b537dec10e539706b149bde5a6c7442f" target="_blank">Contribution</a></td>
-            <td><a href="https://www.codingame.com/ide/demo/1605692ff7906372a45b3320918ac8fbdaaa75f" target="_blank">Jouer IDE</a></td>
+            <td><a href="https://www.codingame.com/ide/demo/1605692ff7906372a45b3320918ac8fbdaaa75f" target="_blank">IDE Demo</a></td>
           </tr>
           <tr>
             <td><b>4</b></td>
             <td><a href="#proving-grounds-werdna"><b>Proving Grounds of Werdna</b></a></td>
             <td><span class="badge badge-rpg">RPG 1v1</span> <span class="badge badge-dual">Dual-Mode</span></td>
-            <td>Compagnie RPG (Fighter, Mage, Cleric), Gardiens Morts-Vivants &amp; Coffres de Reliques</td>
+            <td data-i18n="td_desc_4">Compagnie RPG (Fighter, Mage, Cleric), Gardiens Morts-Vivants &amp; Coffres de Reliques</td>
             <td><a href="https://github.com/codingame-team/codingame-proving-grounds-werdna" target="_blank">codingame-proving-grounds-werdna</a></td>
             <td><a href="https://www.codingame.com/contribute/view/15867946f675bf476dc7f164eb3db1d6ce58f6" target="_blank">Contribution</a></td>
-            <td><a href="https://www.codingame.com/ide/demo/1605773233912493b234f7c05aadee6e291708f" target="_blank">Jouer IDE</a></td>
+            <td><a href="https://www.codingame.com/ide/demo/1605773233912493b234f7c05aadee6e291708f" target="_blank">IDE Demo</a></td>
           </tr>
           <tr>
             <td><b>5</b></td>
             <td><a href="#ultima-dungeon-delver"><b>Ultima: Dungeon Delver</b></a></td>
             <td><span class="badge badge-opti">Optimization</span> <span class="badge badge-dual">Dual-Mode</span></td>
-            <td>Exploration solo d'Ultima IV, gestion Torche/PV/PM, sorts <code>FLAM_POR</code> &amp; <code>MANI</code></td>
+            <td data-i18n="td_desc_5">Exploration solo d'Ultima IV, gestion Torche/PV/PM, sorts <code>FLAM_POR</code> &amp; <code>MANI</code></td>
             <td><a href="https://github.com/codingame-team/codingame-ultima-dungeon-delver" target="_blank">codingame-ultima-dungeon-delver</a></td>
             <td><a href="https://www.codingame.com/contribute/view/158680d08ca9d3d2323c3495364e30863bbe90" target="_blank">Contribution</a></td>
-            <td><a href="https://www.codingame.com/ide/demo/1605775f633efb9245a42848603a5d4018881dc" target="_blank">Jouer IDE</a></td>
+            <td><a href="https://www.codingame.com/ide/demo/1605775f633efb9245a42848603a5d4018881dc" target="_blank">IDE Demo</a></td>
           </tr>
           <tr>
             <td><b>6</b></td>
             <td><a href="#overlords-labyrinth"><b>Overlord's Labyrinth</b></a></td>
             <td><span class="badge badge-rpg">RPG 1v1</span> <span class="badge badge-dual">Dual-Mode</span></td>
-            <td>Allocation de Gemmes d'Énergie, invocations sur Pentagrammes (Hound, Guard, Wraith)</td>
+            <td data-i18n="td_desc_6">Allocation de Gemmes d'Énergie, invocations sur Pentagrammes (Hound, Guard, Wraith)</td>
             <td><a href="https://github.com/codingame-team/codingame-overlords-labyrinth" target="_blank">codingame-overlords-labyrinth</a></td>
             <td><a href="https://www.codingame.com/contribute/view/1586818a88014df499301a39a4dbd615c75dfe" target="_blank">Contribution</a></td>
-            <td><a href="https://www.codingame.com/ide/demo/16057779640832b6c2b793a6dd8f1b789d4447d" target="_blank">Jouer IDE</a></td>
+            <td><a href="https://www.codingame.com/ide/demo/16057779640832b6c2b793a6dd8f1b789d4447d" target="_blank">IDE Demo</a></td>
           </tr>
         </tbody>
       </table>
     </div>
 
-    <!-- ===================================================================== -->
-    <!-- SÉRIE 1 : PUZZLES ALGORITHMIQUES MULTIJOUEURS                         -->
-    <!-- ===================================================================== -->
+    <!-- SÉRIE 1 BANNER -->
     <div class="series-banner">
-      <h2>Série 1 — Puzzles Algorithmiques Multijoueurs (Bot Programming)</h2>
-      <p>Trois jeux de stratégie temps-réel au tour par tour conçus pour mettre à l'épreuve la recherche arborescente (MCTS / Minimax), la théorie des graphes et la physique vectorielle.</p>
+      <h2 data-i18n="s1_title">Série 1 — Puzzles Algorithmiques Multijoueurs (Bot Programming)</h2>
+      <p data-i18n="s1_sub">Trois jeux de stratégie au tour par tour conçus pour mettre à l'épreuve la recherche arborescente (MCTS / Minimax), la théorie des graphes et la physique vectorielle.</p>
     </div>
 
     <!-- 1. CHRONO-TACTICS -->
@@ -589,44 +651,30 @@
         <div>
           <div class="puzzle-badges">
             <span class="badge badge-multi">Bot Programming • 1v1</span>
-            <span class="badge badge-rpg">3 Ligues (Bois 2 → Bronze+)</span>
+            <span class="badge badge-rpg">3 Leagues (Wood 2 → Bronze+)</span>
           </div>
-          <h3>1. Chrono-Tactics — Arène Temporelle &amp; Topologie Dynamique</h3>
+          <h3 data-i18n="g1_title">1. Chrono-Tactics — Arène Temporelle &amp; Topologie Dynamique</h3>
         </div>
         <div class="btn-row">
-          <button class="btn btn-gold" onclick="scrollToReplay('chrono-tactics', 2)">▶️ Voir le Replay PixiJS</button>
-          <a class="btn btn-primary" href="https://www.codingame.com/ide/demo/160565706ec1b3064e2be42d9cc50401b0ae417" target="_blank">🎮 Jouer dans l'IDE</a>
-          <a class="btn" href="https://www.codingame.com/contribute/view/15861375695065563529e288291b702e8df659" target="_blank">📜 Contribution</a>
-          <a class="btn" href="https://github.com/codingame-team/codingame-chrono-tactics" target="_blank">💻 Code Source GitHub</a>
+          <button class="btn btn-gold" onclick="scrollToReplay('chrono-tactics', 2)" data-i18n="btn_watch_replay">▶️ Voir le Replay PixiJS</button>
+          <a class="btn btn-primary" href="https://www.codingame.com/ide/demo/160565706ec1b3064e2be42d9cc50401b0ae417" target="_blank" data-i18n="btn_play_ide">🎮 Jouer dans l'IDE</a>
+          <a class="btn" href="https://www.codingame.com/contribute/view/15861375695065563529e288291b702e8df659" target="_blank" data-i18n="btn_contrib">📜 Contribution</a>
+          <a class="btn" href="https://github.com/codingame-team/codingame-chrono-tactics" target="_blank" data-i18n="btn_github">💻 Code Source GitHub</a>
         </div>
       </div>
-
       <div class="puzzle-grid">
         <div class="screenshot-box">
-          <img src="screenshots/chrono-tactics.png" alt="Capture d'écran Chrono-Tactics" loading="lazy" />
+          <img src="screenshots/chrono-tactics.png" alt="Chrono-Tactics" loading="lazy" />
           <div class="replay-quick-bar">
-            <span>Replays disponibles :</span>
+            <span data-i18n="replays_avail">Replays disponibles :</span>
             <div>
-              <button class="btn" onclick="scrollToReplay('chrono-tactics', 1)">Match 1 (Bois 2)</button>
-              <button class="btn" onclick="scrollToReplay('chrono-tactics', 2)">Match 2 (Bois 1)</button>
+              <button class="btn" onclick="scrollToReplay('chrono-tactics', 1)">Match 1 (Wood 2)</button>
+              <button class="btn" onclick="scrollToReplay('chrono-tactics', 2)">Match 2 (Wood 1)</button>
               <button class="btn" onclick="scrollToReplay('chrono-tactics', 3)">Match 3 (Bronze+)</button>
             </div>
           </div>
         </div>
-
-        <div class="rules-box">
-          <h4>Règles de Fonctionnement &amp; Progression des Ligues</h4>
-          <p>Deux escouades s'affrontent pendant <b>120 tours</b> sur une grille symétrique <b>11×11</b> dont les dalles possèdent une intégrité structurelle (<code>3</code>, <code>2</code>, <code>1</code> puis <code>0</code> = Gouffre mortel) et des piliers indestructibles (<code>#</code>).</p>
-          <ul class="rules-list">
-            <li><b>Ligue Bois 2 (1 unité) :</b> Déplacement orthogonal <code>MOVE x y</code> le long du plus court chemin BFS et capture des <b>Chrono-Balises</b> (<b>+2 pts/tour</b> par balise contrôlée, <b>+1 pt/tour</b> par unité en vie).</li>
-            <li><b>Ligue Bois 1 (2 unités) :</b> Érosion des dalles au départ des unités (<code>-1</code> d'intégrité) et déblocage de <code>BOMB tx ty</code> (portée Manhattan ≤ 2, recharge 3 tours) qui réduit de 1 l'intégrité d'une croix de 5 cases pour effondrer les ponts sous l'adversaire.</li>
-            <li><b>Ligue Bronze+ (3 unités) :</b> Déblocage de l'impulsion cinétique <code>PUSH &lt;N|E|S|W&gt;</code> (recharge 2 tours) permettant de repousser une unité ennemie adjacente d'une case (élimination immédiate si projetée dans une case <code>0</code> ou hors grille, avec <b>+20 pts bonus</b> par survivant en cas d'élimination totale).</li>
-          </ul>
-          <div class="protocol-box">
-            <b>Protocole Sortie (1 ligne par unité en vie) :</b><br>
-            <code>MOVE x y [BOMB tx ty | PUSH &lt;N|E|S|W&gt;]</code>
-          </div>
-        </div>
+        <div class="rules-box" data-i18n="g1_rules"></div>
       </div>
     </article>
 
@@ -636,44 +684,30 @@
         <div>
           <div class="puzzle-badges">
             <span class="badge badge-multi">Bot Programming • 1v1</span>
-            <span class="badge badge-rpg">3 Ligues (Bois 2 → Bronze+)</span>
+            <span class="badge badge-rpg">3 Leagues (Wood 2 → Bronze+)</span>
           </div>
-          <h3>2. Quantum Relay — Réseaux Spatiaux &amp; Flots d'Énergie</h3>
+          <h3 data-i18n="g2_title">2. Quantum Relay — Réseaux Spatiaux &amp; Flots d'Énergie</h3>
         </div>
         <div class="btn-row">
-          <button class="btn btn-gold" onclick="scrollToReplay('quantum-relay', 3)">▶️ Voir le Replay PixiJS</button>
-          <a class="btn btn-primary" href="https://www.codingame.com/ide/demo/1605690daf156413f9393afba6e22199f0011bc" target="_blank">🎮 Jouer dans l'IDE</a>
-          <a class="btn" href="https://www.codingame.com/contribute/view/15864612ee375b7372711a629aff1930a46f01" target="_blank">📜 Contribution</a>
-          <a class="btn" href="https://github.com/codingame-team/codingame-quantum-relay" target="_blank">💻 Code Source GitHub</a>
+          <button class="btn btn-gold" onclick="scrollToReplay('quantum-relay', 3)" data-i18n="btn_watch_replay">▶️ Voir le Replay PixiJS</button>
+          <a class="btn btn-primary" href="https://www.codingame.com/ide/demo/1605690daf156413f9393afba6e22199f0011bc" target="_blank" data-i18n="btn_play_ide">🎮 Jouer dans l'IDE</a>
+          <a class="btn" href="https://www.codingame.com/contribute/view/15864612ee375b7372711a629aff1930a46f01" target="_blank" data-i18n="btn_contrib">📜 Contribution</a>
+          <a class="btn" href="https://github.com/codingame-team/codingame-quantum-relay" target="_blank" data-i18n="btn_github">💻 Code Source GitHub</a>
         </div>
       </div>
-
       <div class="puzzle-grid">
         <div class="screenshot-box">
-          <img src="screenshots/quantum-relay.png" alt="Capture d'écran Quantum Relay" loading="lazy" />
+          <img src="screenshots/quantum-relay.png" alt="Quantum Relay" loading="lazy" />
           <div class="replay-quick-bar">
-            <span>Replays disponibles :</span>
+            <span data-i18n="replays_avail">Replays disponibles :</span>
             <div>
-              <button class="btn" onclick="scrollToReplay('quantum-relay', 1)">Match 1 (Bois 2)</button>
-              <button class="btn" onclick="scrollToReplay('quantum-relay', 2)">Match 2 (Bois 1)</button>
+              <button class="btn" onclick="scrollToReplay('quantum-relay', 1)">Match 1 (Wood 2)</button>
+              <button class="btn" onclick="scrollToReplay('quantum-relay', 2)">Match 2 (Wood 1)</button>
               <button class="btn" onclick="scrollToReplay('quantum-relay', 3)">Match 3 (Bronze+)</button>
             </div>
           </div>
         </div>
-
-        <div class="rules-box">
-          <h4>Règles de Fonctionnement &amp; Progression des Ligues</h4>
-          <p>Dans un secteur spatial continu <b>1600×900</b>, chaque joueur contrôle une flotte de drones chargés de capturer des <b>Relais Quantiques</b> et d'établir un arbre couvrant de faisceaux énergétiques relié à leur <b>Base Core</b>.</p>
-          <ul class="rules-list">
-            <li><b>Ligue Bois 2 :</b> Navigation vectorielle <code>MOVE x y</code> des drones pour capturer par proximité les Relais Quantiques et récolter leur énergie locale.</li>
-            <li><b>Ligue Bois 1 :</b> Construction de liens directionnels <code>LINK id1 id2</code> entre relais contrôlés. Un faisceau ne peut pas croiser géométriquement un faisceau adverse existant (test d'intersection de segments). Chaque relais connecté par une chaîne continue au Core transmet son énergie à chaque tour.</li>
-            <li><b>Ligue Bronze+ :</b> Surcharge quantique <code>OVERCHARGE nodeId</code> doublant la production du relais pendant 3 tours et permettant de rompre les liens adverses sous-alimentés.</li>
-          </ul>
-          <div class="protocol-box">
-            <b>Protocole Sortie (1 ligne par drone) :</b><br>
-            <code>MOVE x y [LINK id1 id2 | OVERCHARGE nodeId]</code>
-          </div>
-        </div>
+        <div class="rules-box" data-i18n="g2_rules"></div>
       </div>
     </article>
 
@@ -683,53 +717,37 @@
         <div>
           <div class="puzzle-badges">
             <span class="badge badge-multi">Bot Programming • 1v1</span>
-            <span class="badge badge-rpg">3 Ligues (Bois 2 → Bronze+)</span>
+            <span class="badge badge-rpg">3 Leagues (Wood 2 → Bronze+)</span>
           </div>
-          <h3>3. Corsairs of the Maelstrom — Inertie, Masse Variable &amp; Balistique</h3>
+          <h3 data-i18n="g3_title">3. Corsairs of the Maelstrom — Inertie, Masse Variable &amp; Balistique</h3>
         </div>
         <div class="btn-row">
-          <button class="btn btn-gold" onclick="scrollToReplay('corsairs-maelstrom', 3)">▶️ Voir le Replay PixiJS</button>
-          <a class="btn btn-primary" href="https://www.codingame.com/ide/demo/1605692ff7906372a45b3320918ac8fbdaaa75f" target="_blank">🎮 Jouer dans l'IDE</a>
-          <a class="btn" href="https://www.codingame.com/contribute/view/158647b537dec10e539706b149bde5a6c7442f" target="_blank">📜 Contribution</a>
-          <a class="btn" href="https://github.com/codingame-team/codingame-corsairs-maelstrom" target="_blank">💻 Code Source GitHub</a>
+          <button class="btn btn-gold" onclick="scrollToReplay('corsairs-maelstrom', 3)" data-i18n="btn_watch_replay">▶️ Voir le Replay PixiJS</button>
+          <a class="btn btn-primary" href="https://www.codingame.com/ide/demo/1605692ff7906372a45b3320918ac8fbdaaa75f" target="_blank" data-i18n="btn_play_ide">🎮 Jouer dans l'IDE</a>
+          <a class="btn" href="https://www.codingame.com/contribute/view/158647b537dec10e539706b149bde5a6c7442f" target="_blank" data-i18n="btn_contrib">📜 Contribution</a>
+          <a class="btn" href="https://github.com/codingame-team/codingame-corsairs-maelstrom" target="_blank" data-i18n="btn_github">💻 Code Source GitHub</a>
         </div>
       </div>
-
       <div class="puzzle-grid">
         <div class="screenshot-box">
-          <img src="screenshots/corsairs-maelstrom.png" alt="Capture d'écran Corsairs of the Maelstrom" loading="lazy" />
+          <img src="screenshots/corsairs-maelstrom.png" alt="Corsairs of the Maelstrom" loading="lazy" />
           <div class="replay-quick-bar">
-            <span>Replays disponibles :</span>
+            <span data-i18n="replays_avail">Replays disponibles :</span>
             <div>
-              <button class="btn" onclick="scrollToReplay('corsairs-maelstrom', 1)">Match 1 (Bois 2)</button>
-              <button class="btn" onclick="scrollToReplay('corsairs-maelstrom', 2)">Match 2 (Bois 1)</button>
+              <button class="btn" onclick="scrollToReplay('corsairs-maelstrom', 1)">Match 1 (Wood 2)</button>
+              <button class="btn" onclick="scrollToReplay('corsairs-maelstrom', 2)">Match 2 (Wood 1)</button>
               <button class="btn" onclick="scrollToReplay('corsairs-maelstrom', 3)">Match 3 (Bronze+)</button>
             </div>
           </div>
         </div>
-
-        <div class="rules-box">
-          <h4>Règles de Fonctionnement &amp; Progression des Ligues</h4>
-          <p>Simulation navale continue <b>1600×900</b> sur <b>120 tours</b> où les navires corsaires collectent des Coffres d'Or flottants (<code>PICKUP_RADIUS = 85</code>) et les rapportent à leur Port d'Attache (<code>PORT_RADIUS = 130</code>).</p>
-          <ul class="rules-list">
-            <li><b>Ligue Bois 2 (1 navire) :</b> Cinématique avec inertie (<code>DRAG = 0.78</code>) et <b>masse dynamique liée à la cargaison</b> : <code>accel = power / (1.0 + 0.15 × cargoGold)</code>. Plus un navire est chargé d'or, plus son rayon de freinage s'allonge.</li>
-            <li><b>Ligue Bois 1 (2 navires) :</b> Ajout du frein d'urgence <code>ANCHOR</code> et activation du <b>Champ Vectoriel du Maelström</b> au centre <code>(800, 450)</code> (rayon <code>380</code>) qui applique une dérive tangentielle anti-horaire et une aspiration radiale. Tout navire entrant dans l'œil du tourbillon (<code>dist &lt; 65</code>) fait naufrage, perd sa cargaison et réapparaît à son port !</li>
-            <li><b>Ligue Bronze+ (Canons Balistiques) :</b> Tir de boulets <code>FIRE tx ty</code> (portée <code>450</code>, rayon d'explosion <code>115</code>, recharge 2 tours) générant une onde de choc répulsive (<code>BLAST_IMPULSE = 95</code>) capable de projeter un ennemi dans l'œil du Maelström et de lui piller jusqu'à <b>2 Or</b>.</li>
-          </ul>
-          <div class="protocol-box">
-            <b>Protocole Sortie (1 ligne par navire) :</b><br>
-            <code>THRUST x y power | ANCHOR | FIRE tx ty</code>
-          </div>
-        </div>
+        <div class="rules-box" data-i18n="g3_rules"></div>
       </div>
     </article>
 
-    <!-- ===================================================================== -->
-    <!-- SÉRIE 2 : PUZZLES RPG & DUAL-MODE PIXIJS                              -->
-    <!-- ===================================================================== -->
+    <!-- SÉRIE 2 BANNER -->
     <div class="series-banner rpg">
-      <h2>Série 2 — Puzzles Thématiques RPG avec Viewer PixiJS Dual-Mode</h2>
-      <p>Trois puzzles inspirés de <i>Wizardry: Proving Grounds of the Mad Overlord</i>, <i>D&amp;D 5e</i>, <i>Ultima IV</i> et <i>Conan Overlord</i>, intégrant un commutateur temps-réel entre <b>Sprites RPG 2D</b> et <b>Formes Géométriques de Debug</b>.</p>
+      <h2 data-i18n="s2_title">Série 2 — Puzzles Thématiques RPG avec Viewer PixiJS Dual-Mode</h2>
+      <p data-i18n="s2_sub">Trois puzzles inspirés de <i>Wizardry: Proving Grounds of the Mad Overlord</i>, <i>D&amp;D 5e</i>, <i>Ultima IV</i> et <i>Conan Overlord</i>, intégrant un commutateur temps-réel entre <b>Sprites RPG 2D</b> et <b>Formes Géométriques de Debug</b>.</p>
     </div>
 
     <!-- 4. PROVING GROUNDS OF WERDNA -->
@@ -740,49 +758,35 @@
             <span class="badge badge-rpg">Tactical Party RPG • 1v1</span>
             <span class="badge badge-dual">PixiJS Dual-Mode (Sprites / Debug)</span>
           </div>
-          <h3>4. Proving Grounds of Werdna — Compagnie RPG (Fighter, Mage, Cleric)</h3>
+          <h3 data-i18n="g4_title">4. Proving Grounds of Werdna — Compagnie RPG (Fighter, Mage, Cleric)</h3>
         </div>
         <div class="btn-row">
-          <button class="btn btn-gold" onclick="scrollToReplay('proving-grounds-werdna', 3)">▶️ Voir le Replay PixiJS</button>
-          <a class="btn btn-primary" href="https://www.codingame.com/ide/demo/1605773233912493b234f7c05aadee6e291708f" target="_blank">🎮 Jouer dans l'IDE</a>
-          <a class="btn" href="https://www.codingame.com/contribute/view/15867946f675bf476dc7f164eb3db1d6ce58f6" target="_blank">📜 Contribution</a>
-          <a class="btn" href="https://github.com/codingame-team/codingame-proving-grounds-werdna" target="_blank">💻 Code Source GitHub</a>
+          <button class="btn btn-gold" onclick="scrollToReplay('proving-grounds-werdna', 3)" data-i18n="btn_watch_replay">▶️ Voir le Replay PixiJS</button>
+          <a class="btn btn-primary" href="https://www.codingame.com/ide/demo/1605773233912493b234f7c05aadee6e291708f" target="_blank" data-i18n="btn_play_ide">🎮 Jouer dans l'IDE</a>
+          <a class="btn" href="https://www.codingame.com/contribute/view/15867946f675bf476dc7f164eb3db1d6ce58f6" target="_blank" data-i18n="btn_contrib">📜 Contribution</a>
+          <a class="btn" href="https://github.com/codingame-team/codingame-proving-grounds-werdna" target="_blank" data-i18n="btn_github">💻 Code Source GitHub</a>
         </div>
       </div>
-
       <div class="puzzle-grid">
         <div class="screenshot-box">
           <div class="screenshot-tabs">
-            <span>Aperçu du Rendu Dual-Mode :</span>
+            <span data-i18n="dual_preview">Aperçu du Rendu Dual-Mode :</span>
             <div class="mode-switch-btns">
               <button class="mode-btn active" onclick="switchScreenshot('werdna-img', 'screenshots/proving-grounds-werdna-sprites.png', this)">🎨 RPG SPRITES</button>
               <button class="mode-btn" onclick="switchScreenshot('werdna-img', 'screenshots/proving-grounds-werdna-debug.png', this)">📐 GEOMETRIC DEBUG</button>
             </div>
           </div>
-          <img id="werdna-img" src="screenshots/proving-grounds-werdna-sprites.png" alt="Capture d'écran Proving Grounds of Werdna" loading="lazy" />
+          <img id="werdna-img" src="screenshots/proving-grounds-werdna-sprites.png" alt="Proving Grounds of Werdna" loading="lazy" />
           <div class="replay-quick-bar">
-            <span>Replays disponibles :</span>
+            <span data-i18n="replays_avail">Replays disponibles :</span>
             <div>
-              <button class="btn" onclick="scrollToReplay('proving-grounds-werdna', 1)">Match 1 (Bois 2)</button>
-              <button class="btn" onclick="scrollToReplay('proving-grounds-werdna', 2)">Match 2 (Bois 1)</button>
+              <button class="btn" onclick="scrollToReplay('proving-grounds-werdna', 1)">Match 1 (Wood 2)</button>
+              <button class="btn" onclick="scrollToReplay('proving-grounds-werdna', 2)">Match 2 (Wood 1)</button>
               <button class="btn" onclick="scrollToReplay('proving-grounds-werdna', 3)">Match 3 (Bronze+)</button>
             </div>
           </div>
         </div>
-
-        <div class="rules-box">
-          <h4>Règles de Fonctionnement &amp; Synergies de Classes</h4>
-          <p>Sur une grille de donjon <b>11×11</b> en <b>100 tours</b>, dirigez une compagnie de 3 héros aux rôles complémentaires face aux Gardiens Squelettes (<code>18 PV</code>, <b>+10 pts</b> au coup fatal) qui protègent les Coffres de Reliques (<b>+25 à +35 pts</b>) :</p>
-          <ul class="rules-list">
-            <li><b>FIGHTER (36 PV, 9 ATQ — Carré <code>F0</code> en Debug) :</b> Guerrier de mêlée pouvant frapper un ennemi adjacent via <code>SLASH targetId</code> (9 dégâts, +3 pts) ou protéger un allié adjacent via <code>GUARD allyId</code> (réduit de 3 tous les dégâts subis durant le tour).</li>
-            <li><b>MAGE (22 PV, 4 ATQ — Losange <code>M1</code> en Debug, débloqué en Bois 1) :</b> Incante <code>FIREBALL tx ty</code> (<i>MAHALITO</i>, portée ≤ 3, recharge 2 tours) infligeant <b>8 dégâts AoE</b> dans un rayon de Manhattan ≤ 1 autour de <code>(tx, ty)</code>.</li>
-            <li><b>CLERIC (28 PV, 6 ATQ — Triangle <code>C2</code> en Debug, débloqué en Bronze) :</b> Incante <code>HEAL allyId</code> (<i>DIOS</i>, portée ≤ 3, recharge 2 tours) restaurant <b>+10 PV</b> à un héros allié.</li>
-          </ul>
-          <div class="protocol-box">
-            <b>Protocole Sortie (1 ligne par héros en vie) :</b><br>
-            <code>MOVE x y [SLASH id | GUARD id | FIREBALL tx ty | HEAL id]</code>
-          </div>
-        </div>
+        <div class="rules-box" data-i18n="g4_rules"></div>
       </div>
     </article>
 
@@ -794,48 +798,35 @@
             <span class="badge badge-opti">Solo Optimization • Score = Gold</span>
             <span class="badge badge-dual">PixiJS Dual-Mode (Sprites / Debug)</span>
           </div>
-          <h3>5. Ultima: Dungeon Delver — Exploration Solo &amp; Sorts Runiques</h3>
+          <h3 data-i18n="g5_title">5. Ultima: Dungeon Delver — Exploration Solo &amp; Sorts Runiques</h3>
         </div>
         <div class="btn-row">
-          <button class="btn btn-gold" onclick="scrollToReplay('ultima-dungeon-delver', 1)">▶️ Voir le Replay PixiJS</button>
-          <a class="btn btn-primary" href="https://www.codingame.com/ide/demo/1605775f633efb9245a42848603a5d4018881dc" target="_blank">🎮 Jouer dans l'IDE</a>
-          <a class="btn" href="https://www.codingame.com/contribute/view/158680d08ca9d3d2323c3495364e30863bbe90" target="_blank">📜 Contribution</a>
-          <a class="btn" href="https://github.com/codingame-team/codingame-ultima-dungeon-delver" target="_blank">💻 Code Source GitHub</a>
+          <button class="btn btn-gold" onclick="scrollToReplay('ultima-dungeon-delver', 1)" data-i18n="btn_watch_replay">▶️ Voir le Replay PixiJS</button>
+          <a class="btn btn-primary" href="https://www.codingame.com/ide/demo/1605775f633efb9245a42848603a5d4018881dc" target="_blank" data-i18n="btn_play_ide">🎮 Jouer dans l'IDE</a>
+          <a class="btn" href="https://www.codingame.com/contribute/view/158680d08ca9d3d2323c3495364e30863bbe90" target="_blank" data-i18n="btn_contrib">📜 Contribution</a>
+          <a class="btn" href="https://github.com/codingame-team/codingame-ultima-dungeon-delver" target="_blank" data-i18n="btn_github">💻 Code Source GitHub</a>
         </div>
       </div>
-
       <div class="puzzle-grid">
         <div class="screenshot-box">
           <div class="screenshot-tabs">
-            <span>Aperçu du Rendu Dual-Mode :</span>
+            <span data-i18n="dual_preview">Aperçu du Rendu Dual-Mode :</span>
             <div class="mode-switch-btns">
               <button class="mode-btn active" onclick="switchScreenshot('ultima-img', 'screenshots/ultima-dungeon-delver-sprites.png', this)">🎨 RPG SPRITES</button>
               <button class="mode-btn" onclick="switchScreenshot('ultima-img', 'screenshots/ultima-dungeon-delver-debug.png', this)">📐 GEOMETRIC DEBUG</button>
             </div>
           </div>
-          <img id="ultima-img" src="screenshots/ultima-dungeon-delver-sprites.png" alt="Capture d'écran Ultima: Dungeon Delver" loading="lazy" />
+          <img id="ultima-img" src="screenshots/ultima-dungeon-delver-sprites.png" alt="Ultima: Dungeon Delver" loading="lazy" />
           <div class="replay-quick-bar">
-            <span>Replays des 3 Donjons :</span>
+            <span data-i18n="replays_avail">Replays disponibles :</span>
             <div>
-              <button class="btn" onclick="scrollToReplay('ultima-dungeon-delver', 1)">Donjon 1 (Shrine)</button>
-              <button class="btn" onclick="scrollToReplay('ultima-dungeon-delver', 2)">Donjon 2 (Vault)</button>
-              <button class="btn" onclick="scrollToReplay('ultima-dungeon-delver', 3)">Donjon 3 (Gauntlet)</button>
+              <button class="btn" onclick="scrollToReplay('ultima-dungeon-delver', 1)">Dungeon 1 (Shrine)</button>
+              <button class="btn" onclick="scrollToReplay('ultima-dungeon-delver', 2)">Dungeon 2 (Vault)</button>
+              <button class="btn" onclick="scrollToReplay('ultima-dungeon-delver', 3)">Dungeon 3 (Gauntlet)</button>
             </div>
           </div>
         </div>
-
-        <div class="rules-box">
-          <h4>Règles de Fonctionnement &amp; Optimisation du Score (Or)</h4>
-          <p>Dans un donjon <b>13×11</b> inspiré d'<i>Ultima IV</i>, l'<b>Avatar</b> débute avec <b>40 PV</b>, <b>20 PM</b> et <b>65 tours de Torche</b> (qui diminue de 1 par tour). L'objectif est de maximiser l'<b>Or</b> collecté et d'extraire par l'Escalier de Sortie (<code>E</code>) :</p>
-          <ul class="rules-list">
-            <li><b>Entités du Donjon :</b> Coffres (<code>C</code> = <b>+25 Or</b>), Reliques des Vertus (<code>R</code> = <b>+60 Or</b>, protégées par un Gardien à 15 PV), Monstres (<code>M</code> = <b>+20 Or</b>, 15 PV, infligent 4 dégâts/tour au contact), Fontaines (<code>F</code> = <b>+18 PV &amp; +10 Torche</b>) et Escalier de Sortie (<code>E</code> = <b>+50 Or + 1 Or par tour de Torche restant</b>).</li>
-            <li><b>Actions &amp; Sorts Runiques :</b> Après son pas <code>MOVE x y</code>, l'Avatar peut lancer <code>STRIKE tx ty</code> (0 PM, portée 1, 8 dégâts), <code>FLAM_POR tx ty</code> (5 PM, portée ≤ 3, 15 dégâts : élimine instantanément un Monstre ou Gardien) ou <code>MANI</code> (4 PM, restaure +14 PV).</li>
-          </ul>
-          <div class="protocol-box">
-            <b>Protocole Sortie (1 seule ligne par tour) :</b><br>
-            <code>MOVE x y [STRIKE tx ty | FLAM_POR tx ty | MANI]</code>
-          </div>
-        </div>
+        <div class="rules-box" data-i18n="g5_rules"></div>
       </div>
     </article>
 
@@ -847,64 +838,394 @@
             <span class="badge badge-rpg">Overlord Board Duel • 1v1</span>
             <span class="badge badge-dual">PixiJS Dual-Mode (Sprites / Debug)</span>
           </div>
-          <h3>6. Overlord's Labyrinth — Gemmes d'Énergie &amp; Pentagrammes d'Invocation</h3>
+          <h3 data-i18n="g6_title">6. Overlord's Labyrinth — Gemmes d'Énergie &amp; Pentagrammes d'Invocation</h3>
         </div>
         <div class="btn-row">
-          <button class="btn btn-gold" onclick="scrollToReplay('overlords-labyrinth', 3)">▶️ Voir le Replay PixiJS</button>
-          <a class="btn btn-primary" href="https://www.codingame.com/ide/demo/16057779640832b6c2b793a6dd8f1b789d4447d" target="_blank">🎮 Jouer dans l'IDE</a>
-          <a class="btn" href="https://www.codingame.com/contribute/view/1586818a88014df499301a39a4dbd615c75dfe" target="_blank">📜 Contribution</a>
-          <a class="btn" href="https://github.com/codingame-team/codingame-overlords-labyrinth" target="_blank">💻 Code Source GitHub</a>
+          <button class="btn btn-gold" onclick="scrollToReplay('overlords-labyrinth', 3)" data-i18n="btn_watch_replay">▶️ Voir le Replay PixiJS</button>
+          <a class="btn btn-primary" href="https://www.codingame.com/ide/demo/16057779640832b6c2b793a6dd8f1b789d4447d" target="_blank" data-i18n="btn_play_ide">🎮 Jouer dans l'IDE</a>
+          <a class="btn" href="https://www.codingame.com/contribute/view/1586818a88014df499301a39a4dbd615c75dfe" target="_blank" data-i18n="btn_contrib">📜 Contribution</a>
+          <a class="btn" href="https://github.com/codingame-team/codingame-overlords-labyrinth" target="_blank" data-i18n="btn_github">💻 Code Source GitHub</a>
         </div>
       </div>
-
       <div class="puzzle-grid">
         <div class="screenshot-box">
           <div class="screenshot-tabs">
-            <span>Aperçu du Rendu Dual-Mode :</span>
+            <span data-i18n="dual_preview">Aperçu du Rendu Dual-Mode :</span>
             <div class="mode-switch-btns">
               <button class="mode-btn active" onclick="switchScreenshot('overlord-img', 'screenshots/overlords-labyrinth-sprites.png', this)">🎨 RPG SPRITES</button>
               <button class="mode-btn" onclick="switchScreenshot('overlord-img', 'screenshots/overlords-labyrinth-debug.png', this)">📐 GEOMETRIC DEBUG</button>
             </div>
           </div>
-          <img id="overlord-img" src="screenshots/overlords-labyrinth-sprites.png" alt="Capture d'écran Overlord's Labyrinth" loading="lazy" />
+          <img id="overlord-img" src="screenshots/overlords-labyrinth-sprites.png" alt="Overlord's Labyrinth" loading="lazy" />
           <div class="replay-quick-bar">
-            <span>Replays disponibles :</span>
+            <span data-i18n="replays_avail">Replays disponibles :</span>
             <div>
-              <button class="btn" onclick="scrollToReplay('overlords-labyrinth', 1)">Match 1 (Bois 2)</button>
-              <button class="btn" onclick="scrollToReplay('overlords-labyrinth', 2)">Match 2 (Bois 1)</button>
+              <button class="btn" onclick="scrollToReplay('overlords-labyrinth', 1)">Match 1 (Wood 2)</button>
+              <button class="btn" onclick="scrollToReplay('overlords-labyrinth', 2)">Match 2 (Wood 1)</button>
               <button class="btn" onclick="scrollToReplay('overlords-labyrinth', 3)">Match 3 (Bronze+)</button>
             </div>
           </div>
         </div>
-
-        <div class="rules-box">
-          <h4>Règles de Fonctionnement &amp; Économie des Gemmes</h4>
-          <p>Inspiré du plateau d'Overlord de <i>Conan: Book of Skelos</i> et de <i>Werdna</i> : chaque Overlord protège son <b>Sanctuaire (40 PV)</b> dans un labyrinthe <b>11×11</b> comportant <b>5 Pentagrammes d'Invocation</b>. Au début de chaque tour, vous recevez <code>5 + leagueLevel + pentagrammesContrôlés</code> <b>Gemmes d'Énergie</b> :</p>
-          <ul class="rules-list">
-            <li><b><code>SUMMON pentagramId TYPE</code> :</b> Invoque un serviteur sur un Pentagramme contrôlé ou neutre (ce qui le capture) :
-              <b>HOUND</b> (Coût 2, 12 PV, 4 ATQ, Vitesse 2, Portée 1),
-              <b>GUARD</b> (Coût 3, 24 PV, 6 ATQ, Vitesse 1, Portée 1 — débloqué en Bois 1),
-              <b>WRAITH</b> (Coût 4, 14 PV, 7 ATQ, Vitesse 1, Portée 2 — débloqué en Bronze).</li>
-            <li><b><code>ACTIVATE minionId targetX targetY</code> (Coût 1 Gemme, max 2 activations/tour par serviteur) :</b> Fait avancer le serviteur jusqu'à sa Vitesse vers la cible, capture les Pentagrammes traversés et frappe le Sanctuaire adverse s'il est adjacent (<b>+8 pts</b> par frappe, <b>+50 pts</b> à la destruction du Sanctuaire).</li>
-          </ul>
-          <div class="protocol-box">
-            <b>Protocole Sortie (commandes séparées par <code>;</code>) :</b><br>
-            <code>SUMMON 0 GUARD ; ACTIVATE 3 9 5 ; ACTIVATE 4 5 5</code>
-          </div>
-        </div>
+        <div class="rules-box" data-i18n="g6_rules"></div>
       </div>
     </article>
 
   </main>
 
   <footer>
-    <p>
+    <p data-i18n="footer_text">
       Développé avec <b>CodinGame Game Engine SDK v4.7.7</b> (Java 17 &amp; PixiJS v6) • Organisation GitHub
       <a href="https://github.com/codingame-team" target="_blank" rel="noopener">@codingame-team</a>
     </p>
   </footer>
 
   <script>
+    const I18N = {
+      fr: {
+        hero_title: "Catalogue des 6 Puzzles CodinGame & Lecteur de Replays PixiJS",
+        hero_sub: "Retrouvez nos 6 créations communautaires développées avec le SDK officiel CodinGame : <b>3 puzzles algorithmiques multijoueurs</b> (graphes, flots, balistique inertielle) et <b>3 puzzles RPG tactiques</b> dotés d'un viewer PixiJS <b>Dual-Mode</b> (<i>RPG Sprites</i> vs <i>Geometric Debug</i>).",
+        nav_theater: "🎬 Lecteur PixiJS Interactif",
+        theater_title: "Lecteur de Replays PixiJS en Direct (18 Matchs Embarqués)",
+        btn_inspector: "🔍 Ouvrir l'Inspecteur Complet (Console & Logs)",
+        select_match_lbl: "Sélectionner une partie :",
+        match1_btn: "Match 1 (Bois 2 / Test 1)",
+        match2_btn: "Match 2 (Bois 1 / Test 2)",
+        match3_btn: "Match 3 (Bronze+ / Test 3)",
+        theater_tip: "💡 <b>Astuce Dual-Mode (Puzzles RPG 4, 5, 6) :</b> cliquez sur l'icône <b>⚙️ Engrenage</b> en bas à droite du lecteur PixiJS pour basculer en temps réel entre <code>RPG SPRITES</code> et <code>GEOMETRIC DEBUG</code> !",
+        theater_controls: "Contrôles : Lecture/Pause, Curseur tour par tour, Vitesse (1x à 10x) et Plein écran.",
+        th_puzzle: "Puzzle",
+        th_category: "Catégorie",
+        th_mechanics: "Thème & Mécaniques Clés",
+        td_desc_1: "Arène 11×11 à effondrement progressif, <code>BOMB</code>, <code>PUSH</code>, Voronoï & MCTS",
+        td_desc_2: "Arbres de relais d'énergie (<code>LINK</code>), surcharge (<code>OVERCHARGE</code>) & intersections",
+        td_desc_3: "Physique inertielle à masse variable, vortex du Maelström, <code>ANCHOR</code> & <code>FIRE</code>",
+        td_desc_4: "Compagnie RPG (Fighter, Mage, Cleric), Gardiens Morts-Vivants & Coffres de Reliques",
+        td_desc_5: "Exploration solo d'Ultima IV, gestion Torche/PV/PM, sorts <code>FLAM_POR</code> & <code>MANI</code>",
+        td_desc_6: "Allocation de Gemmes d'Énergie, invocations sur Pentagrammes (Hound, Guard, Wraith)",
+        s1_title: "Série 1 — Puzzles Algorithmiques Multijoueurs (Bot Programming)",
+        s1_sub: "Trois jeux de stratégie au tour par tour conçus pour mettre à l'épreuve la recherche arborescente (MCTS / Minimax), la théorie des graphes et la physique vectorielle.",
+        s2_title: "Série 2 — Puzzles Thématiques RPG avec Viewer PixiJS Dual-Mode",
+        s2_sub: "Trois puzzles inspirés de <i>Wizardry: Proving Grounds of the Mad Overlord</i>, <i>D&D 5e</i>, <i>Ultima IV</i> et <i>Conan Overlord</i>, intégrant un commutateur temps-réel entre <b>Sprites RPG 2D</b> et <b>Formes Géométriques de Debug</b>.",
+        btn_watch_replay: "▶️ Voir le Replay PixiJS",
+        btn_play_ide: "🎮 Jouer dans l'IDE",
+        btn_contrib: "📜 Contribution",
+        btn_github: "💻 Code Source GitHub",
+        replays_avail: "Replays disponibles :",
+        dual_preview: "Aperçu du Rendu Dual-Mode :",
+        g1_title: "1. Chrono-Tactics — Arène Temporelle & Topologie Dynamique",
+        g1_rules: `<h4>Règles de Fonctionnement & Progression des Ligues</h4>
+          <p>Deux escouades s'affrontent pendant <b>120 tours</b> sur une grille symétrique <b>11×11</b> dont les dalles possèdent une intégrité structurelle (<code>3</code>, <code>2</code>, <code>1</code> puis <code>0</code> = Gouffre mortel) et des piliers indestructibles (<code>#</code>).</p>
+          <ul class="rules-list">
+            <li><b>Ligue Bois 2 (1 unité) :</b> Déplacement orthogonal <code>MOVE x y</code> le long du plus court chemin BFS et capture des <b>Chrono-Balises</b> (<b>+2 pts/tour</b> par balise contrôlée, <b>+1 pt/tour</b> par unité en vie).</li>
+            <li><b>Ligue Bois 1 (2 unités) :</b> Érosion des dalles au départ des unités (<code>-1</code> d'intégrité) et déblocage de <code>BOMB tx ty</code> (portée Manhattan ≤ 2, recharge 3 tours) qui réduit de 1 l'intégrité d'une croix de 5 cases.</li>
+            <li><b>Ligue Bronze+ (3 unités) :</b> Déblocage de l'impulsion cinétique <code>PUSH &lt;N|E|S|W&gt;</code> (recharge 2 tours) permettant de repousser une unité ennemie adjacente d'une case (élimination immédiate si projetée dans le vide <code>0</code>, avec <b>+20 pts bonus</b> par survivant).</li>
+          </ul>
+          <div class="protocol-box"><b>Protocole Sortie (1 ligne par unité en vie) :</b><br><code>MOVE x y [BOMB tx ty | PUSH &lt;N|E|S|W&gt;]</code></div>`,
+        g2_title: "2. Quantum Relay — Réseaux Spatiaux & Flots d'Énergie",
+        g2_rules: `<h4>Règles de Fonctionnement & Progression des Ligues</h4>
+          <p>Dans un secteur spatial continu <b>1600×900</b>, chaque joueur contrôle une flotte de drones chargés de capturer des <b>Relais Quantiques</b> et d'établir un arbre couvrant de faisceaux énergétiques relié à leur <b>Base Core</b>.</p>
+          <ul class="rules-list">
+            <li><b>Ligue Bois 2 :</b> Navigation vectorielle <code>MOVE x y</code> des drones pour capturer par proximité les Relais Quantiques et récolter leur énergie locale.</li>
+            <li><b>Ligue Bois 1 :</b> Construction de liens directionnels <code>LINK id1 id2</code> entre relais contrôlés sans croiser géométriquement un faisceau adverse existant. Chaque relais relié au Core transmet son flux énergétique à chaque tour.</li>
+            <li><b>Ligue Bronze+ :</b> Surcharge quantique <code>OVERCHARGE nodeId</code> doublant la production du relais pendant 3 tours et permettant de rompre les liens adverses sous-alimentés.</li>
+          </ul>
+          <div class="protocol-box"><b>Protocole Sortie (1 ligne par drone) :</b><br><code>MOVE x y [LINK id1 id2 | OVERCHARGE nodeId]</code></div>`,
+        g3_title: "3. Corsairs of the Maelstrom — Inertie, Masse Variable & Balistique",
+        g3_rules: `<h4>Règles de Fonctionnement & Progression des Ligues</h4>
+          <p>Simulation navale continue <b>1600×900</b> sur <b>120 tours</b> où les navires corsaires collectent des Coffres d'Or flottants (<code>PICKUP_RADIUS = 85</code>) et les rapportent à leur Port d'Attache (<code>PORT_RADIUS = 130</code>).</p>
+          <ul class="rules-list">
+            <li><b>Ligue Bois 2 (1 navire) :</b> Cinématique avec inertie (<code>DRAG = 0.78</code>) et <b>masse dynamique liée à la cargaison</b> : <code>accel = power / (1.0 + 0.15 × cargoGold)</code>.</li>
+            <li><b>Ligue Bois 1 (2 navires) :</b> Ajout du frein d'urgence <code>ANCHOR</code> et activation du <b>Champ Vectoriel du Maelström</b> au centre <code>(800, 450)</code> (rayon <code>380</code>) qui applique une dérive tangentielle anti-horaire et une aspiration radiale (naufrage si <code>dist &lt; 65</code>).</li>
+            <li><b>Ligue Bronze+ (Canons Balistiques) :</b> Tir de boulets <code>FIRE tx ty</code> (portée <code>450</code>, rayon d'impact <code>115</code>, recharge 2 tours) générant une onde de choc répulsive (<code>BLAST_IMPULSE = 95</code>) et pillant jusqu'à <b>2 Or</b>.</li>
+          </ul>
+          <div class="protocol-box"><b>Protocole Sortie (1 ligne par navire) :</b><br><code>THRUST x y power | ANCHOR | FIRE tx ty</code></div>`,
+        g4_title: "4. Proving Grounds of Werdna — Compagnie RPG (Fighter, Mage, Cleric)",
+        g4_rules: `<h4>Règles de Fonctionnement & Synergies de Classes</h4>
+          <p>Sur une grille de donjon <b>11×11</b> en <b>100 tours</b>, dirigez une compagnie de 3 héros aux rôles complémentaires face aux Gardiens Squelettes (<code>18 PV</code>, <b>+10 pts</b> au coup fatal) qui protègent les Coffres de Reliques (<b>+25 à +35 pts</b>) :</p>
+          <ul class="rules-list">
+            <li><b>FIGHTER (36 PV, 9 ATQ — Carré <code>F0</code> en Debug) :</b> Frappe un ennemi adjacent via <code>SLASH targetId</code> (9 dégâts, +3 pts) ou protège un allié adjacent via <code>GUARD allyId</code> (réduit de 3 tous les dégâts subis durant le tour).</li>
+            <li><b>MAGE (22 PV, 4 ATQ — Losange <code>M1</code> en Debug, débloqué en Bois 1) :</b> Incante <code>FIREBALL tx ty</code> (<i>MAHALITO</i>, portée ≤ 3, recharge 2 tours) infligeant <b>8 dégâts AoE</b> dans un rayon de Manhattan ≤ 1 autour de <code>(tx, ty)</code>.</li>
+            <li><b>CLERIC (28 PV, 6 ATQ — Triangle <code>C2</code> en Debug, débloqué en Bronze) :</b> Incante <code>HEAL allyId</code> (<i>DIOS</i>, portée ≤ 3, recharge 2 tours) restaurant <b>+10 PV</b> à un héros allié.</li>
+          </ul>
+          <div class="protocol-box"><b>Protocole Sortie (1 ligne par héros en vie) :</b><br><code>MOVE x y [SLASH id | GUARD id | FIREBALL tx ty | HEAL id]</code></div>`,
+        g5_title: "5. Ultima: Dungeon Delver — Exploration Solo & Sorts Runiques",
+        g5_rules: `<h4>Règles de Fonctionnement & Optimisation du Score (Or)</h4>
+          <p>Dans un donjon <b>13×11</b> inspiré d'<i>Ultima IV</i>, l'<b>Avatar</b> débute avec <b>40 PV</b>, <b>20 PM</b> et <b>65 tours de Torche</b> (qui diminue de 1 par tour). L'objectif est de maximiser l'<b>Or</b> collecté et d'extraire par l'Escalier de Sortie (<code>E</code>) :</p>
+          <ul class="rules-list">
+            <li><b>Entités du Donjon :</b> Coffres (<code>C</code> = <b>+25 Or</b>), Reliques des Vertus (<code>R</code> = <b>+60 Or</b>, protégées par un Gardien à 15 PV), Monstres (<code>M</code> = <b>+20 Or</b>, 15 PV, infligent 4 dégâts/tour au contact), Fontaines (<code>F</code> = <b>+18 PV & +10 Torche</b>) et Escalier de Sortie (<code>E</code> = <b>+50 Or + 1 Or par tour de Torche restant</b>).</li>
+            <li><b>Actions & Sorts Runiques :</b> Après son pas <code>MOVE x y</code>, l'Avatar peut lancer <code>STRIKE tx ty</code> (0 PM, portée 1, 8 dégâts), <code>FLAM_POR tx ty</code> (5 PM, portée ≤ 3, 15 dégâts) ou <code>MANI</code> (4 PM, restaure +14 PV).</li>
+          </ul>
+          <div class="protocol-box"><b>Protocole Sortie (1 seule ligne par tour) :</b><br><code>MOVE x y [STRIKE tx ty | FLAM_POR tx ty | MANI]</code></div>`,
+        g6_title: "6. Overlord's Labyrinth — Gemmes d'Énergie & Pentagrammes d'Invocation",
+        g6_rules: `<h4>Règles de Fonctionnement & Économie des Gemmes</h4>
+          <p>Inspiré du plateau d'Overlord de <i>Conan: Book of Skelos</i> et de <i>Werdna</i> : chaque Overlord protège son <b>Sanctuaire (40 PV)</b> dans un labyrinthe <b>11×11</b> comportant <b>5 Pentagrammes d'Invocation</b>. Au début de chaque tour, vous recevez <code>5 + leagueLevel + pentagrammesContrôlés</code> <b>Gemmes d'Énergie</b> :</p>
+          <ul class="rules-list">
+            <li><b><code>SUMMON pentagramId TYPE</code> :</b> Invoque un serviteur sur un Pentagramme contrôlé ou neutre (ce qui le capture) : <b>HOUND</b> (Coût 2, 12 PV, 4 ATQ, Vitesse 2, Portée 1), <b>GUARD</b> (Coût 3, 24 PV, 6 ATQ, Vitesse 1, Portée 1 — Bois 1), <b>WRAITH</b> (Coût 4, 14 PV, 7 ATQ, Vitesse 1, Portée 2 — Bronze).</li>
+            <li><b><code>ACTIVATE minionId targetX targetY</code> (Coût 1 Gemme, max 2 activations/tour par serviteur) :</b> Fait avancer le serviteur jusqu'à sa Vitesse vers la cible, capture les Pentagrammes traversés et frappe le Sanctuaire adverse s'il est adjacent (<b>+8 pts</b> par frappe, <b>+50 pts</b> à la destruction du Sanctuaire).</li>
+          </ul>
+          <div class="protocol-box"><b>Protocole Sortie (commandes séparées par <code>;</code>) :</b><br><code>SUMMON 0 GUARD ; ACTIVATE 3 9 5 ; ACTIVATE 4 5 5</code></div>`,
+        footer_text: 'Développé avec <b>CodinGame Game Engine SDK v4.7.7</b> (Java 17 & PixiJS v6) • Organisation GitHub <a href="https://github.com/codingame-team" target="_blank" rel="noopener">@codingame-team</a>'
+      },
+
+      en: {
+        hero_title: "CodinGame 6-Puzzle Showcase & Live PixiJS Replay Theater",
+        hero_sub: "Explore our 6 community games built with the official CodinGame SDK: <b>3 multiplayer algorithmic puzzles</b> (graph topology, energy flows, inertial ballistics) and <b>3 tactical RPG puzzles</b> featuring a real-time <b>Dual-Mode</b> PixiJS viewer (<i>RPG Sprites</i> vs <i>Geometric Debug</i>).",
+        nav_theater: "🎬 Interactive PixiJS Player",
+        theater_title: "Live Embedded PixiJS Replay Player (18 Playable Matches)",
+        btn_inspector: "🔍 Open Full Replay Inspector (Console & Logs)",
+        select_match_lbl: "Select a match replay:",
+        match1_btn: "Match 1 (Wood 2 / Test 1)",
+        match2_btn: "Match 2 (Wood 1 / Test 2)",
+        match3_btn: "Match 3 (Bronze+ / Test 3)",
+        theater_tip: "💡 <b>Dual-Mode Tip (RPG Puzzles 4, 5, 6):</b> click the <b>⚙️ Gear icon</b> in the bottom-right corner of the PixiJS viewer to switch live between <code>RPG SPRITES</code> and <code>GEOMETRIC DEBUG</code>!",
+        theater_controls: "Controls: Play/Pause, Turn-by-turn Scrubber, Speed (1x–10x), and Fullscreen.",
+        th_puzzle: "Puzzle",
+        th_category: "Category",
+        th_mechanics: "Core Theme & Mechanics",
+        td_desc_1: "11×11 collapsing arena, <code>BOMB</code>, <code>PUSH</code>, Voronoi partitioning & MCTS",
+        td_desc_2: "Energy relay spanning trees (<code>LINK</code>), node <code>OVERCHARGE</code> & segment intersection",
+        td_desc_3: "Variable-mass inertial physics, Maelstrom vortex vector field, <code>ANCHOR</code> & <code>FIRE</code>",
+        td_desc_4: "Tactical RPG Party (Fighter, Mage, Cleric), Undead Guardians & Relic Chests",
+        td_desc_5: "Solo Ultima IV dungeon crawler, Torch/HP/MP management, <code>FLAM_POR</code> & <code>MANI</code> spells",
+        td_desc_6: "Energy Gem allocation & Pentagram minion summoning (Hound, Guard, Wraith)",
+        s1_title: "Series 1 — Multiplayer Algorithmic Puzzles (Bot Programming)",
+        s1_sub: "Three turn-based strategy games designed to challenge tree search (MCTS / Minimax), graph theory, and continuous vector kinematics.",
+        s2_title: "Series 2 — RPG Tactical Puzzles with Dual-Mode PixiJS Viewer",
+        s2_sub: "Three games inspired by <i>Wizardry: Proving Grounds of the Mad Overlord</i>, <i>D&D 5e</i>, <i>Ultima IV</i>, and <i>Conan Overlord</i>, featuring an instant toggle between <b>2D RPG Sprites</b> and <b>Geometric Debug Shapes</b>.",
+        btn_watch_replay: "▶️ Watch PixiJS Replay",
+        btn_play_ide: "🎮 Play in CodinGame IDE",
+        btn_contrib: "📜 Contribution",
+        btn_github: "💻 GitHub Source",
+        replays_avail: "Available Replays:",
+        dual_preview: "Dual-Mode Rendering Preview:",
+        g1_title: "1. Chrono-Tactics — Collapsing Arena & Dynamic Topology",
+        g1_rules: `<h4>Rules of Operation & League Progression</h4>
+          <p>Two squads battle for <b>120 turns</b> on a symmetric <b>11×11</b> grid whose tiles degrade in structural integrity (<code>3</code>, <code>2</code>, <code>1</code> then <code>0</code> = deadly Void) around indestructible pillars (<code>#</code>).</p>
+          <ul class="rules-list">
+            <li><b>Wood 2 League (1 unit):</b> Orthogonal movement <code>MOVE x y</code> along the shortest BFS path and capture of <b>Chrono-Beacons</b> (<b>+2 pts/turn</b> per controlled beacon, <b>+1 pt/turn</b> per alive unit).</li>
+            <li><b>Wood 1 League (2 units):</b> Tile erosion when units leave a cell (<code>-1</code> integrity) and unlocking of <code>BOMB tx ty</code> (Manhattan range ≤ 2, cooldown 3) which reduces by 1 the integrity of a 5-tile cross.</li>
+            <li><b>Bronze+ League (3 units):</b> Unlocking of kinetic impulse <code>PUSH &lt;N|E|S|W&gt;</code> (cooldown 2) pushing an adjacent enemy 1 tile away (instant elimination if pushed onto a <code>0</code> void tile, awarding <b>+20 bonus pts</b> per survivor on a full squad wipe).</li>
+          </ul>
+          <div class="protocol-box"><b>Output Protocol (1 line per alive unit):</b><br><code>MOVE x y [BOMB tx ty | PUSH &lt;N|E|S|W&gt;]</code></div>`,
+        g2_title: "2. Quantum Relay — Spatial Networks & Energy Flows",
+        g2_rules: `<h4>Rules of Operation & League Progression</h4>
+          <p>In a continuous <b>1600×900</b> space sector, each player commands a fleet of drones to capture <b>Quantum Relays</b> and build a spanning tree of energy beams connected to their <b>Core Base</b>.</p>
+          <ul class="rules-list">
+            <li><b>Wood 2 League:</b> Vector navigation <code>MOVE x y</code> for drones to capture nearby Quantum Relays and harvest local energy.</li>
+            <li><b>Wood 1 League:</b> Directional link construction <code>LINK id1 id2</code> between controlled relays without intersecting existing opponent beams. Every relay connected to the Core transmits its energy yield each turn.</li>
+            <li><b>Bronze+ League:</b> Quantum <code>OVERCHARGE nodeId</code> doubling a relay's output for 3 turns and severing under-powered rival links.</li>
+          </ul>
+          <div class="protocol-box"><b>Output Protocol (1 line per drone):</b><br><code>MOVE x y [LINK id1 id2 | OVERCHARGE nodeId]</code></div>`,
+        g3_title: "3. Corsairs of the Maelstrom — Variable-Mass Inertia & Naval Ballistics",
+        g3_rules: `<h4>Rules of Operation & League Progression</h4>
+          <p>Continuous <b>1600×900</b> naval simulation over <b>120 turns</b> where corsair ships collect floating Gold Chests (<code>PICKUP_RADIUS = 85</code>) and deliver them to their Home Port (<code>PORT_RADIUS = 130</code>).</p>
+          <ul class="rules-list">
+            <li><b>Wood 2 League (1 ship):</b> Inertial kinematics (<code>DRAG = 0.78</code>) with <b>cargo-dependent mass</b>: <code>accel = power / (1.0 + 0.15 × cargoGold)</code>. Heavier gold cargo increases braking distance.</li>
+            <li><b>Wood 1 League (2 ships):</b> Emergency brake <code>ANCHOR</code> and activation of the central <b>Maelstrom Vortex Vector Field</b> at <code>(800, 450)</code> (radius <code>380</code>), applying counter-clockwise tangential drift and inward pull (shipwreck if <code>dist &lt; 65</code>).</li>
+            <li><b>Bronze+ League (Ballistic Cannons):</b> Cannon fire <code>FIRE tx ty</code> (range <code>450</code>, blast radius <code>115</code>, cooldown 2) generating a shockwave impulse (<code>BLAST_IMPULSE = 95</code>) that can knock enemies into the Maelstrom eye and plunder up to <b>2 Gold</b>.</li>
+          </ul>
+          <div class="protocol-box"><b>Output Protocol (1 line per ship):</b><br><code>THRUST x y power | ANCHOR | FIRE tx ty</code></div>`,
+        g4_title: "4. Proving Grounds of Werdna — Tactical RPG Party (Fighter, Mage, Cleric)",
+        g4_rules: `<h4>Rules of Operation & Class Synergies</h4>
+          <p>On an <b>11×11</b> dungeon grid over <b>100 turns</b>, command a 3-hero RPG party against Skeleton Guardians (<code>18 HP</code>, <b>+10 pts</b> on kill) protecting Relic Chests (<b>+25 to +35 pts</b>):</p>
+          <ul class="rules-list">
+            <li><b>FIGHTER (36 HP, 9 ATK — Square <code>F0</code> in Debug):</b> Strikes an adjacent enemy via <code>SLASH targetId</code> (9 damage, +3 pts) or shields an adjacent ally via <code>GUARD allyId</code> (reduces all damage taken that turn by 3).</li>
+            <li><b>MAGE (22 HP, 4 ATK — Diamond <code>M1</code> in Debug, unlocked in Wood 1):</b> Casts <code>FIREBALL tx ty</code> (<i>MAHALITO</i>, range ≤ 3, cooldown 2) dealing <b>8 AoE damage</b> within Manhattan distance ≤ 1 of <code>(tx, ty)</code>.</li>
+            <li><b>CLERIC (28 HP, 6 ATK — Triangle <code>C2</code> in Debug, unlocked in Bronze):</b> Casts <code>HEAL allyId</code> (<i>DIOS</i>, range ≤ 3, cooldown 2) restoring <b>+10 HP</b> to a friendly hero.</li>
+          </ul>
+          <div class="protocol-box"><b>Output Protocol (1 line per alive hero):</b><br><code>MOVE x y [SLASH id | GUARD id | FIREBALL tx ty | HEAL id]</code></div>`,
+        g5_title: "5. Ultima: Dungeon Delver — Solo Dungeon Crawl & Runic Spells",
+        g5_rules: `<h4>Rules of Operation & Gold Score Optimization</h4>
+          <p>In a <b>13×11</b> dungeon inspired by <i>Ultima IV</i>, the <b>Avatar</b> starts with <b>40 HP</b>, <b>20 MP</b>, and <b>65 Torchlight turns</b> (decreasing by 1 each turn). Maximize total <b>Gold</b> collected and extract via the Exit Stairs (<code>E</code>):</p>
+          <ul class="rules-list">
+            <li><b>Dungeon Entities:</b> Chests (<code>C</code> = <b>+25 Gold</b>), Virtue Relics (<code>R</code> = <b>+60 Gold</b>, guarded by a 15 HP Spirit), Monsters (<code>M</code> = <b>+20 Gold</b>, 15 HP, deal 4 damage/turn when adjacent), Fountains (<code>F</code> = <b>+18 HP & +10 Torch</b>), and Exit Stairs (<code>E</code> = <b>+50 Gold + 1 Gold per remaining Torch turn</b>).</li>
+            <li><b>Actions & Runic Spells:</b> After stepping via <code>MOVE x y</code>, the Avatar can execute <code>STRIKE tx ty</code> (0 MP, range 1, 8 damage), <code>FLAM_POR tx ty</code> (5 MP, range ≤ 3, 15 damage), or <code>MANI</code> (4 MP, restores +14 HP).</li>
+          </ul>
+          <div class="protocol-box"><b>Output Protocol (1 single line per turn):</b><br><code>MOVE x y [STRIKE tx ty | FLAM_POR tx ty | MANI]</code></div>`,
+        g6_title: "6. Overlord's Labyrinth — Energy Gems & Summoning Pentagrams",
+        g6_rules: `<h4>Rules of Operation & Energy Gem Economy</h4>
+          <p>Inspired by <i>Conan: Book of Skelos (Overlord Board)</i> and <i>Werdna</i>: each Overlord defends their <b>Sanctum (40 HP)</b> in an <b>11×11</b> labyrinth with <b>5 Summoning Pentagrams</b>. At the start of each turn, you receive <code>5 + leagueLevel + controlledPentagrams</code> <b>Energy Gems</b>:</p>
+          <ul class="rules-list">
+            <li><b><code>SUMMON pentagramId TYPE</code>:</b> Summons a minion onto an owned or neutral Pentagram (capturing it): <b>HOUND</b> (Cost 2, 12 HP, 4 ATK, Speed 2, Range 1), <b>GUARD</b> (Cost 3, 24 HP, 6 ATK, Speed 1, Range 1 — Wood 1), <b>WRAITH</b> (Cost 4, 14 HP, 7 ATK, Speed 1, Range 2 — Bronze).</li>
+            <li><b><code>ACTIVATE minionId targetX targetY</code> (Cost 1 Gem, max 2 activations/turn per minion):</b> Advances the minion up to its Speed toward the target, captures Pentagrams, and strikes the enemy Sanctum when adjacent (<b>+8 pts</b> per hit, <b>+50 pts</b> for destroying the Sanctum).</li>
+          </ul>
+          <div class="protocol-box"><b>Output Protocol (semicolon-separated commands):</b><br><code>SUMMON 0 GUARD ; ACTIVATE 3 9 5 ; ACTIVATE 4 5 5</code></div>`,
+        footer_text: 'Built with <b>CodinGame Game Engine SDK v4.7.7</b> (Java 17 & PixiJS v6) • GitHub Organization <a href="https://github.com/codingame-team" target="_blank" rel="noopener">@codingame-team</a>'
+      },
+
+      de: {
+        hero_title: "CodinGame 6-Puzzle-Katalog & Interaktiver PixiJS-Replay-Player",
+        hero_sub: "Entdecken Sie unsere 6 mit dem offiziellen CodinGame-SDK entwickelten Community-Spiele: <b>3 algorithmische Multiplayer-Puzzles</b> (Graphentheorie, Energieflüsse, Trägheitsballistik) und <b>3 taktische RPG-Puzzles</b> mit einem <b>Dual-Mode</b> PixiJS-Viewer (<i>RPG Sprites</i> vs. <i>Geometric Debug</i>).",
+        nav_theater: "🎬 Interaktiver PixiJS-Player",
+        theater_title: "Eingebetteter Live-PixiJS-Replay-Player (18 Spielbare Matches)",
+        btn_inspector: "🔍 Vollständigen Replay-Inspektor öffnen (Konsole & Logs)",
+        select_match_lbl: "Partie auswählen:",
+        match1_btn: "Match 1 (Holz 2 / Test 1)",
+        match2_btn: "Match 2 (Holz 1 / Test 2)",
+        match3_btn: "Match 3 (Bronze+ / Test 3)",
+        theater_tip: "💡 <b>Dual-Mode-Tipp (RPG-Puzzles 4, 5, 6):</b> Klicken Sie auf das <b>⚙️ Zahnrad-Symbol</b> unten rechts im PixiJS-Player, um live zwischen <code>RPG SPRITES</code> und <code>GEOMETRIC DEBUG</code> umzuschalten!",
+        theater_controls: "Steuerung: Wiedergabe/Pause, Runden-Scrubber, Geschwindigkeit (1x–10x) und Vollbild.",
+        th_puzzle: "Puzzle",
+        th_category: "Kategorie",
+        th_mechanics: "Thema & Kernmechaniken",
+        td_desc_1: "11×11 einstürzende Arena, <code>BOMB</code>, <code>PUSH</code>, Voronoi-Partitionierung & MCTS",
+        td_desc_2: "Energierelais-Spannbäume (<code>LINK</code>), Knoten-<code>OVERCHARGE</code> & Schnittpunktprüfung",
+        td_desc_3: "Trägheitsphysik mit variabler Masse, Maelström-Vektorfeld, <code>ANCHOR</code> & <code>FIRE</code>",
+        td_desc_4: "Taktische RPG-Gruppe (Fighter, Mage, Cleric), Untote Wächter & Relikttruhen",
+        td_desc_5: "Solo Ultima IV Dungeon-Crawler, Fackel/HP/MP-Management, <code>FLAM_POR</code> & <code>MANI</code>",
+        td_desc_6: "Energiejewelen-Allokation & Pentagramm-Beschwörung (Hound, Guard, Wraith)",
+        s1_title: "Serie 1 — Algorithmische Multiplayer-Puzzles (Bot Programming)",
+        s1_sub: "Drei rundenbasierte Strategiespiele zur Herausforderung von Baumsuche (MCTS / Minimax), Graphentheorie und kontinuierlicher Vektorkinematik.",
+        s2_title: "Serie 2 — Taktische RPG-Puzzles mit Dual-Mode PixiJS-Viewer",
+        s2_sub: "Drei von <i>Wizardry: Proving Grounds of the Mad Overlord</i>, <i>D&D 5e</i>, <i>Ultima IV</i> und <i>Conan Overlord</i> inspirierte Spiele mit Echtzeit-Umschaltung zwischen <b>2D-RPG-Sprites</b> und <b>Geometrischen Debug-Formen</b>.",
+        btn_watch_replay: "▶️ PixiJS-Replay ansehen",
+        btn_play_ide: "🎮 Im CodinGame-IDE spielen",
+        btn_contrib: "📜 Beitrag",
+        btn_github: "💻 GitHub-Quellcode",
+        replays_avail: "Verfügbare Replays:",
+        dual_preview: "Dual-Mode-Rendering-Vorschau:",
+        g1_title: "1. Chrono-Tactics — Einstürzende Arena & Dynamische Topologie",
+        g1_rules: `<h4>Funktionsregeln & Liga-Fortschritt</h4>
+          <p>Zwei Trupps kämpfen über <b>120 Runden</b> auf einem symmetrischen <b>11×11</b>-Gitter, dessen Platten an struktureller Integrität verlieren (<code>3</code>, <code>2</code>, <code>1</code> dann <code>0</code> = tödlicher Abgrund), umgeben von unzerstörbaren Säulen (<code>#</code>).</p>
+          <ul class="rules-list">
+            <li><b>Holz 2 Liga (1 Einheit):</b> Orthogonale Bewegung <code>MOVE x y</code> entlang des kürzesten BFS-Pfades und Eroberung von <b>Chrono-Baken</b> (<b>+2 Pkt./Runde</b> pro Bake, <b>+1 Pkt./Runde</b> pro lebender Einheit).</li>
+            <li><b>Holz 1 Liga (2 Einheiten):</b> Plattenerosion beim Verlassen eines Feldes (<code>-1</code> Integrität) sowie Freischaltung von <code>BOMB tx ty</code> (Manhattan-Reichweite ≤ 2, Abklingzeit 3), die ein 5-Felder-Kreuz um 1 Integrität schwächt.</li>
+            <li><b>Bronze+ Liga (3 Einheiten):</b> Kinetischer Stoß <code>PUSH &lt;N|E|S|W&gt;</code> (Abklingzeit 2), der einen benachbarten Gegner um 1 Feld zurückstößt (sofortige Eliminierung im Abgrund <code>0</code>, mit <b>+20 Bonuspunkten</b> pro Überlebendem bei Auslöschung).</li>
+          </ul>
+          <div class="protocol-box"><b>Ausgabeprotokoll (1 Zeile pro lebender Einheit):</b><br><code>MOVE x y [BOMB tx ty | PUSH &lt;N|E|S|W&gt;]</code></div>`,
+        g2_title: "2. Quantum Relay — Raumnetzwerke & Energieflüsse",
+        g2_rules: `<h4>Funktionsregeln & Liga-Fortschritt</h4>
+          <p>In einem kontinuierlichen <b>1600×900</b>-Weltraumsektor steuert jeder Spieler eine Drohnenflotte, um <b>Quantenrelais</b> zu erobern und einen Spannbaum aus Energiestrahlen zum eigenen <b>Core</b> aufzubauen.</p>
+          <ul class="rules-list">
+            <li><b>Holz 2 Liga:</b> Vektornavigation <code>MOVE x y</code> der Drohnen zur Eroberung nahegelegener Quantenrelais und lokaler Energiegewinnung.</li>
+            <li><b>Holz 1 Liga:</b> Aufbau gerichteter Verbindungen <code>LINK id1 id2</code> zwischen kontrollierten Relais ohne geometrische Kreuzung feindlicher Strahlen. Jedes mit dem Core verbundene Relais liefert jede Runde Energie.</li>
+            <li><b>Bronze+ Liga:</b> Quanten-Überladung <code>OVERCHARGE nodeId</code> verdoppelt die Relaisleistung für 3 Runden und trennt unterversorgte gegnerische Verbindungen.</li>
+          </ul>
+          <div class="protocol-box"><b>Ausgabeprotokoll (1 Zeile pro Drohne):</b><br><code>MOVE x y [LINK id1 id2 | OVERCHARGE nodeId]</code></div>`,
+        g3_title: "3. Corsairs of the Maelstrom — Variable Massenträgheit & Schiffsballistik",
+        g3_rules: `<h4>Funktionsregeln & Liga-Fortschritt</h4>
+          <p>Kontinuierliche <b>1600×900</b>-Seeschlacht über <b>120 Runden</b>, in der Korsarenschiffe treibende Goldtruhen (<code>PICKUP_RADIUS = 85</code>) bergen und in ihren Heimathafen (<code>PORT_RADIUS = 130</code>) liefern.</p>
+          <ul class="rules-list">
+            <li><b>Holz 2 Liga (1 Schiff):</b> Trägheitskinematik (<code>DRAG = 0.78</code>) mit <b>ladungsabhängiger Masse</b>: <code>accel = power / (1.0 + 0.15 × cargoGold)</code>.</li>
+            <li><b>Holz 1 Liga (2 Schiffe):</b> Notanker <code>ANCHOR</code> und Aktivierung des zentralen <b>Maelström-Wirbelfeldes</b> bei <code>(800, 450)</code> (Radius <code>380</code>), das tangentiale Drift und radialen Sog erzeugt (Schiffbruch bei <code>dist &lt; 65</code>).</li>
+            <li><b>Bronze+ Liga (Ballistische Kanonen):</b> Kanonenschuss <code>FIRE tx ty</code> (Reichweite <code>450</code>, Explosionsradius <code>115</code>, Abklingzeit 2) mit Rückstoßwelle (<code>BLAST_IMPULSE = 95</code>) und Plünderung von bis zu <b>2 Gold</b>.</li>
+          </ul>
+          <div class="protocol-box"><b>Ausgabeprotokoll (1 Zeile pro Schiff):</b><br><code>THRUST x y power | ANCHOR | FIRE tx ty</code></div>`,
+        g4_title: "4. Proving Grounds of Werdna — Taktische RPG-Gruppe (Fighter, Mage, Cleric)",
+        g4_rules: `<h4>Funktionsregeln & Klassen-Synergien</h4>
+          <p>Führen Sie auf einem <b>11×11</b>-Dungeongitter über <b>100 Runden</b> eine 3-Helden-Gruppe gegen Skelettwächter (<code>18 HP</code>, <b>+10 Pkt.</b> beim Todesstoß) und sammeln Sie Relikttruhen (<b>+25 bis +35 Pkt.</b>):</p>
+          <ul class="rules-list">
+            <li><b>FIGHTER (36 HP, 9 ATK — Quadrat <code>F0</code> im Debug-Modus):</b> Nahkampfangriff <code>SLASH targetId</code> (9 Schaden, +3 Pkt.) oder Schutz eines benachbarten Verbündeten via <code>GUARD allyId</code> (reduziert erlittenen Schaden um 3).</li>
+            <li><b>MAGE (22 HP, 4 ATK — Raute <code>M1</code> im Debug-Modus, ab Holz 1):</b> Wirkt <code>FIREBALL tx ty</code> (<i>MAHALITO</i>, Reichweite ≤ 3, Abklingzeit 2) für <b>8 AoE-Schaden</b> im Manhattan-Radius ≤ 1 um <code>(tx, ty)</code>.</li>
+            <li><b>CLERIC (28 HP, 6 ATK — Dreieck <code>C2</code> im Debug-Modus, ab Bronze):</b> Wirkt <code>HEAL allyId</code> (<i>DIOS</i>, Reichweite ≤ 3, Abklingzeit 2) und heilt einen Verbündeten um <b>+10 HP</b>.</li>
+          </ul>
+          <div class="protocol-box"><b>Ausgabeprotokoll (1 Zeile pro lebendem Helden):</b><br><code>MOVE x y [SLASH id | GUARD id | FIREBALL tx ty | HEAL id]</code></div>`,
+        g5_title: "5. Ultima: Dungeon Delver — Solo-Dungeon-Exploration & Runenzauber",
+        g5_rules: `<h4>Funktionsregeln & Gold-Optimierung</h4>
+          <p>In einem von <i>Ultima IV</i> inspirierten <b>13×11</b>-Dungeon startet der <b>Avatar</b> mit <b>40 HP</b>, <b>20 MP</b> und <b>65 Fackelrunden</b> (-1 pro Runde). Maximieren Sie das gesammelte <b>Gold</b> und entkommen Sie über die Ausgangstreppe (<code>E</code>):</p>
+          <ul class="rules-list">
+            <li><b>Dungeon-Objekte:</b> Truhen (<code>C</code> = <b>+25 Gold</b>), Tugendrelikte (<code>R</code> = <b>+60 Gold</b>, bewacht von einem 15-HP-Geist), Monster (<code>M</code> = <b>+20 Gold</b>, 15 HP, 4 Schaden/Runde im Nahkampf), Brunnen (<code>F</code> = <b>+18 HP & +10 Fackel</b>) und Ausgangstreppe (<code>E</code> = <b>+50 Gold + 1 Gold pro verbleibender Fackelrunde</b>).</li>
+            <li><b>Aktionen & Runenzauber:</b> Nach <code>MOVE x y</code> kann der Avatar <code>STRIKE tx ty</code> (0 MP, Reichweite 1, 8 Schaden), <code>FLAM_POR tx ty</code> (5 MP, Reichweite ≤ 3, 15 Schaden) oder <code>MANI</code> (4 MP, +14 HP Heilung) ausführen.</li>
+          </ul>
+          <div class="protocol-box"><b>Ausgabeprotokoll (1 Zeile pro Runde):</b><br><code>MOVE x y [STRIKE tx ty | FLAM_POR tx ty | MANI]</code></div>`,
+        g6_title: "6. Overlord's Labyrinth — Energiejewelen & Beschwörungs-Pentagramme",
+        g6_rules: `<h4>Funktionsregeln & Juwelen-Ökonomie</h4>
+          <p>Inspiriert vom Overlord-Tableau aus <i>Conan: Book of Skelos</i> und <i>Werdna</i>: Jeder Overlord verteidigt sein <b>Sanctum (40 HP)</b> in einem <b>11×11</b>-Labyrinth mit <b>5 Beschwörungs-Pentagrammen</b>. Zu Rundenbeginn erhalten Sie <code>5 + leagueLevel + kontrolliertePentagramme</code> <b>Energiejewelen</b>:</p>
+          <ul class="rules-list">
+            <li><b><code>SUMMON pentagramId TYPE</code>:</b> Beschwört einen Diener auf einem eigenen oder neutralen Pentagramm (wodurch es erobert wird): <b>HOUND</b> (Kosten 2, 12 HP, 4 ATK, Tempo 2, Reichweite 1), <b>GUARD</b> (Kosten 3, 24 HP, 6 ATK, Tempo 1, Reichweite 1 — Holz 1), <b>WRAITH</b> (Kosten 4, 14 HP, 7 ATK, Tempo 1, Reichweite 2 — Bronze).</li>
+            <li><b><code>ACTIVATE minionId targetX targetY</code> (Kosten 1 Juwel, max. 2 Aktivierungen/Runde pro Diener):</b> Bewegt den Diener bis zu seinem Tempo zum Ziel, erobert Pentagramme und greift das feindliche Sanctum an (<b>+8 Pkt.</b> pro Treffer, <b>+50 Pkt.</b> bei Zerstörung).</li>
+          </ul>
+          <div class="protocol-box"><b>Ausgabeprotokoll (Befehle getrennt durch <code>;</code>):</b><br><code>SUMMON 0 GUARD ; ACTIVATE 3 9 5 ; ACTIVATE 4 5 5</code></div>`,
+        footer_text: 'Entwickelt mit <b>CodinGame Game Engine SDK v4.7.7</b> (Java 17 & PixiJS v6) • GitHub-Organisation <a href="https://github.com/codingame-team" target="_blank" rel="noopener">@codingame-team</a>'
+      },
+
+      jp: {
+        hero_title: "CodinGame 6パズル・ショーケース & PixiJS ライブ・リプレイシアター",
+        hero_sub: "公式 CodinGame SDK で開発された6つのコミュニティゲーム集：<b>3つのマルチプレイヤー・アルゴリズムパズル</b>（グラフ理論、エネルギーフロー、慣性弾道物理）と、リアルタイム <b>Dual-Mode</b> PixiJS ビューア（<i>RPG Sprites</i> vs <i>Geometric Debug</i>）を搭載した <b>3つのタクティカルRPGパズル</b>。",
+        nav_theater: "🎬 インタラクティブ PixiJS プレイヤー",
+        theater_title: "ライブ埋め込み PixiJS リプレイプレイヤー（全18マッチ収録）",
+        btn_inspector: "🔍 フル・リプレイインスペクタを開く（コンソール & ログ）",
+        select_match_lbl: "マッチを選択：",
+        match1_btn: "マッチ 1 (Wood 2 / Test 1)",
+        match2_btn: "マッチ 2 (Wood 1 / Test 2)",
+        match3_btn: "マッチ 3 (Bronze+ / Test 3)",
+        theater_tip: "💡 <b>Dual-Mode のヒント（RPGパズル 4, 5, 6）：</b> PixiJS プレイヤー右下の <b>⚙️ 歯車アイコン</b> をクリックすると、再生中に <code>RPG SPRITES</code> と <code>GEOMETRIC DEBUG</code> をリアルタイムに切り替えられます！",
+        theater_controls: "操作：再生/一時停止、ターン・シークバー、再生速度 (1x〜10x)、フルスクリーン。",
+        th_puzzle: "パズル名",
+        th_category: "カテゴリ",
+        th_mechanics: "テーマ & 主要メカニクス",
+        td_desc_1: "11×11 崩壊アリーナ、<code>BOMB</code>、<code>PUSH</code>、ボロノイ分割 & MCTS",
+        td_desc_2: "エネルギーリレー全域木 (<code>LINK</code>)、<code>OVERCHARGE</code> & 線分交差判定",
+        td_desc_3: "可変質量慣性物理、メイルストロム渦ベクトル場、<code>ANCHOR</code> & <code>FIRE</code>",
+        td_desc_4: "タクティカルRPGパーティ (Fighter, Mage, Cleric)、アンデッド守護者 & 聖遺物宝箱",
+        td_desc_5: "Ultima IV 風ソロ探索最適化、松明/HP/MP管理、ルーン呪文 <code>FLAM_POR</code> & <code>MANI</code>",
+        td_desc_6: "エネルギージェム配分 & 五芒星召喚デュエル (Hound, Guard, Wraith)",
+        s1_title: "シリーズ 1 — マルチプレイヤー・アルゴリズムパズル (Bot Programming)",
+        s1_sub: "木探索（MCTS / Minimax）、グラフ理論、連続ベクトル運動学の限界に挑む3つのターン制ストラテジーゲーム。",
+        s2_title: "シリーズ 2 — Dual-Mode PixiJS ビューア搭載 タクティカルRPGパズル",
+        s2_sub: "<i>Wizardry: Proving Grounds of the Mad Overlord</i>、<i>D&D 5e</i>、<i>Ultima IV</i>、<i>Conan Overlord</i> に着想を得て、<b>2D RPGスプライト</b> と <b>幾何学デバッグ表示</b> を瞬時に切り替え可能な3作品。",
+        btn_watch_replay: "▶️ PixiJS リプレイを再生",
+        btn_play_ide: "🎮 CodinGame IDE でプレイ",
+        btn_contrib: "📜 コントリビューション",
+        btn_github: "💻 GitHub ソースコード",
+        replays_avail: "収録リプレイ：",
+        dual_preview: "Dual-Mode レンダリング比較：",
+        g1_title: "1. Chrono-Tactics — 崩壊する時空アリーナ & 動的トポロジー",
+        g1_rules: `<h4>ゲームルール & リーグ進行</h4>
+          <p>対称な <b>11×11</b> グリッド上で <b>120ターン</b> にわたり2つの部隊が激突します。床タイルは構造耐久度（<code>3</code> → <code>2</code> → <code>1</code> → <code>0</code>＝奈落）を持ち、破壊不能な柱（<code>#</code>）が配置されています。</p>
+          <ul class="rules-list">
+            <li><b>Wood 2 リーグ（1ユニット）：</b> 最短BFS経路に沿った直交移動 <code>MOVE x y</code> と <b>クロノビーコン</b> の占領（支配ビーコンごとに <b>+2点/ターン</b>、生存ユニットごとに <b>+1点/ターン</b>）。</li>
+            <li><b>Wood 1 リーグ（2ユニット）：</b> ユニット離脱時の床浸食（耐久度 <code>-1</code>）に加え、十字5マスの耐久度を1減らす時空爆弾 <code>BOMB tx ty</code>（マンハッタン射程 ≤ 2、クールダウン3）が解禁。</li>
+            <li><b>Bronze+ リーグ（3ユニット）：</b> 隣接する敵を1マス突き飛ばす運動衝撃波 <code>PUSH &lt;N|E|S|W&gt;</code>（クールダウン2）が解禁（奈落 <code>0</code> へ落とせば即死、全滅させると生存ユニットごとに <b>+20ボーナス点</b>）。</li>
+          </ul>
+          <div class="protocol-box"><b>出力プロトコル（生存ユニットごとに1行）：</b><br><code>MOVE x y [BOMB tx ty | PUSH &lt;N|E|S|W&gt;]</code></div>`,
+        g2_title: "2. Quantum Relay — 宇宙中継ネットワーク & エネルギーフロー",
+        g2_rules: `<h4>ゲームルール & リーグ進行</h4>
+          <p>連続座標 <b>1600×900</b> の宇宙セクターでドローン艦隊を指揮し、<b>量子リレー</b> を占領して自軍の <b>Core Base</b> へ繋がるエネルギービームの全域木を構築します。</p>
+          <ul class="rules-list">
+            <li><b>Wood 2 リーグ：</b> ドローンのベクトル移動 <code>MOVE x y</code> により近傍の量子リレーを占領し、局所エネルギーを回収します。</li>
+            <li><b>Wood 1 リーグ：</b> 支配リレー間で敵ビームと交差しないように指向性リンク <code>LINK id1 id2</code> を構築（線分交差判定）。Core に接続された各リレーが毎ターンエネルギーを送電します。</li>
+            <li><b>Bronze+ リーグ：</b> リレー出力を3ターン倍増させ、敵の脆弱なリンクを遮断する量子過負荷 <code>OVERCHARGE nodeId</code> が解禁。</li>
+          </ul>
+          <div class="protocol-box"><b>出力プロトコル（ドローンごとに1行）：</b><br><code>MOVE x y [LINK id1 id2 | OVERCHARGE nodeId]</code></div>`,
+        g3_title: "3. Corsairs of the Maelstrom — 可変質量慣性 & 海戦弾道学",
+        g3_rules: `<h4>ゲームルール & リーグ進行</h4>
+          <p><b>1600×900</b> の連続海域で <b>120ターン</b> 競う海戦シミュレーション。海賊船で漂流する黄金の宝箱（<code>PICKUP_RADIUS = 85</code>）を回収し、母港（<code>PORT_RADIUS = 130</code>）へ持ち帰ります。</p>
+          <ul class="rules-list">
+            <li><b>Wood 2 リーグ（1隻）：</b> 流体抵抗（<code>DRAG = 0.78</code>）と <b>積載ゴールドに応じた可変質量</b>：<code>accel = power / (1.0 + 0.15 × cargoGold)</code>。財宝を積むほど制動距離が伸びます。</li>
+            <li><b>Wood 1 リーグ（2隻）：</b> 緊急停止錨 <code>ANCHOR</code> と、中央 <code>(800, 450)</code>（半径 <code>380</code>）の <b>メイルストロム大渦ベクトル場</b>（反時計回りの接線ドリフトと中心への引力、<code>dist &lt; 65</code> で難破し積荷喪失）が登場。</li>
+            <li><b>Bronze+ リーグ（弾道キャノン）：</b> 砲撃 <code>FIRE tx ty</code>（射程 <code>450</code>、爆発半径 <code>115</code>、クールダウン2）が爆風衝撃波（<code>BLAST_IMPULSE = 95</code>）を発生させ、敵船を大渦の目へ突き飛ばしつつ最大 <b>2 Gold</b> を略奪します。</li>
+          </ul>
+          <div class="protocol-box"><b>出力プロトコル（船ごとに1行）：</b><br><code>THRUST x y power | ANCHOR | FIRE tx ty</code></div>`,
+        g4_title: "4. Proving Grounds of Werdna — タクティカルRPGパーティ (Fighter, Mage, Cleric)",
+        g4_rules: `<h4>ゲームルール & クラスシナジー</h4>
+          <p><b>11×11</b> のダンジョンで <b>100ターン</b> にわたり3人のRPGパーティを指揮し、聖遺物の宝箱（<b>+25〜+35点</b>）を守るアンデッド守護者（<code>18 HP</code>、討伐ボーナス <b>+10点</b>）や敵パーティと戦います：</p>
+          <ul class="rules-list">
+            <li><b>FIGHTER（36 HP, 9 ATK — デバッグ表示：四角形 <code>F0</code>）：</b> 隣接する敵を斬りつける <code>SLASH targetId</code>（9ダメージ、+3点）、または隣接する味方を守る <code>GUARD allyId</code>（そのターンの被ダメージを3軽減）。</li>
+            <li><b>MAGE（22 HP, 4 ATK — デバッグ表示：菱形 <code>M1</code>、Wood 1 で解禁）：</b> 火炎呪文 <code>FIREBALL tx ty</code>（<i>MAHALITO</i>、射程 ≤ 3、クールダウン2）を放ち、<code>(tx, ty)</code> からマンハッタン距離 ≤ 1 の範囲に <b>8 AoEダメージ</b>。</li>
+            <li><b>CLERIC（28 HP, 6 ATK — デバッグ表示：三角形 <code>C2</code>、Bronze で解禁）：</b> 治癒呪文 <code>HEAL allyId</code>（<i>DIOS</i>、射程 ≤ 3、クールダウン2）により味方のHPを <b>+10回復</b>。</li>
+          </ul>
+          <div class="protocol-box"><b>出力プロトコル（生存ヒーローごとに1行）：</b><br><code>MOVE x y [SLASH id | GUARD id | FIREBALL tx ty | HEAL id]</code></div>`,
+        g5_title: "5. Ultima: Dungeon Delver — ソロ・ダンジョン探索 & ルーン呪文",
+        g5_rules: `<h4>ゲームルール & ゴールド最適化スコア</h4>
+          <p><i>Ultima IV</i> に着想を得た <b>13×11</b> ダンジョンで、<b>アバタール (Avatar)</b> は <b>40 HP</b>、<b>20 MP</b>、<b>松明 65ターン分</b>（毎ターン1減少）を持って出発します。獲得 <b>Gold</b> を最大化し、脱出階段（<code>E</code>）へ到達してください：</p>
+          <ul class="rules-list">
+            <li><b>ダンジョン内の要素：</b> 宝箱（<code>C</code> = <b>+25 Gold</b>）、徳の聖遺物（<code>R</code> = <b>+60 Gold</b>、15 HPの守護霊が防衛）、モンスター（<code>M</code> = <b>+20 Gold</b>、15 HP、隣接時毎ターン4ダメージ）、癒しの泉（<code>F</code> = <b>+18 HP & 松明+10</b>）、脱出階段（<code>E</code> = <b>+50 Gold + 残り松明ターン数のボーナスGold</b>）。</li>
+            <li><b>アクション & ルーン呪文：</b> <code>MOVE x y</code> で1歩移動後、近接攻撃 <code>STRIKE tx ty</code>（0 MP、射程1、8ダメージ）、火炎呪文 <code>FLAM_POR tx ty</code>（5 MP、射程 ≤ 3、15ダメージで即死）、治癒呪文 <code>MANI</code>（4 MP、+14 HP回復）を実行可能。</li>
+          </ul>
+          <div class="protocol-box"><b>出力プロトコル（毎ターン1行）：</b><br><code>MOVE x y [STRIKE tx ty | FLAM_POR tx ty | MANI]</code></div>`,
+        g6_title: "6. Overlord's Labyrinth — エネルギージェム配分 & 五芒星召喚",
+        g6_rules: `<h4>ゲームルール & エネルギージェム経済</h4>
+          <p><i>Conan: Book of Skelos (Overlord Dashboard)</i> と <i>Werdna</i> に着想を得た1v1戦術ボードデュエル。<b>5つの召喚五芒星</b> が配置された <b>11×11</b> 迷宮で自軍の <b>聖域 Sanctum (40 HP)</b> を守ります。毎ターン開始時に <code>5 + leagueLevel + 支配五芒星数</code> の <b>エネルギージェム</b> を獲得：</p>
+          <ul class="rules-list">
+            <li><b><code>SUMMON pentagramId TYPE</code>：</b> 自軍または中立の五芒星にミニオンを召喚（中立なら即占領）：<b>HOUND</b>（コスト2、12 HP、4 ATK、速度2、射程1）、<b>GUARD</b>（コスト3、24 HP、6 ATK、速度1、射程1 — Wood 1）、<b>WRAITH</b>（コスト4、14 HP、7 ATK、速度1、射程2 — Bronze）。</li>
+            <li><b><code>ACTIVATE minionId targetX targetY</code>（コスト1ジェム、1体につき毎ターン最大2回）：</b> ミニオンを速度分だけ目標へ前進させ、五芒星を占領し、敵Sanctumに隣接すれば攻撃（1ヒット <b>+8点</b>、Sanctum破壊で <b>+50点</b>）。</li>
+          </ul>
+          <div class="protocol-box"><b>出力プロトコル（セミコロン <code>;</code> 区切り）：</b><br><code>SUMMON 0 GUARD ; ACTIVATE 3 9 5 ; ACTIVATE 4 5 5</code></div>`,
+        footer_text: '<b>CodinGame Game Engine SDK v4.7.7</b> (Java 17 & PixiJS v6) で構築 • GitHub オーガニゼーション <a href="https://github.com/codingame-team" target="_blank" rel="noopener">@codingame-team</a>'
+      }
+    };
+
     const GAME_TITLES = {
       'chrono-tactics': '1. Chrono-Tactics',
       'quantum-relay': '2. Quantum Relay',
@@ -914,8 +1235,47 @@
       'overlords-labyrinth': "6. Overlord's Labyrinth"
     };
 
+    let currentLang = 'fr';
     let currentSlug = 'proving-grounds-werdna';
     let currentMatch = 3;
+
+    function setLanguage(lang) {
+      if (!I18N[lang]) lang = 'fr';
+      currentLang = lang;
+      document.documentElement.lang = lang === 'jp' ? 'ja' : lang;
+
+      const dict = I18N[lang];
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key] !== undefined) {
+          el.innerHTML = dict[key];
+        }
+      });
+
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+      });
+
+      updateActiveReplayLabel();
+      try {
+        localStorage.setItem('cg_hub_lang', lang);
+        const url = new URL(window.location);
+        url.searchParams.set('lang', lang);
+        window.history.replaceState({}, '', url);
+      } catch (e) {}
+    }
+
+    function updateActiveReplayLabel() {
+      const prefix = {
+        fr: 'Puzzle actif :',
+        en: 'Active Puzzle:',
+        de: 'Aktives Puzzle:',
+        jp: '選択中のパズル：'
+      }[currentLang] || 'Active Puzzle:';
+      const matchWord = currentLang === 'jp' ? 'マッチ' : 'Match';
+      document.getElementById('current-replay-label').textContent =
+        `${prefix} ${GAME_TITLES[currentSlug]} — ${matchWord} ${currentMatch}`;
+    }
 
     function loadReplay(slug, matchNum) {
       currentSlug = slug;
@@ -927,8 +1287,7 @@
       const inspectorLink = document.getElementById('open-full-inspector');
       inspectorLink.href = `replays/${currentSlug}/test.html?replay=replay${currentMatch}.json`;
 
-      document.getElementById('current-replay-label').textContent =
-        `Puzzle actif : ${GAME_TITLES[currentSlug]} — Match ${currentMatch}`;
+      updateActiveReplayLabel();
 
       document.querySelectorAll('#theater-game-tabs .game-tab').forEach(btn => {
         btn.classList.toggle('active', btn.getAttribute('onclick').includes(`'${currentSlug}'`));
@@ -953,6 +1312,18 @@
       parent.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
       btnEl.classList.add('active');
     }
+
+    // Initialize language from ?lang= query param, localStorage, or browser locale
+    (function initLang() {
+      const params = new URLSearchParams(window.location.search);
+      const qLang = (params.get('lang') || '').toLowerCase();
+      let saved = null;
+      try { saved = localStorage.getItem('cg_hub_lang'); } catch (e) {}
+      const nav = (navigator.language || 'fr').toLowerCase();
+      const autoLang = nav.startsWith('ja') ? 'jp' : (nav.startsWith('de') ? 'de' : (nav.startsWith('en') ? 'en' : 'fr'));
+      const initial = I18N[qLang] ? qLang : (I18N[saved] ? saved : autoLang);
+      setLanguage(initial);
+    })();
   </script>
 </body>
 </html>
