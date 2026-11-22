@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CodinGame SDK Puzzles Hub — 6 Jeux Multijoueurs &amp; RPG (PixiJS v4.7.7)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0f19;
+      --bg-card: #131a2a;
+      --bg-card-alt: #182136;
+      --border: #26324d;
+      --accent: #f59e0b;
+      --accent-blue: #38bdf8;
+      --accent-purple: #a855f7;
+      --accent-green: #22c55e;
+      --accent-red: #f43f5e;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(circle at 50% 0%, #17223b 0%, var(--bg) 55%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: var(--accent-blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    code, pre { font-family: 'JetBrains Mono', monospace; }
+
+    /* Header */
+    .hero {
+      padding: 3.5rem 1.5rem 2.5rem;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(56,189,248,0.08) 0%, rgba(11,15,25,0) 100%);
+    }
+    .hero-badge {
+      display: inline-block;
+      padding: 0.35rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.45);
+      color: var(--accent);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .hero h1 {
+      margin: 0 auto 0.8rem;
+      max-width: 960px;
+      font-size: clamp(1.9rem, 3.6vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(90deg, #ffffff, #93c5fd, #fcd34d);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero p {
+      max-width: 820px;
+      margin: 0 auto 1.6rem;
+      color: var(--text-muted);
+      font-size: 1.05rem;
+    }
+    .nav-pills {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.6rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .nav-pill {
+      padding: 0.5rem 1rem;
+      border-radius: 0.6rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 0.88rem;
+      font-weight: 600;
+      transition: all 0.18s ease;
+    }
+    .nav-pill:hover {
+      border-color: var(--accent-blue);
+      background: var(--bg-card-alt);
+      text-decoration: none;
+      transform: translateY(-1px);
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    /* Interactive Replay Theater */
+    .theater-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.45);
+    }
+    .theater-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.1rem;
+    }
+    .theater-title {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .theater-title h2 {
+      margin: 0;
+      font-size: 1.35rem;
+    }
+    .live-dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: var(--accent-green);
+      box-shadow: 0 0 12px var(--accent-green);
+    }
+    .theater-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .game-tab, .match-btn {
+      cursor: pointer;
+      padding: 0.55rem 0.95rem;
+      border-radius: 0.55rem;
+      border: 1px solid var(--border);
+      background: var(--bg-card-alt);
+      color: var(--text);
+      font-size: 0.86rem;
+      font-weight: 600;
+      transition: all 0.15s ease;
+    }
+    .game-tab:hover, .match-btn:hover {
+      border-color: var(--accent-blue);
+    }
+    .game-tab.active {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      border-color: #60a5fa;
+      color: #fff;
+    }
+    .match-btn.active {
+      background: rgba(245, 158, 11, 0.2);
+      border-color: var(--accent);
+      color: #fde68a;
+    }
+    .theater-subbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.8rem;
+      margin-bottom: 1rem;
+    }
+    .match-group {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .iframe-shell {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9.6;
+      background: #060911;
+      border-radius: 0.75rem;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .iframe-shell iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    .theater-tip {
+      margin-top: 0.85rem;
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Section Headings */
+    .series-banner {
+      margin: 3rem 0 1.5rem;
+      padding: 1.25rem 1.5rem;
+      border-radius: 0.85rem;
+      background: linear-gradient(90deg, rgba(56,189,248,0.12), rgba(168,85,247,0.08));
+      border-left: 4px solid var(--accent-blue);
+    }
+    .series-banner.rpg {
+      background: linear-gradient(90deg, rgba(245,158,11,0.14), rgba(244,63,94,0.08));
+      border-left-color: var(--accent);
+    }
+    .series-banner h2 {
+      margin: 0 0 0.3rem;
+      font-size: 1.5rem;
+    }
+    .series-banner p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* Overview Table */
+    .table-wrap {
+      overflow-x: auto;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 0.85rem;
+      margin-bottom: 2.5rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+    th, td {
+      padding: 0.85rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    th {
+      background: var(--bg-card-alt);
+      color: #cbd5e1;
+      font-weight: 700;
+    }
+    tr:last-child td { border-bottom: none; }
+
+    /* Puzzle Detail Cards */
+    .puzzle-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 1.8rem;
+      margin-bottom: 2.5rem;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.3);
+    }
+    .puzzle-top {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .puzzle-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-bottom: 0.45rem;
+    }
+    .badge {
+      padding: 0.22rem 0.65rem;
+      border-radius: 0.4rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .badge-multi { background: rgba(56,189,248,0.16); color: #7dd3fc; border: 1px solid rgba(56,189,248,0.35); }
+    .badge-opti { background: rgba(34,197,94,0.16); color: #86efac; border: 1px solid rgba(34,197,94,0.35); }
+    .badge-rpg { background: rgba(245,158,11,0.16); color: #fcd34d; border: 1px solid rgba(245,158,11,0.35); }
+    .badge-dual { background: rgba(168,85,247,0.16); color: #d8b4fe; border: 1px solid rgba(168,85,247,0.35); }
+
+    .puzzle-top h3 {
+      margin: 0;
+      font-size: 1.6rem;
+    }
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.5rem 0.9rem;
+      border-radius: 0.55rem;
+      font-size: 0.84rem;
+      font-weight: 600;
+      border: 1px solid var(--border);
+      background: var(--bg-card-alt);
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .btn:hover {
+      border-color: var(--accent-blue);
+      text-decoration: none;
+      transform: translateY(-1px);
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #0284c7, #0369a1);
+      border-color: #38bdf8;
+      color: #fff;
+    }
+    .btn-gold {
+      background: linear-gradient(135deg, #d97706, #b45309);
+      border-color: #fbbf24;
+      color: #fff;
+    }
+
+    .puzzle-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 1.6rem;
+      align-items: start;
+    }
+    @media (max-width: 980px) {
+      .puzzle-grid { grid-template-columns: 1fr; }
+    }
+    .screenshot-box {
+      background: #070a12;
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      overflow: hidden;
+    }
+    .screenshot-box img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .screenshot-tabs {
+      display: flex;
+      background: var(--bg-card-alt);
+      border-bottom: 1px solid var(--border);
+      padding: 0.45rem 0.6rem;
+      gap: 0.45rem;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .screenshot-tabs span {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+    .mode-switch-btns {
+      display: flex;
+      gap: 0.35rem;
+    }
+    .mode-btn {
+      cursor: pointer;
+      padding: 0.28rem 0.65rem;
+      font-size: 0.76rem;
+      font-weight: 700;
+      border-radius: 0.4rem;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      color: var(--text-muted);
+    }
+    .mode-btn.active {
+      background: var(--accent);
+      color: #0b0f19;
+      border-color: var(--accent);
+    }
+    .replay-quick-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      padding: 0.7rem;
+      background: rgba(15, 23, 42, 0.75);
+      border-top: 1px solid var(--border);
+      align-items: center;
+      justify-content: space-between;
+    }
+    .replay-quick-bar span {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .rules-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 1.05rem;
+      color: #fcd34d;
+    }
+    .rules-box p {
+      margin: 0 0 0.85rem;
+      font-size: 0.93rem;
+      color: #dbeafe;
+    }
+    .rules-list {
+      margin: 0 0 1rem;
+      padding-left: 1.2rem;
+      font-size: 0.9rem;
+      color: #cbd5e1;
+    }
+    .rules-list li { margin-bottom: 0.4rem; }
+    .protocol-box {
+      background: #090d16;
+      border: 1px solid var(--border);
+      border-radius: 0.6rem;
+      padding: 0.85rem 1rem;
+      font-size: 0.83rem;
+    }
+    .protocol-box code {
+      color: #7dd3fc;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2.5rem 1.5rem;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.88rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO HEADER -->
+  <header class="hero">
+    <div class="hero-badge">CodinGame SDK v4.7.7 • Java 17 &amp; PixiJS v6</div>
+    <h1>Catalogue des 6 Puzzles CodinGame &amp; Lecteur de Replays PixiJS</h1>
+    <p>
+      Retrouvez nos 6 créations communautaires développées avec le SDK officiel CodinGame :
+      <b>3 puzzles algorithmiques multijoueurs</b> (graphes, flots, balistique inertielle) et
+      <b>3 puzzles RPG tactiques</b> dotés d'un viewer PixiJS <b>Dual-Mode</b> (<i>RPG Sprites</i> vs <i>Geometric Debug</i>).
+    </p>
+    <nav class="nav-pills">
+      <a class="nav-pill" href="#replay-theater">🎬 Lecteur PixiJS Interactif</a>
+      <a class="nav-pill" href="#chrono-tactics">1. Chrono-Tactics</a>
+      <a class="nav-pill" href="#quantum-relay">2. Quantum Relay</a>
+      <a class="nav-pill" href="#corsairs-maelstrom">3. Corsairs of the Maelstrom</a>
+      <a class="nav-pill" href="#proving-grounds-werdna">4. Proving Grounds of Werdna</a>
+      <a class="nav-pill" href="#ultima-dungeon-delver">5. Ultima: Dungeon Delver</a>
+      <a class="nav-pill" href="#overlords-labyrinth">6. Overlord's Labyrinth</a>
+    </nav>
+  </header>
+
+  <main class="container">
+
+    <!-- INTERACTIVE PIXIJS REPLAY THEATER -->
+    <section id="replay-theater" class="theater-section">
+      <div class="theater-header">
+        <div class="theater-title">
+          <span class="live-dot"></span>
+          <h2>Lecteur de Replays PixiJS en Direct (18 Matchs Embarqués)</h2>
+        </div>
+        <a id="open-full-inspector" class="btn btn-primary" href="replays/proving-grounds-werdna/test.html?replay=replay3.json" target="_blank" rel="noopener">
+          🔍 Ouvrir l'Inspecteur Complet (Console &amp; Logs)
+        </a>
+      </div>
+
+      <!-- Puzzle Tabs -->
+      <div class="theater-controls" id="theater-game-tabs">
+        <button class="game-tab active" onclick="loadReplay('proving-grounds-werdna', 3)">⚔️ 4. Proving Grounds of Werdna</button>
+        <button class="game-tab" onclick="loadReplay('ultima-dungeon-delver', 1)">🕯️ 5. Ultima: Dungeon Delver</button>
+        <button class="game-tab" onclick="loadReplay('overlords-labyrinth', 3)">🔮 6. Overlord's Labyrinth</button>
+        <button class="game-tab" onclick="loadReplay('chrono-tactics', 2)">⏳ 1. Chrono-Tactics</button>
+        <button class="game-tab" onclick="loadReplay('quantum-relay', 3)">⚡ 2. Quantum Relay</button>
+        <button class="game-tab" onclick="loadReplay('corsairs-maelstrom', 3)">🏴‍☠️ 3. Corsairs of the Maelstrom</button>
+      </div>
+
+      <!-- Match Selector -->
+      <div class="theater-subbar">
+        <div class="match-group" id="theater-match-btns">
+          <span style="font-size:0.86rem; color:var(--text-muted); font-weight:600;">Sélectionner une partie :</span>
+          <button class="match-btn" data-match="1" onclick="switchMatch(1)">Match 1 (Ligue Bois 2 / Test 1)</button>
+          <button class="match-btn" data-match="2" onclick="switchMatch(2)">Match 2 (Ligue Bois 1 / Test 2)</button>
+          <button class="match-btn active" data-match="3" onclick="switchMatch(3)">Match 3 (Ligue Bronze+ / Test 3)</button>
+        </div>
+        <span id="current-replay-label" style="font-size:0.85rem; color:#fcd34d; font-weight:600;">
+          Puzzle actif : Proving Grounds of Werdna — Match 3
+        </span>
+      </div>
+
+      <!-- Embedded Authentic CodinGame PixiJS Player -->
+      <div class="iframe-shell">
+        <iframe id="pixi-replay-frame" src="replays/proving-grounds-werdna/embed.html?replay=replay3.json&autoplay=1" allowfullscreen></iframe>
+      </div>
+
+      <div class="theater-tip">
+        <span>💡 <b>Astuce Dual-Mode (Puzzles RPG 4, 5, 6) :</b> cliquez sur l'icône <b>⚙️ Engrenage</b> en bas à droite du lecteur PixiJS pour basculer en temps réel entre <code>RPG SPRITES</code> et <code>GEOMETRIC DEBUG</code> !</span>
+        <span>Contrôles : Lecture/Pause, Curseur tour par tour, Vitesse (1x à 10x) et Plein écran.</span>
+      </div>
+    </section>
+
+    <!-- SUMMARY TABLE -->
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Puzzle</th>
+            <th>Catégorie</th>
+            <th>Thème &amp; Mécaniques Clés</th>
+            <th>Dépôt GitHub (<code>@codingame-team</code>)</th>
+            <th>Contribution CodinGame</th>
+            <th>Démo IDE</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>1</b></td>
+            <td><a href="#chrono-tactics"><b>Chrono-Tactics</b></a></td>
+            <td><span class="badge badge-multi">Bot Programming</span></td>
+            <td>Arène 11×11 à effondrement progressif, <code>BOMB</code>, <code>PUSH</code>, Voronoï &amp; MCTS</td>
+            <td><a href="https://github.com/codingame-team/codingame-chrono-tactics" target="_blank">codingame-chrono-tactics</a></td>
+            <td><a href="https://www.codingame.com/contribute/view/15861375695065563529e288291b702e8df659" target="_blank">Contribution</a></td>
+            <td><a href="https://www.codingame.com/ide/demo/160565706ec1b3064e2be42d9cc50401b0ae417" target="_blank">Jouer IDE</a></td>
+          </tr>
+          <tr>
+            <td><b>2</b></td>
+            <td><a href="#quantum-relay"><b>Quantum Relay</b></a></td>
+            <td><span class="badge badge-multi">Bot Programming</span></td>
+            <td>Arbres de relais d'énergie (<code>LINK</code>), surcharge (<code>OVERCHARGE</code>) &amp; intersections</td>
+            <td><a href="https://github.com/codingame-team/codingame-quantum-relay" target="_blank">codingame-quantum-relay</a></td>
+            <td><a href="https://www.codingame.com/contribute/view/15864612ee375b7372711a629aff1930a46f01" target="_blank">Contribution</a></td>
+            <td><a href="https://www.codingame.com/ide/demo/1605690daf156413f9393afba6e22199f0011bc" target="_blank">Jouer IDE</a></td>
+          </tr>
+          <tr>
+            <td><b>3</b></td>
+            <td><a href="#corsairs-maelstrom"><b>Corsairs of the Maelstrom</b></a></td>
+            <td><span class="badge badge-multi">Bot Programming</span></td>
+            <td>Physique inertielle à masse variable, vortex du Maelström, <code>ANCHOR</code> &amp; <code>FIRE</code></td>
+            <td><a href="https://github.com/codingame-team/codingame-corsairs-maelstrom" target="_blank">codingame-corsairs-maelstrom</a></td>
+            <td><a href="https://www.codingame.com/contribute/view/158647b537dec10e539706b149bde5a6c7442f" target="_blank">Contribution</a></td>
+            <td><a href="https://www.codingame.com/ide/demo/1605692ff7906372a45b3320918ac8fbdaaa75f" target="_blank">Jouer IDE</a></td>
+          </tr>
+          <tr>
+            <td><b>4</b></td>
+            <td><a href="#proving-grounds-werdna"><b>Proving Grounds of Werdna</b></a></td>
+            <td><span class="badge badge-rpg">RPG 1v1</span> <span class="badge badge-dual">Dual-Mode</span></td>
+            <td>Compagnie RPG (Fighter, Mage, Cleric), Gardiens Morts-Vivants &amp; Coffres de Reliques</td>
+            <td><a href="https://github.com/codingame-team/codingame-proving-grounds-werdna" target="_blank">codingame-proving-grounds-werdna</a></td>
+            <td><a href="https://www.codingame.com/contribute/view/15867946f675bf476dc7f164eb3db1d6ce58f6" target="_blank">Contribution</a></td>
+            <td><a href="https://www.codingame.com/ide/demo/1605773233912493b234f7c05aadee6e291708f" target="_blank">Jouer IDE</a></td>
+          </tr>
+          <tr>
+            <td><b>5</b></td>
+            <td><a href="#ultima-dungeon-delver"><b>Ultima: Dungeon Delver</b></a></td>
+            <td><span class="badge badge-opti">Optimization</span> <span class="badge badge-dual">Dual-Mode</span></td>
+            <td>Exploration solo d'Ultima IV, gestion Torche/PV/PM, sorts <code>FLAM_POR</code> &amp; <code>MANI</code></td>
+            <td><a href="https://github.com/codingame-team/codingame-ultima-dungeon-delver" target="_blank">codingame-ultima-dungeon-delver</a></td>
+            <td><a href="https://www.codingame.com/contribute/view/158680d08ca9d3d2323c3495364e30863bbe90" target="_blank">Contribution</a></td>
+            <td><a href="https://www.codingame.com/ide/demo/1605775f633efb9245a42848603a5d4018881dc" target="_blank">Jouer IDE</a></td>
+          </tr>
+          <tr>
+            <td><b>6</b></td>
+            <td><a href="#overlords-labyrinth"><b>Overlord's Labyrinth</b></a></td>
+            <td><span class="badge badge-rpg">RPG 1v1</span> <span class="badge badge-dual">Dual-Mode</span></td>
+            <td>Allocation de Gemmes d'Énergie, invocations sur Pentagrammes (Hound, Guard, Wraith)</td>
+            <td><a href="https://github.com/codingame-team/codingame-overlords-labyrinth" target="_blank">codingame-overlords-labyrinth</a></td>
+            <td><a href="https://www.codingame.com/contribute/view/1586818a88014df499301a39a4dbd615c75dfe" target="_blank">Contribution</a></td>
+            <td><a href="https://www.codingame.com/ide/demo/16057779640832b6c2b793a6dd8f1b789d4447d" target="_blank">Jouer IDE</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- SÉRIE 1 : PUZZLES ALGORITHMIQUES MULTIJOUEURS                         -->
+    <!-- ===================================================================== -->
+    <div class="series-banner">
+      <h2>Série 1 — Puzzles Algorithmiques Multijoueurs (Bot Programming)</h2>
+      <p>Trois jeux de stratégie temps-réel au tour par tour conçus pour mettre à l'épreuve la recherche arborescente (MCTS / Minimax), la théorie des graphes et la physique vectorielle.</p>
+    </div>
+
+    <!-- 1. CHRONO-TACTICS -->
+    <article id="chrono-tactics" class="puzzle-card">
+      <div class="puzzle-top">
+        <div>
+          <div class="puzzle-badges">
+            <span class="badge badge-multi">Bot Programming • 1v1</span>
+            <span class="badge badge-rpg">3 Ligues (Bois 2 → Bronze+)</span>
+          </div>
+          <h3>1. Chrono-Tactics — Arène Temporelle &amp; Topologie Dynamique</h3>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-gold" onclick="scrollToReplay('chrono-tactics', 2)">▶️ Voir le Replay PixiJS</button>
+          <a class="btn btn-primary" href="https://www.codingame.com/ide/demo/160565706ec1b3064e2be42d9cc50401b0ae417" target="_blank">🎮 Jouer dans l'IDE</a>
+          <a class="btn" href="https://www.codingame.com/contribute/view/15861375695065563529e288291b702e8df659" target="_blank">📜 Contribution</a>
+          <a class="btn" href="https://github.com/codingame-team/codingame-chrono-tactics" target="_blank">💻 Code Source GitHub</a>
+        </div>
+      </div>
+
+      <div class="puzzle-grid">
+        <div class="screenshot-box">
+          <img src="screenshots/chrono-tactics.png" alt="Capture d'écran Chrono-Tactics" loading="lazy" />
+          <div class="replay-quick-bar">
+            <span>Replays disponibles :</span>
+            <div>
+              <button class="btn" onclick="scrollToReplay('chrono-tactics', 1)">Match 1 (Bois 2)</button>
+              <button class="btn" onclick="scrollToReplay('chrono-tactics', 2)">Match 2 (Bois 1)</button>
+              <button class="btn" onclick="scrollToReplay('chrono-tactics', 3)">Match 3 (Bronze+)</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="rules-box">
+          <h4>Règles de Fonctionnement &amp; Progression des Ligues</h4>
+          <p>Deux escouades s'affrontent pendant <b>120 tours</b> sur une grille symétrique <b>11×11</b> dont les dalles possèdent une intégrité structurelle (<code>3</code>, <code>2</code>, <code>1</code> puis <code>0</code> = Gouffre mortel) et des piliers indestructibles (<code>#</code>).</p>
+          <ul class="rules-list">
+            <li><b>Ligue Bois 2 (1 unité) :</b> Déplacement orthogonal <code>MOVE x y</code> le long du plus court chemin BFS et capture des <b>Chrono-Balises</b> (<b>+2 pts/tour</b> par balise contrôlée, <b>+1 pt/tour</b> par unité en vie).</li>
+            <li><b>Ligue Bois 1 (2 unités) :</b> Érosion des dalles au départ des unités (<code>-1</code> d'intégrité) et déblocage de <code>BOMB tx ty</code> (portée Manhattan ≤ 2, recharge 3 tours) qui réduit de 1 l'intégrité d'une croix de 5 cases pour effondrer les ponts sous l'adversaire.</li>
+            <li><b>Ligue Bronze+ (3 unités) :</b> Déblocage de l'impulsion cinétique <code>PUSH &lt;N|E|S|W&gt;</code> (recharge 2 tours) permettant de repousser une unité ennemie adjacente d'une case (élimination immédiate si projetée dans une case <code>0</code> ou hors grille, avec <b>+20 pts bonus</b> par survivant en cas d'élimination totale).</li>
+          </ul>
+          <div class="protocol-box">
+            <b>Protocole Sortie (1 ligne par unité en vie) :</b><br>
+            <code>MOVE x y [BOMB tx ty | PUSH &lt;N|E|S|W&gt;]</code>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 2. QUANTUM RELAY -->
+    <article id="quantum-relay" class="puzzle-card">
+      <div class="puzzle-top">
+        <div>
+          <div class="puzzle-badges">
+            <span class="badge badge-multi">Bot Programming • 1v1</span>
+            <span class="badge badge-rpg">3 Ligues (Bois 2 → Bronze+)</span>
+          </div>
+          <h3>2. Quantum Relay — Réseaux Spatiaux &amp; Flots d'Énergie</h3>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-gold" onclick="scrollToReplay('quantum-relay', 3)">▶️ Voir le Replay PixiJS</button>
+          <a class="btn btn-primary" href="https://www.codingame.com/ide/demo/1605690daf156413f9393afba6e22199f0011bc" target="_blank">🎮 Jouer dans l'IDE</a>
+          <a class="btn" href="https://www.codingame.com/contribute/view/15864612ee375b7372711a629aff1930a46f01" target="_blank">📜 Contribution</a>
+          <a class="btn" href="https://github.com/codingame-team/codingame-quantum-relay" target="_blank">💻 Code Source GitHub</a>
+        </div>
+      </div>
+
+      <div class="puzzle-grid">
+        <div class="screenshot-box">
+          <img src="screenshots/quantum-relay.png" alt="Capture d'écran Quantum Relay" loading="lazy" />
+          <div class="replay-quick-bar">
+            <span>Replays disponibles :</span>
+            <div>
+              <button class="btn" onclick="scrollToReplay('quantum-relay', 1)">Match 1 (Bois 2)</button>
+              <button class="btn" onclick="scrollToReplay('quantum-relay', 2)">Match 2 (Bois 1)</button>
+              <button class="btn" onclick="scrollToReplay('quantum-relay', 3)">Match 3 (Bronze+)</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="rules-box">
+          <h4>Règles de Fonctionnement &amp; Progression des Ligues</h4>
+          <p>Dans un secteur spatial continu <b>1600×900</b>, chaque joueur contrôle une flotte de drones chargés de capturer des <b>Relais Quantiques</b> et d'établir un arbre couvrant de faisceaux énergétiques relié à leur <b>Base Core</b>.</p>
+          <ul class="rules-list">
+            <li><b>Ligue Bois 2 :</b> Navigation vectorielle <code>MOVE x y</code> des drones pour capturer par proximité les Relais Quantiques et récolter leur énergie locale.</li>
+            <li><b>Ligue Bois 1 :</b> Construction de liens directionnels <code>LINK id1 id2</code> entre relais contrôlés. Un faisceau ne peut pas croiser géométriquement un faisceau adverse existant (test d'intersection de segments). Chaque relais connecté par une chaîne continue au Core transmet son énergie à chaque tour.</li>
+            <li><b>Ligue Bronze+ :</b> Surcharge quantique <code>OVERCHARGE nodeId</code> doublant la production du relais pendant 3 tours et permettant de rompre les liens adverses sous-alimentés.</li>
+          </ul>
+          <div class="protocol-box">
+            <b>Protocole Sortie (1 ligne par drone) :</b><br>
+            <code>MOVE x y [LINK id1 id2 | OVERCHARGE nodeId]</code>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 3. CORSAIRS OF THE MAELSTROM -->
+    <article id="corsairs-maelstrom" class="puzzle-card">
+      <div class="puzzle-top">
+        <div>
+          <div class="puzzle-badges">
+            <span class="badge badge-multi">Bot Programming • 1v1</span>
+            <span class="badge badge-rpg">3 Ligues (Bois 2 → Bronze+)</span>
+          </div>
+          <h3>3. Corsairs of the Maelstrom — Inertie, Masse Variable &amp; Balistique</h3>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-gold" onclick="scrollToReplay('corsairs-maelstrom', 3)">▶️ Voir le Replay PixiJS</button>
+          <a class="btn btn-primary" href="https://www.codingame.com/ide/demo/1605692ff7906372a45b3320918ac8fbdaaa75f" target="_blank">🎮 Jouer dans l'IDE</a>
+          <a class="btn" href="https://www.codingame.com/contribute/view/158647b537dec10e539706b149bde5a6c7442f" target="_blank">📜 Contribution</a>
+          <a class="btn" href="https://github.com/codingame-team/codingame-corsairs-maelstrom" target="_blank">💻 Code Source GitHub</a>
+        </div>
+      </div>
+
+      <div class="puzzle-grid">
+        <div class="screenshot-box">
+          <img src="screenshots/corsairs-maelstrom.png" alt="Capture d'écran Corsairs of the Maelstrom" loading="lazy" />
+          <div class="replay-quick-bar">
+            <span>Replays disponibles :</span>
+            <div>
+              <button class="btn" onclick="scrollToReplay('corsairs-maelstrom', 1)">Match 1 (Bois 2)</button>
+              <button class="btn" onclick="scrollToReplay('corsairs-maelstrom', 2)">Match 2 (Bois 1)</button>
+              <button class="btn" onclick="scrollToReplay('corsairs-maelstrom', 3)">Match 3 (Bronze+)</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="rules-box">
+          <h4>Règles de Fonctionnement &amp; Progression des Ligues</h4>
+          <p>Simulation navale continue <b>1600×900</b> sur <b>120 tours</b> où les navires corsaires collectent des Coffres d'Or flottants (<code>PICKUP_RADIUS = 85</code>) et les rapportent à leur Port d'Attache (<code>PORT_RADIUS = 130</code>).</p>
+          <ul class="rules-list">
+            <li><b>Ligue Bois 2 (1 navire) :</b> Cinématique avec inertie (<code>DRAG = 0.78</code>) et <b>masse dynamique liée à la cargaison</b> : <code>accel = power / (1.0 + 0.15 × cargoGold)</code>. Plus un navire est chargé d'or, plus son rayon de freinage s'allonge.</li>
+            <li><b>Ligue Bois 1 (2 navires) :</b> Ajout du frein d'urgence <code>ANCHOR</code> et activation du <b>Champ Vectoriel du Maelström</b> au centre <code>(800, 450)</code> (rayon <code>380</code>) qui applique une dérive tangentielle anti-horaire et une aspiration radiale. Tout navire entrant dans l'œil du tourbillon (<code>dist &lt; 65</code>) fait naufrage, perd sa cargaison et réapparaît à son port !</li>
+            <li><b>Ligue Bronze+ (Canons Balistiques) :</b> Tir de boulets <code>FIRE tx ty</code> (portée <code>450</code>, rayon d'explosion <code>115</code>, recharge 2 tours) générant une onde de choc répulsive (<code>BLAST_IMPULSE = 95</code>) capable de projeter un ennemi dans l'œil du Maelström et de lui piller jusqu'à <b>2 Or</b>.</li>
+          </ul>
+          <div class="protocol-box">
+            <b>Protocole Sortie (1 ligne par navire) :</b><br>
+            <code>THRUST x y power | ANCHOR | FIRE tx ty</code>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ===================================================================== -->
+    <!-- SÉRIE 2 : PUZZLES RPG & DUAL-MODE PIXIJS                              -->
+    <!-- ===================================================================== -->
+    <div class="series-banner rpg">
+      <h2>Série 2 — Puzzles Thématiques RPG avec Viewer PixiJS Dual-Mode</h2>
+      <p>Trois puzzles inspirés de <i>Wizardry: Proving Grounds of the Mad Overlord</i>, <i>D&amp;D 5e</i>, <i>Ultima IV</i> et <i>Conan Overlord</i>, intégrant un commutateur temps-réel entre <b>Sprites RPG 2D</b> et <b>Formes Géométriques de Debug</b>.</p>
+    </div>
+
+    <!-- 4. PROVING GROUNDS OF WERDNA -->
+    <article id="proving-grounds-werdna" class="puzzle-card">
+      <div class="puzzle-top">
+        <div>
+          <div class="puzzle-badges">
+            <span class="badge badge-rpg">Tactical Party RPG • 1v1</span>
+            <span class="badge badge-dual">PixiJS Dual-Mode (Sprites / Debug)</span>
+          </div>
+          <h3>4. Proving Grounds of Werdna — Compagnie RPG (Fighter, Mage, Cleric)</h3>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-gold" onclick="scrollToReplay('proving-grounds-werdna', 3)">▶️ Voir le Replay PixiJS</button>
+          <a class="btn btn-primary" href="https://www.codingame.com/ide/demo/1605773233912493b234f7c05aadee6e291708f" target="_blank">🎮 Jouer dans l'IDE</a>
+          <a class="btn" href="https://www.codingame.com/contribute/view/15867946f675bf476dc7f164eb3db1d6ce58f6" target="_blank">📜 Contribution</a>
+          <a class="btn" href="https://github.com/codingame-team/codingame-proving-grounds-werdna" target="_blank">💻 Code Source GitHub</a>
+        </div>
+      </div>
+
+      <div class="puzzle-grid">
+        <div class="screenshot-box">
+          <div class="screenshot-tabs">
+            <span>Aperçu du Rendu Dual-Mode :</span>
+            <div class="mode-switch-btns">
+              <button class="mode-btn active" onclick="switchScreenshot('werdna-img', 'screenshots/proving-grounds-werdna-sprites.png', this)">🎨 RPG SPRITES</button>
+              <button class="mode-btn" onclick="switchScreenshot('werdna-img', 'screenshots/proving-grounds-werdna-debug.png', this)">📐 GEOMETRIC DEBUG</button>
+            </div>
+          </div>
+          <img id="werdna-img" src="screenshots/proving-grounds-werdna-sprites.png" alt="Capture d'écran Proving Grounds of Werdna" loading="lazy" />
+          <div class="replay-quick-bar">
+            <span>Replays disponibles :</span>
+            <div>
+              <button class="btn" onclick="scrollToReplay('proving-grounds-werdna', 1)">Match 1 (Bois 2)</button>
+              <button class="btn" onclick="scrollToReplay('proving-grounds-werdna', 2)">Match 2 (Bois 1)</button>
+              <button class="btn" onclick="scrollToReplay('proving-grounds-werdna', 3)">Match 3 (Bronze+)</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="rules-box">
+          <h4>Règles de Fonctionnement &amp; Synergies de Classes</h4>
+          <p>Sur une grille de donjon <b>11×11</b> en <b>100 tours</b>, dirigez une compagnie de 3 héros aux rôles complémentaires face aux Gardiens Squelettes (<code>18 PV</code>, <b>+10 pts</b> au coup fatal) qui protègent les Coffres de Reliques (<b>+25 à +35 pts</b>) :</p>
+          <ul class="rules-list">
+            <li><b>FIGHTER (36 PV, 9 ATQ — Carré <code>F0</code> en Debug) :</b> Guerrier de mêlée pouvant frapper un ennemi adjacent via <code>SLASH targetId</code> (9 dégâts, +3 pts) ou protéger un allié adjacent via <code>GUARD allyId</code> (réduit de 3 tous les dégâts subis durant le tour).</li>
+            <li><b>MAGE (22 PV, 4 ATQ — Losange <code>M1</code> en Debug, débloqué en Bois 1) :</b> Incante <code>FIREBALL tx ty</code> (<i>MAHALITO</i>, portée ≤ 3, recharge 2 tours) infligeant <b>8 dégâts AoE</b> dans un rayon de Manhattan ≤ 1 autour de <code>(tx, ty)</code>.</li>
+            <li><b>CLERIC (28 PV, 6 ATQ — Triangle <code>C2</code> en Debug, débloqué en Bronze) :</b> Incante <code>HEAL allyId</code> (<i>DIOS</i>, portée ≤ 3, recharge 2 tours) restaurant <b>+10 PV</b> à un héros allié.</li>
+          </ul>
+          <div class="protocol-box">
+            <b>Protocole Sortie (1 ligne par héros en vie) :</b><br>
+            <code>MOVE x y [SLASH id | GUARD id | FIREBALL tx ty | HEAL id]</code>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 5. ULTIMA: DUNGEON DELVER -->
+    <article id="ultima-dungeon-delver" class="puzzle-card">
+      <div class="puzzle-top">
+        <div>
+          <div class="puzzle-badges">
+            <span class="badge badge-opti">Solo Optimization • Score = Gold</span>
+            <span class="badge badge-dual">PixiJS Dual-Mode (Sprites / Debug)</span>
+          </div>
+          <h3>5. Ultima: Dungeon Delver — Exploration Solo &amp; Sorts Runiques</h3>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-gold" onclick="scrollToReplay('ultima-dungeon-delver', 1)">▶️ Voir le Replay PixiJS</button>
+          <a class="btn btn-primary" href="https://www.codingame.com/ide/demo/1605775f633efb9245a42848603a5d4018881dc" target="_blank">🎮 Jouer dans l'IDE</a>
+          <a class="btn" href="https://www.codingame.com/contribute/view/158680d08ca9d3d2323c3495364e30863bbe90" target="_blank">📜 Contribution</a>
+          <a class="btn" href="https://github.com/codingame-team/codingame-ultima-dungeon-delver" target="_blank">💻 Code Source GitHub</a>
+        </div>
+      </div>
+
+      <div class="puzzle-grid">
+        <div class="screenshot-box">
+          <div class="screenshot-tabs">
+            <span>Aperçu du Rendu Dual-Mode :</span>
+            <div class="mode-switch-btns">
+              <button class="mode-btn active" onclick="switchScreenshot('ultima-img', 'screenshots/ultima-dungeon-delver-sprites.png', this)">🎨 RPG SPRITES</button>
+              <button class="mode-btn" onclick="switchScreenshot('ultima-img', 'screenshots/ultima-dungeon-delver-debug.png', this)">📐 GEOMETRIC DEBUG</button>
+            </div>
+          </div>
+          <img id="ultima-img" src="screenshots/ultima-dungeon-delver-sprites.png" alt="Capture d'écran Ultima: Dungeon Delver" loading="lazy" />
+          <div class="replay-quick-bar">
+            <span>Replays des 3 Donjons :</span>
+            <div>
+              <button class="btn" onclick="scrollToReplay('ultima-dungeon-delver', 1)">Donjon 1 (Shrine)</button>
+              <button class="btn" onclick="scrollToReplay('ultima-dungeon-delver', 2)">Donjon 2 (Vault)</button>
+              <button class="btn" onclick="scrollToReplay('ultima-dungeon-delver', 3)">Donjon 3 (Gauntlet)</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="rules-box">
+          <h4>Règles de Fonctionnement &amp; Optimisation du Score (Or)</h4>
+          <p>Dans un donjon <b>13×11</b> inspiré d'<i>Ultima IV</i>, l'<b>Avatar</b> débute avec <b>40 PV</b>, <b>20 PM</b> et <b>65 tours de Torche</b> (qui diminue de 1 par tour). L'objectif est de maximiser l'<b>Or</b> collecté et d'extraire par l'Escalier de Sortie (<code>E</code>) :</p>
+          <ul class="rules-list">
+            <li><b>Entités du Donjon :</b> Coffres (<code>C</code> = <b>+25 Or</b>), Reliques des Vertus (<code>R</code> = <b>+60 Or</b>, protégées par un Gardien à 15 PV), Monstres (<code>M</code> = <b>+20 Or</b>, 15 PV, infligent 4 dégâts/tour au contact), Fontaines (<code>F</code> = <b>+18 PV &amp; +10 Torche</b>) et Escalier de Sortie (<code>E</code> = <b>+50 Or + 1 Or par tour de Torche restant</b>).</li>
+            <li><b>Actions &amp; Sorts Runiques :</b> Après son pas <code>MOVE x y</code>, l'Avatar peut lancer <code>STRIKE tx ty</code> (0 PM, portée 1, 8 dégâts), <code>FLAM_POR tx ty</code> (5 PM, portée ≤ 3, 15 dégâts : élimine instantanément un Monstre ou Gardien) ou <code>MANI</code> (4 PM, restaure +14 PV).</li>
+          </ul>
+          <div class="protocol-box">
+            <b>Protocole Sortie (1 seule ligne par tour) :</b><br>
+            <code>MOVE x y [STRIKE tx ty | FLAM_POR tx ty | MANI]</code>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 6. OVERLORD'S LABYRINTH -->
+    <article id="overlords-labyrinth" class="puzzle-card">
+      <div class="puzzle-top">
+        <div>
+          <div class="puzzle-badges">
+            <span class="badge badge-rpg">Overlord Board Duel • 1v1</span>
+            <span class="badge badge-dual">PixiJS Dual-Mode (Sprites / Debug)</span>
+          </div>
+          <h3>6. Overlord's Labyrinth — Gemmes d'Énergie &amp; Pentagrammes d'Invocation</h3>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-gold" onclick="scrollToReplay('overlords-labyrinth', 3)">▶️ Voir le Replay PixiJS</button>
+          <a class="btn btn-primary" href="https://www.codingame.com/ide/demo/16057779640832b6c2b793a6dd8f1b789d4447d" target="_blank">🎮 Jouer dans l'IDE</a>
+          <a class="btn" href="https://www.codingame.com/contribute/view/1586818a88014df499301a39a4dbd615c75dfe" target="_blank">📜 Contribution</a>
+          <a class="btn" href="https://github.com/codingame-team/codingame-overlords-labyrinth" target="_blank">💻 Code Source GitHub</a>
+        </div>
+      </div>
+
+      <div class="puzzle-grid">
+        <div class="screenshot-box">
+          <div class="screenshot-tabs">
+            <span>Aperçu du Rendu Dual-Mode :</span>
+            <div class="mode-switch-btns">
+              <button class="mode-btn active" onclick="switchScreenshot('overlord-img', 'screenshots/overlords-labyrinth-sprites.png', this)">🎨 RPG SPRITES</button>
+              <button class="mode-btn" onclick="switchScreenshot('overlord-img', 'screenshots/overlords-labyrinth-debug.png', this)">📐 GEOMETRIC DEBUG</button>
+            </div>
+          </div>
+          <img id="overlord-img" src="screenshots/overlords-labyrinth-sprites.png" alt="Capture d'écran Overlord's Labyrinth" loading="lazy" />
+          <div class="replay-quick-bar">
+            <span>Replays disponibles :</span>
+            <div>
+              <button class="btn" onclick="scrollToReplay('overlords-labyrinth', 1)">Match 1 (Bois 2)</button>
+              <button class="btn" onclick="scrollToReplay('overlords-labyrinth', 2)">Match 2 (Bois 1)</button>
+              <button class="btn" onclick="scrollToReplay('overlords-labyrinth', 3)">Match 3 (Bronze+)</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="rules-box">
+          <h4>Règles de Fonctionnement &amp; Économie des Gemmes</h4>
+          <p>Inspiré du plateau d'Overlord de <i>Conan: Book of Skelos</i> et de <i>Werdna</i> : chaque Overlord protège son <b>Sanctuaire (40 PV)</b> dans un labyrinthe <b>11×11</b> comportant <b>5 Pentagrammes d'Invocation</b>. Au début de chaque tour, vous recevez <code>5 + leagueLevel + pentagrammesContrôlés</code> <b>Gemmes d'Énergie</b> :</p>
+          <ul class="rules-list">
+            <li><b><code>SUMMON pentagramId TYPE</code> :</b> Invoque un serviteur sur un Pentagramme contrôlé ou neutre (ce qui le capture) :
+              <b>HOUND</b> (Coût 2, 12 PV, 4 ATQ, Vitesse 2, Portée 1),
+              <b>GUARD</b> (Coût 3, 24 PV, 6 ATQ, Vitesse 1, Portée 1 — débloqué en Bois 1),
+              <b>WRAITH</b> (Coût 4, 14 PV, 7 ATQ, Vitesse 1, Portée 2 — débloqué en Bronze).</li>
+            <li><b><code>ACTIVATE minionId targetX targetY</code> (Coût 1 Gemme, max 2 activations/tour par serviteur) :</b> Fait avancer le serviteur jusqu'à sa Vitesse vers la cible, capture les Pentagrammes traversés et frappe le Sanctuaire adverse s'il est adjacent (<b>+8 pts</b> par frappe, <b>+50 pts</b> à la destruction du Sanctuaire).</li>
+          </ul>
+          <div class="protocol-box">
+            <b>Protocole Sortie (commandes séparées par <code>;</code>) :</b><br>
+            <code>SUMMON 0 GUARD ; ACTIVATE 3 9 5 ; ACTIVATE 4 5 5</code>
+          </div>
+        </div>
+      </div>
+    </article>
+
+  </main>
+
+  <footer>
+    <p>
+      Développé avec <b>CodinGame Game Engine SDK v4.7.7</b> (Java 17 &amp; PixiJS v6) • Organisation GitHub
+      <a href="https://github.com/codingame-team" target="_blank" rel="noopener">@codingame-team</a>
+    </p>
+  </footer>
+
+  <script>
+    const GAME_TITLES = {
+      'chrono-tactics': '1. Chrono-Tactics',
+      'quantum-relay': '2. Quantum Relay',
+      'corsairs-maelstrom': '3. Corsairs of the Maelstrom',
+      'proving-grounds-werdna': '4. Proving Grounds of Werdna',
+      'ultima-dungeon-delver': '5. Ultima: Dungeon Delver',
+      'overlords-labyrinth': "6. Overlord's Labyrinth"
+    };
+
+    let currentSlug = 'proving-grounds-werdna';
+    let currentMatch = 3;
+
+    function loadReplay(slug, matchNum) {
+      currentSlug = slug;
+      currentMatch = matchNum || 3;
+
+      const frame = document.getElementById('pixi-replay-frame');
+      frame.src = `replays/${currentSlug}/embed.html?replay=replay${currentMatch}.json&autoplay=1`;
+
+      const inspectorLink = document.getElementById('open-full-inspector');
+      inspectorLink.href = `replays/${currentSlug}/test.html?replay=replay${currentMatch}.json`;
+
+      document.getElementById('current-replay-label').textContent =
+        `Puzzle actif : ${GAME_TITLES[currentSlug]} — Match ${currentMatch}`;
+
+      document.querySelectorAll('#theater-game-tabs .game-tab').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('onclick').includes(`'${currentSlug}'`));
+      });
+      document.querySelectorAll('#theater-match-btns .match-btn').forEach(btn => {
+        btn.classList.toggle('active', Number(btn.dataset.match) === currentMatch);
+      });
+    }
+
+    function switchMatch(matchNum) {
+      loadReplay(currentSlug, matchNum);
+    }
+
+    function scrollToReplay(slug, matchNum) {
+      loadReplay(slug, matchNum);
+      document.getElementById('replay-theater').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function switchScreenshot(imgId, src, btnEl) {
+      document.getElementById(imgId).src = src;
+      const parent = btnEl.parentElement;
+      parent.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+      btnEl.classList.add('active');
+    }
+  </script>
+</body>
+</html>
