@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="google-site-verification" content="1uCpKdTLgPRdHp2INSheFwQZ5RGznJJilZmipkgunGY" />
   <title>CodinGame SDK Puzzles Hub — FR / EN / DE / JP (PixiJS v4.7.7)</title>
-  <meta name="description" content="Catalogue interactif de 6 puzzles communautaires CodinGame SDK v4.7.7 (Chrono-Tactics, Quantum Relay, Corsairs of the Maelstrom, Proving Grounds of Nerdna, Ultima: Dungeon Delver, Overlord's Labyrinth) avec captures d'écran HD, règles FR/EN/DE/JP et 18 replays PixiJS en direct." />
+  <meta name="description" content="Interactive showcase of 6 CodinGame SDK v4.7.7 community puzzles (Chrono-Tactics, Quantum Relay, Corsairs of the Maelstrom, Proving Grounds of Nerdna, Ultima: Dungeon Delver, Overlord's Labyrinth) with HD Dual-Mode screenshots, EN/FR/DE/JP rules, and 18 live PixiJS replays." />
   <meta name="keywords" content="CodinGame, CodinGame SDK, Bot Programming, Optimization, PixiJS, Java 17, AI Challenge, Chrono-Tactics, Quantum Relay, Corsairs of the Maelstrom, Proving Grounds of Nerdna, Ultima Dungeon Delver, Overlord's Labyrinth, RPG, MCTS, Graph Algorithms" />
   <meta name="author" content="codingame-team (philRG / pmourey)" />
   <meta name="robots" content="index, follow" />
@@ -19,19 +19,19 @@
   <!-- Open Graph / Social Sharing -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="CodinGame SDK Puzzles Hub" />
-  <meta property="og:title" content="CodinGame SDK Puzzles Hub — 6 Jeux Multijoueurs &amp; RPG avec Replays PixiJS" />
-  <meta property="og:description" content="Découvrez 6 puzzles CodinGame SDK v4.7.7 avec règles détaillées FR/EN/DE/JP, captures d'écran Dual-Mode et 18 replays PixiJS jouables en direct." />
+  <meta property="og:title" content="CodinGame SDK Puzzles Hub — 6 Multiplayer &amp; RPG Puzzles with Live PixiJS Replays" />
+  <meta property="og:description" content="Explore 6 CodinGame SDK v4.7.7 puzzles with EN/FR/DE/JP rules, Dual-Mode screenshots, and 18 playable live PixiJS replays." />
   <meta property="og:url" content="https://codingame-team.github.io/codingame-sdk-puzzles/" />
   <meta property="og:image" content="https://codingame-team.github.io/codingame-sdk-puzzles/screenshots/proving-grounds-nerdna-sprites.png" />
-  <meta property="og:locale" content="fr_FR" />
-  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="fr_FR" />
   <meta property="og:locale:alternate" content="de_DE" />
   <meta property="og:locale:alternate" content="ja_JP" />
 
   <!-- Twitter / X Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="CodinGame SDK Puzzles Hub — 6 Jeux Multijoueurs &amp; RPG (PixiJS)" />
-  <meta name="twitter:description" content="6 puzzles CodinGame SDK v4.7.7 avec règles FR/EN/DE/JP, captures Dual-Mode et 18 replays PixiJS en direct." />
+  <meta name="twitter:title" content="CodinGame SDK Puzzles Hub — 6 Multiplayer &amp; RPG Puzzles (PixiJS)" />
+  <meta name="twitter:description" content="6 CodinGame SDK v4.7.7 puzzles with EN/FR/DE/JP rules, Dual-Mode screenshots, and 18 live PixiJS replays." />
   <meta name="twitter:image" content="https://codingame-team.github.io/codingame-sdk-puzzles/screenshots/proving-grounds-nerdna-sprites.png" />
 
   <!-- JSON-LD Structured Data (Schema.org) -->
@@ -542,8 +542,8 @@
       <span style="color:var(--text-muted); font-weight:500; font-size:0.82rem;">(@codingame-team)</span>
     </div>
     <div class="lang-switcher" role="group" aria-label="Language Selector">
-      <button class="lang-btn active" data-lang="fr" onclick="setLanguage('fr')">🇫🇷 FR</button>
-      <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">🇬🇧 EN</button>
+      <button class="lang-btn active" data-lang="en" onclick="setLanguage('en')">🇬🇧 EN</button>
+      <button class="lang-btn" data-lang="en" onclick="setLanguage('fr')">🇫🇷 FR</button>
       <button class="lang-btn" data-lang="de" onclick="setLanguage('de')">🇩🇪 DE</button>
       <button class="lang-btn" data-lang="jp" onclick="setLanguage('jp')">🇯🇵 JP</button>
     </div>
@@ -1330,12 +1330,12 @@
       'overlords-labyrinth': "6. Overlord's Labyrinth"
     };
 
-    let currentLang = 'fr';
+    let currentLang = 'en';
     let currentSlug = 'proving-grounds-nerdna';
     let currentMatch = 3;
 
     function setLanguage(lang) {
-      if (!I18N[lang]) lang = 'fr';
+      if (!I18N[lang]) lang = 'en';
       currentLang = lang;
       document.documentElement.lang = lang === 'jp' ? 'ja' : lang;
 
@@ -1418,9 +1418,7 @@
       const qLang = (params.get('lang') || '').toLowerCase();
       let saved = null;
       try { saved = localStorage.getItem('cg_hub_lang'); } catch (e) {}
-      const nav = (navigator.language || 'fr').toLowerCase();
-      const autoLang = nav.startsWith('ja') ? 'jp' : (nav.startsWith('de') ? 'de' : (nav.startsWith('en') ? 'en' : 'fr'));
-      const initial = I18N[qLang] ? qLang : (I18N[saved] ? saved : autoLang);
+      const initial = I18N[qLang] ? qLang : (I18N[saved] ? saved : 'en');
       setLanguage(initial);
     })();
   </script>
