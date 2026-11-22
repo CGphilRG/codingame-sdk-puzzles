@@ -5,7 +5,7 @@
 
 Ce dépôt centralise nos **6 puzzles communautaires CodinGame** développés avec le SDK officiel `codingame-game-engine` **v4.7.7** (Java 17 & PixiJS v6) :
 * **Série 1 (Puzzles Algorithmiques Multijoueurs 1v1)** : *Chrono-Tactics*, *Quantum Relay*, *Corsairs of the Maelstrom*.
-* **Série 2 (Puzzles Thématiques RPG avec Viewer PixiJS Dual-Mode `RPG SPRITES` / `GEOMETRIC DEBUG`)** : *Proving Grounds of Werdna*, *Ultima: Dungeon Delver*, *Overlord's Labyrinth*.
+* **Série 2 (Puzzles Thématiques RPG avec Viewer PixiJS Dual-Mode `RPG SPRITES` / `GEOMETRIC DEBUG`)** : *Proving Grounds of Nerdna*, *Ultima: Dungeon Delver*, *Overlord's Labyrinth*.
 
 ---
 
@@ -16,7 +16,7 @@ Ce dépôt centralise nos **6 puzzles communautaires CodinGame** développés av
 | **1** | **Chrono-Tactics** | `bot-programming` (3 ligues) | [codingame-chrono-tactics](https://github.com/codingame-team/codingame-chrono-tactics) | [Contribution](https://www.codingame.com/contribute/view/15861375695065563529e288291b702e8df659) | [Démo IDE](https://www.codingame.com/ide/demo/160565706ec1b3064e2be42d9cc50401b0ae417) | [Replay Live](https://codingame-team.github.io/codingame-sdk-puzzles/replays/chrono-tactics/test.html?replay=replay2.json) |
 | **2** | **Quantum Relay** | `bot-programming` (3 ligues) | [codingame-quantum-relay](https://github.com/codingame-team/codingame-quantum-relay) | [Contribution](https://www.codingame.com/contribute/view/15864612ee375b7372711a629aff1930a46f01) | [Démo IDE](https://www.codingame.com/ide/demo/1605690daf156413f9393afba6e22199f0011bc) | [Replay Live](https://codingame-team.github.io/codingame-sdk-puzzles/replays/quantum-relay/test.html?replay=replay3.json) |
 | **3** | **Corsairs of the Maelstrom** | `bot-programming` (3 ligues) | [codingame-corsairs-maelstrom](https://github.com/codingame-team/codingame-corsairs-maelstrom) | [Contribution](https://www.codingame.com/contribute/view/158647b537dec10e539706b149bde5a6c7442f) | [Démo IDE](https://www.codingame.com/ide/demo/1605692ff7906372a45b3320918ac8fbdaaa75f) | [Replay Live](https://codingame-team.github.io/codingame-sdk-puzzles/replays/corsairs-maelstrom/test.html?replay=replay3.json) |
-| **4** | **Proving Grounds of Werdna** | `bot-programming` (RPG 1v1) | [codingame-proving-grounds-werdna](https://github.com/codingame-team/codingame-proving-grounds-werdna) | [Contribution](https://www.codingame.com/contribute/view/15867946f675bf476dc7f164eb3db1d6ce58f6) | [Démo IDE](https://www.codingame.com/ide/demo/1605773233912493b234f7c05aadee6e291708f) | [Replay Live](https://codingame-team.github.io/codingame-sdk-puzzles/replays/proving-grounds-werdna/test.html?replay=replay3.json) |
+| **4** | **Proving Grounds of Nerdna** | `bot-programming` (RPG 1v1) | [codingame-proving-grounds-nerdna](https://github.com/codingame-team/codingame-proving-grounds-nerdna) | [Contribution](https://www.codingame.com/contribute/view/15867946f675bf476dc7f164eb3db1d6ce58f6) | [Démo IDE](https://www.codingame.com/ide/demo/1605773233912493b234f7c05aadee6e291708f) | [Replay Live](https://codingame-team.github.io/codingame-sdk-puzzles/replays/proving-grounds-nerdna/test.html?replay=replay3.json) |
 | **5** | **Ultima: Dungeon Delver** | `optimization` (RPG Solo) | [codingame-ultima-dungeon-delver](https://github.com/codingame-team/codingame-ultima-dungeon-delver) | [Contribution](https://www.codingame.com/contribute/view/158680d08ca9d3d2323c3495364e30863bbe90) | [Démo IDE](https://www.codingame.com/ide/demo/1605775f633efb9245a42848603a5d4018881dc) | [Replay Live](https://codingame-team.github.io/codingame-sdk-puzzles/replays/ultima-dungeon-delver/test.html?replay=replay1.json) |
 | **6** | **Overlord's Labyrinth** | `bot-programming` (RPG 1v1) | [codingame-overlords-labyrinth](https://github.com/codingame-team/codingame-overlords-labyrinth) | [Contribution](https://www.codingame.com/contribute/view/1586818a88014df499301a39a4dbd615c75dfe) | [Démo IDE](https://www.codingame.com/ide/demo/16057779640832b6c2b793a6dd8f1b789d4447d) | [Replay Live](https://codingame-team.github.io/codingame-sdk-puzzles/replays/overlords-labyrinth/test.html?replay=replay3.json) |
 
@@ -45,10 +45,10 @@ Ce dépôt centralise nos **6 puzzles communautaires CodinGame** développés av
 
 ---
 
-### 4. Proving Grounds of Werdna (`codingame-proving-grounds-werdna`)
+### 4. Proving Grounds of Nerdna (`codingame-proving-grounds-nerdna`)
 | Mode `RPG SPRITES` | Mode `GEOMETRIC DEBUG` |
 | :---: | :---: |
-| ![Werdna Sprites](screenshots/proving-grounds-werdna-sprites.png) | ![Werdna Debug](screenshots/proving-grounds-werdna-debug.png) |
+| ![Nerdna Sprites](screenshots/proving-grounds-nerdna-sprites.png) | ![Nerdna Debug](screenshots/proving-grounds-nerdna-debug.png) |
 
 * **Objectif & Règles** : Dirigez une compagnie RPG tactique (**Fighter**, **Mage**, **Cleric**) inspirée de *Wizardry* et *D&D 5e* sur une grille de donjon **11×11**. Éliminez les Gardiens Morts-Vivants (`18 PV`, `+10 pts`), récupérez les Coffres de Reliques (`+25 à +35 pts`) et combinez `SLASH targetId`, `GUARD allyId`, `FIREBALL tx ty` (*MAHALITO*, AoE 8 dégâts) et `HEAL allyId` (*DIOS*, +10 PV).
 * **Sortie par héros** : `MOVE x y [SLASH id | GUARD id | FIREBALL tx ty | HEAL id]`
@@ -70,5 +70,5 @@ Ce dépôt centralise nos **6 puzzles communautaires CodinGame** développés av
 | :---: | :---: |
 | ![Overlord Sprites](screenshots/overlords-labyrinth-sprites.png) | ![Overlord Debug](screenshots/overlords-labyrinth-debug.png) |
 
-* **Objectif & Règles** : Duel tactique inspiré du plateau d'Overlord de *Conan: Book of Skelos* et de *Werdna*. Répartissez à chaque tour vos **Gemmes d'Énergie** (`5 + leagueLevel + pentagrammesContrôlés`) entre l'invocation de serviteurs `SUMMON pentagramId <HOUND|GUARD|WRAITH>` sur les 5 Pentagrammes du labyrinthe et l'activation de vos troupes `ACTIVATE minionId targetX targetY` pour détruire le Sanctuaire adverse (`40 PV`).
+* **Objectif & Règles** : Duel tactique inspiré du plateau d'Overlord de *Conan: Book of Skelos* et de *Nerdna*. Répartissez à chaque tour vos **Gemmes d'Énergie** (`5 + leagueLevel + pentagrammesContrôlés`) entre l'invocation de serviteurs `SUMMON pentagramId <HOUND|GUARD|WRAITH>` sur les 5 Pentagrammes du labyrinthe et l'activation de vos troupes `ACTIVATE minionId targetX targetY` pour détruire le Sanctuaire adverse (`40 PV`).
 * **Sortie par tour** : `SUMMON pentagramId TYPE ; ACTIVATE minionId targetX targetY`

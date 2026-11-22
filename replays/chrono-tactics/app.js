@@ -7,7 +7,7 @@ const createCGPlayer = (opts) => {
   return window['cg-player'].default({
     ...opts,
     localStorageKey: 'ngStorage-gameParams',
-    src: './player.html',
+    src: './player.html?game=chrono-tactics',
     libraries: {
       PIXI6: './lib/pixi6.js'
     }
@@ -66,7 +66,7 @@ function PlayerCtrl ($scope, $timeout, $interval, $element) {
 
   async function init () {
     cgPlayer = createCGPlayer({
-      viewerUrl: './core/Drawer.js'
+      viewerUrl: new URL('./core/Drawer.js?game=chrono-tactics', window.location.href).href
     })
     cgPlayer.on('parsedGameInfo', onParsedGameInfo)
     cgPlayer.createIframe($element.find('.cg-player-sandbox')[0])
@@ -239,7 +239,7 @@ function PlayerCtrl ($scope, $timeout, $interval, $element) {
 
   function viewReplay () {
     const cgPlayerReplay = createCGPlayer({
-      viewerUrl: './core/Drawer.js',
+      viewerUrl: new URL('./core/Drawer.js?game=chrono-tactics', window.location.href).href,
       customDemo: ctrl.introReplayData
     })
     cgPlayerReplay.createIframe($element.find('.cg-player-sandbox-replay')[0])

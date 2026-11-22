@@ -49,9 +49,9 @@
       const params = new URLSearchParams(window.location.search);
       const replayFile = params.get('replay') || 'game.json';
       const cgPlayer = window['cg-player'].default({
-        viewerUrl: './core/Drawer.js',
+        viewerUrl: new URL('./core/Drawer.js?game=proving-grounds-nerdna', window.location.href).href,
         localStorageKey: 'ngStorage-gameParams-' + window.location.pathname,
-        src: './player.html',
+        src: './player.html?game=proving-grounds-nerdna',
         libraries: { PIXI6: './lib/pixi6.js' }
       });
       cgPlayer.createIframe(document.getElementById('player-mount'));

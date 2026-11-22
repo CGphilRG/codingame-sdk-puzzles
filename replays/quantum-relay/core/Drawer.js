@@ -1,9 +1,9 @@
-import { assets } from '../assets.js'
-import * as config from '../config.js'
+import { assets } from '../assets.js?game=quantum-relay'
+import * as config from '../config.js?game=quantum-relay'
 import { unlerp, fitAspectRatio } from './utils.js'
 import { WIDTH, HEIGHT, BASE_FRAME_DURATION } from './constants.js'
 import { ErrorLog } from './ErrorLog.js'
-import { demo as defaultDemo } from '../demo.js'
+import { demo as defaultDemo } from '../demo.js?game=quantum-relay'
 import { setRenderer, destroyFlagged } from './rendering.js'
 import { ModuleError } from './ModuleError.js'
 /* global PIXI requestAnimationFrame $ */
