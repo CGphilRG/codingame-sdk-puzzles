@@ -217,6 +217,71 @@
       margin-bottom: 8px;
     }
     .tabs button { flex: 1; font-size: 0.78rem; padding: 6px 8px; }
+
+    /* GitHub Auth Gate */
+    #authGate {
+      max-width: 520px;
+      margin: 56px auto;
+      padding: 28px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.5);
+    }
+    #authGate h2 {
+      margin: 0 0 8px;
+      color: var(--accent);
+      font-size: 1.2rem;
+    }
+    #authGate p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin: 0 0 14px;
+    }
+    #authGate input[type="password"] {
+      width: 100%;
+      background: var(--bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 0.92rem;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      margin-bottom: 12px;
+    }
+    .auth-err {
+      display: none;
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      background: rgba(245, 101, 101, 0.14);
+      border: 1px solid var(--err);
+      color: #feb2b2;
+      font-size: 0.85rem;
+    }
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .user-pill {
+      display: none;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(72, 187, 120, 0.14);
+      border: 1px solid #48bb78;
+      color: #9ae6b4;
+      font-size: 0.84rem;
+      font-weight: 600;
+    }
+    .user-pill img {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+    }
   </style>
 </head>
 <body>
@@ -225,10 +290,37 @@
       <h1>🗺️ RPG Tile &amp; Thin-Wall Maze Editor</h1>
       <div class="sub">Open-Field Boulders · Dungeon Masonry · Directional Thin-Wall Labyrinth (N=1, E=2, S=4, W=8) + Live BFS Validator</div>
     </div>
-    <a class="back-link" href="./index.html">← Back to Puzzles Showcase</a>
+    <div class="header-right">
+      <span id="authUserBadge" class="user-pill">
+        <img id="authAvatar" src="" alt="" />
+        <span id="authLogin">@pmourey</span>
+        <button id="btnLogout" type="button" style="padding:2px 8px; font-size:0.75rem; margin-left:4px;">Sign out</button>
+      </span>
+      <a class="back-link" href="./index.html">← Back to Puzzles Showcase</a>
+    </div>
   </header>
 
-  <main class="layout">
+  <!-- GitHub Authentication Gate (pmourey only) -->
+  <section id="authGate" aria-label="GitHub Authentication">
+    <h2>🔒 Accès réservé — GitHub @pmourey</h2>
+    <p>
+      Cet éditeur est réservé exclusivement au compte GitHub authentifié <b>@pmourey</b>.
+      Saisissez un <b>GitHub Fine-Grained Personal Access Token</b> (aucune permission de dépôt n'est requise, la vérification utilise uniquement <code>GET https://api.github.com/user</code>).
+    </p>
+    <form id="authForm">
+      <input id="ghTokenInput" type="password" placeholder="github_pat_... ou ghp_..." autocomplete="off" required />
+      <div class="btn-row" style="margin-top:0">
+        <button id="btnVerifyAuth" type="submit" class="primary">🔑 Vérifier l'identité GitHub</button>
+        <a class="back-link" href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">Créer un token (0 scope) ↗</a>
+      </div>
+    </form>
+    <div id="authError" class="auth-err"></div>
+    <p style="font-size:0.78rem; margin-top:14px; margin-bottom:0;">
+      Le token est conservé uniquement en mémoire de session (<code>sessionStorage</code>) et n'est envoyé qu'à <code>api.github.com</code>.
+    </p>
+  </section>
+
+  <main id="editorMain" class="layout" style="display:none">
     <!-- Left Controls -->
     <section class="card">
       <h2>1. Puzzle &amp; Sprite Bank</h2>
@@ -840,7 +932,85 @@
       render();
     };
 
-    initState(true);
+    // --- GitHub Authentication Gate (strictly restricted to @pmourey) ---
+    const ALLOWED_GITHUB_USER = 'pmourey';
+    const TOKEN_STORAGE_KEY = 'gh_rpg_editor_token';
+    const authGate = document.getElementById('authGate');
+    const editorMain = document.getElementById('editorMain');
+    const authError = document.getElementById('authError');
+    const authUserBadge = document.getElementById('authUserBadge');
+    const authAvatar = document.getElementById('authAvatar');
+    const authLogin = document.getElementById('authLogin');
+    const ghTokenInput = document.getElementById('ghTokenInput');
+    const btnVerifyAuth = document.getElementById('btnVerifyAuth');
+
+    function showAuthError(msg) {
+      authError.textContent = msg;
+      authError.style.display = 'block';
+    }
+
+    function lockEditor() {
+      sessionStorage.removeItem(TOKEN_STORAGE_KEY);
+      editorMain.style.display = 'none';
+      authUserBadge.style.display = 'none';
+      authGate.style.display = 'block';
+      ghTokenInput.value = '';
+    }
+
+    async function verifyGitHubToken(token, silent = false) {
+      if (!token) return false;
+      authError.style.display = 'none';
+      btnVerifyAuth.disabled = true;
+      btnVerifyAuth.textContent = '⏳ Vérification...';
+      try {
+        const res = await fetch('https://api.github.com/user', {
+          headers: {
+            'Authorization': `Bearer ${token.trim()}`,
+            'Accept': 'application/vnd.github+json'
+          }
+        });
+        if (!res.ok) {
+          if (!silent) showAuthError(`Échec d'authentification GitHub (HTTP ${res.status}). Vérifiez votre token.`);
+          sessionStorage.removeItem(TOKEN_STORAGE_KEY);
+          return false;
+        }
+        const user = await res.json();
+        const login = (user.login || '').toLowerCase();
+        if (login !== ALLOWED_GITHUB_USER) {
+          sessionStorage.removeItem(TOKEN_STORAGE_KEY);
+          showAuthError(`Accès refusé : le compte GitHub @${user.login || 'inconnu'} n'est pas autorisé (seul @${ALLOWED_GITHUB_USER} est autorisé).`);
+          return false;
+        }
+        sessionStorage.setItem(TOKEN_STORAGE_KEY, token.trim());
+        authAvatar.src = user.avatar_url || '';
+        authLogin.textContent = `@${user.login}`;
+        authUserBadge.style.display = 'inline-flex';
+        authGate.style.display = 'none';
+        editorMain.style.display = 'grid';
+        initState(true);
+        return true;
+      } catch (err) {
+        if (!silent) showAuthError(`Erreur réseau lors de la vérification GitHub : ${err.message}`);
+        return false;
+      } finally {
+        btnVerifyAuth.disabled = false;
+        btnVerifyAuth.textContent = '🔑 Vérifier l\'identité GitHub';
+      }
+    }
+
+    document.getElementById('authForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      await verifyGitHubToken(ghTokenInput.value, false);
+    });
+
+    document.getElementById('btnLogout').addEventListener('click', lockEditor);
+
+    (async () => {
+      const saved = sessionStorage.getItem(TOKEN_STORAGE_KEY);
+      if (saved) {
+        await verifyGitHubToken(saved, true);
+      }
+    })();
   </script>
 </body>
 </html>
