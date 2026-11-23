@@ -519,6 +519,8 @@
       border-radius: 0.6rem;
       padding: 0.85rem 1rem;
       font-size: 0.83rem;
+      overflow-x: auto;
+      word-break: break-word;
     }
     .protocol-box code {
       color: #7dd3fc;
@@ -531,6 +533,211 @@
       color: var(--text-muted);
       font-size: 0.88rem;
     }
+
+    /* Topbar editor pill */
+    .topbar-editor-btn {
+      margin-left: 0.5rem;
+      padding: 0.32rem 0.72rem;
+      border-radius: 0.45rem;
+      background: rgba(245,158,11,0.16);
+      border: 1px solid rgba(245,158,11,0.5);
+      color: #fcd34d;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+    }
+    .topbar-editor-btn:hover {
+      background: rgba(245,158,11,0.28);
+      text-decoration: none;
+    }
+
+    /* Global overflow & touch-friendly responsive rules */
+    html, body {
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+    .topbar {
+      flex-wrap: wrap;
+      gap: 0.65rem;
+    }
+    .topbar-brand {
+      flex-wrap: wrap;
+    }
+    .table-wrap {
+      -webkit-overflow-scrolling: touch;
+    }
+    .screenshot-tabs {
+      flex-wrap: wrap;
+    }
+
+    /* Tablet (<= 1024px) */
+    @media (max-width: 1024px) {
+      .container {
+        padding: 1.5rem 1.15rem 3rem;
+      }
+      .puzzle-card {
+        padding: 1.35rem;
+      }
+      .theater-section {
+        padding: 1.2rem;
+      }
+    }
+
+    /* Mobile (<= 768px) */
+    @media (max-width: 768px) {
+      .topbar {
+        padding: 0.6rem 0.9rem;
+        justify-content: center;
+      }
+      .topbar-brand {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+        font-size: 0.9rem;
+      }
+      .topbar-editor-btn {
+        margin-left: 0;
+      }
+      .lang-switcher {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .lang-btn {
+        flex: 1 1 auto;
+        justify-content: center;
+        min-width: 64px;
+        padding: 0.42rem 0.55rem;
+        font-size: 0.8rem;
+      }
+
+      .hero {
+        padding: 1.8rem 1rem 1.5rem;
+      }
+      .hero p {
+        font-size: 0.94rem;
+        margin-bottom: 1.2rem;
+      }
+      .nav-pills {
+        gap: 0.45rem;
+      }
+      .nav-pill {
+        padding: 0.44rem 0.78rem;
+        font-size: 0.82rem;
+      }
+
+      .container {
+        padding: 1.15rem 0.85rem 2.5rem;
+      }
+      .theater-section {
+        padding: 1rem 0.85rem;
+        margin-bottom: 2rem;
+        border-radius: 0.85rem;
+      }
+      .theater-title h2 {
+        font-size: 1.12rem;
+      }
+      .theater-controls {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 0.75rem;
+      }
+      .game-tab {
+        white-space: nowrap;
+        flex: 0 0 auto;
+        padding: 0.5rem 0.82rem;
+        font-size: 0.82rem;
+      }
+      .match-group {
+        width: 100%;
+      }
+      .match-btn {
+        flex: 1 1 auto;
+        text-align: center;
+        padding: 0.48rem 0.65rem;
+        font-size: 0.8rem;
+      }
+      .iframe-shell {
+        aspect-ratio: 16 / 11;
+        min-height: 230px;
+      }
+
+      .series-banner {
+        margin: 2rem 0 1.1rem;
+        padding: 1rem 1rem;
+      }
+      .series-banner h2 {
+        font-size: 1.2rem;
+      }
+      .series-banner p {
+        font-size: 0.88rem;
+      }
+
+      table {
+        font-size: 0.82rem;
+      }
+      th, td {
+        padding: 0.65rem 0.7rem;
+      }
+
+      .puzzle-card {
+        padding: 1.1rem 0.95rem;
+        margin-bottom: 1.65rem;
+        border-radius: 0.85rem;
+      }
+      .puzzle-top h3 {
+        font-size: 1.3rem;
+      }
+      .btn-row {
+        width: 100%;
+      }
+      .btn {
+        flex: 1 1 calc(50% - 0.3rem);
+        justify-content: center;
+        padding: 0.52rem 0.7rem;
+        font-size: 0.82rem;
+      }
+      .replay-quick-bar {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+      }
+      .replay-quick-bar .btn-row {
+        justify-content: center;
+      }
+      .rules-box p, .rules-list {
+        font-size: 0.88rem;
+      }
+      .protocol-box {
+        padding: 0.75rem 0.8rem;
+        font-size: 0.78rem;
+      }
+      footer {
+        padding: 1.8rem 1rem;
+        font-size: 0.82rem;
+      }
+    }
+
+    /* Small phones (<= 480px) */
+    @media (max-width: 480px) {
+      .hero-badge {
+        font-size: 0.72rem;
+        padding: 0.28rem 0.72rem;
+      }
+      .btn {
+        flex: 1 1 100%;
+      }
+      .iframe-shell {
+        aspect-ratio: 4 / 3;
+        min-height: 220px;
+      }
+      .screenshot-tabs {
+        justify-content: center;
+      }
+    }
   </style>
 </head>
 <body>
@@ -540,7 +747,7 @@
     <div class="topbar-brand">
       <span>🎮 CodinGame SDK Puzzles Hub</span>
       <span style="color:var(--text-muted); font-weight:500; font-size:0.82rem;">(@codingame-team)</span>
-      <a href="./tile-editor.html" style="margin-left:1rem; padding:0.3rem 0.7rem; border-radius:0.45rem; background:rgba(245,158,11,0.16); border:1px solid rgba(245,158,11,0.5); color:#fcd34d; font-size:0.8rem; font-weight:700; text-decoration:none;">🗺️ RPG Tile &amp; Thin-Wall Editor</a>
+      <a href="./tile-editor.html" class="topbar-editor-btn">🗺️ RPG Tile &amp; Thin-Wall Editor</a>
     </div>
     <div class="lang-switcher" role="group" aria-label="Language Selector">
       <button class="lang-btn active" data-lang="en" onclick="setLanguage('en')">🇬🇧 EN</button>
