@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://codingame-team.github.io/codingame-sdk-puzzles/sitemap.xml
+Sitemap: https://cgphilrg.github.io/codingame-sdk-puzzles/sitemap.xml

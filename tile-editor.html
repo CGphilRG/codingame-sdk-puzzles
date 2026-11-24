@@ -336,18 +336,18 @@
     <div class="header-right">
       <span id="authUserBadge" class="user-pill">
         <img id="authAvatar" src="" alt="" />
-        <span id="authLogin">@pmourey</span>
+        <span id="authLogin">@philouRG</span>
         <button id="btnLogout" type="button" style="padding:2px 8px; font-size:0.75rem; margin-left:4px;">Sign out</button>
       </span>
       <a class="back-link" href="./index.html">← Back to Puzzles Showcase</a>
     </div>
   </header>
 
-  <!-- GitHub Authentication Gate (pmourey only) -->
+  <!-- GitHub Authentication Gate (philouRG / pmourey) -->
   <section id="authGate" aria-label="GitHub Authentication">
-    <h2>🔒 Accès réservé — GitHub @pmourey</h2>
+    <h2>🔒 Accès réservé — GitHub @philouRG / @pmourey</h2>
     <p>
-      Cet éditeur est réservé exclusivement au compte GitHub authentifié <b>@pmourey</b>.
+      Cet éditeur est réservé exclusivement aux comptes GitHub autorisés (<b>@philouRG</b> / <b>@pmourey</b>).
       Saisissez un <b>GitHub Fine-Grained Personal Access Token</b> (aucune permission de dépôt n'est requise, la vérification utilise uniquement <code>GET https://api.github.com/user</code>).
     </p>
     <form id="authForm">
@@ -975,8 +975,8 @@
       render();
     };
 
-    // --- GitHub Authentication Gate (strictly restricted to @pmourey) ---
-    const ALLOWED_GITHUB_USER = 'pmourey';
+    // --- GitHub Authentication Gate (restricted to @philouRG and @pmourey) ---
+    const ALLOWED_GITHUB_USERS = new Set(['pmourey', 'philourg']);
     const TOKEN_STORAGE_KEY = 'gh_rpg_editor_token';
     const authGate = document.getElementById('authGate');
     const editorMain = document.getElementById('editorMain');
@@ -1019,9 +1019,9 @@
         }
         const user = await res.json();
         const login = (user.login || '').toLowerCase();
-        if (login !== ALLOWED_GITHUB_USER) {
+        if (!ALLOWED_GITHUB_USERS.has(login)) {
           sessionStorage.removeItem(TOKEN_STORAGE_KEY);
-          showAuthError(`Accès refusé : le compte GitHub @${user.login || 'inconnu'} n'est pas autorisé (seul @${ALLOWED_GITHUB_USER} est autorisé).`);
+          showAuthError(`Accès refusé : le compte GitHub @${user.login || 'inconnu'} n'est pas autorisé.`);
           return false;
         }
         sessionStorage.setItem(TOKEN_STORAGE_KEY, token.trim());

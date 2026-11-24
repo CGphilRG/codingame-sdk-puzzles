@@ -2,11 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://codingame-team.github.io/codingame-sdk-puzzles/</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://codingame-team.github.io/codingame-sdk-puzzles/?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://codingame-team.github.io/codingame-sdk-puzzles/?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://codingame-team.github.io/codingame-sdk-puzzles/?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://codingame-team.github.io/codingame-sdk-puzzles/?lang=jp"/>
+    <loc>https://cgphilrg.github.io/codingame-sdk-puzzles/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://cgphilrg.github.io/codingame-sdk-puzzles/?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cgphilrg.github.io/codingame-sdk-puzzles/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://cgphilrg.github.io/codingame-sdk-puzzles/?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://cgphilrg.github.io/codingame-sdk-puzzles/?lang=jp"/>
     <priority>1.0</priority>
   </url>
 </urlset>
