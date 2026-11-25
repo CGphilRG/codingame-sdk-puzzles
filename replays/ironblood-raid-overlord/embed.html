@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CodinGame PixiJS Replay Player</title>
+  <style>
+    html, body { margin: 0; padding: 0; width: 100%; height: 100%; background: #0b0f19; overflow: hidden; }
+    #player-mount { width: 100%; height: 100%; position: relative; }
+    #player-mount iframe { width: 100% !important; height: 100% !important; position: absolute; top: 0; left: 0; border: 0; }
+  </style>
+</head>
+<body>
+  <div id="player-mount"></div>
+  <script type="module">
+    import './player.js';
+    function convertFrameFormat(data) {
+      const frames = data.views.map(v => {
+        const f = v.split('\n');
+        const header = f[0].split(' ');
+        return { view: v.replace(/^(KEY_FRAME)|(INTERMEDIATE_FRAME)/, ''), keyframe: header[0] === 'KEY_FRAME' };
+      });
+      const refereeKeysMap = { errors: 'stderr', outputs: 'stdout' };
+      for (let i = 0; i < frames.length; i++) {
+        frames[i].gameSummary = data.summaries[i];
+        frames[i].referee = {};
+        for (const key in refereeKeysMap) {
+          const newKey = refereeKeysMap[key];
+          if (data[key].referee[i] && data[key].referee[i].length) {
+            frames[i].referee[newKey] = data[key].referee[i];
+          }
+        }
+        for (const pi in data.ids) {
+          const stdout = data.outputs[pi][i];
+          const stderr = data.errors[pi][i];
+          if (pi !== 'referee') {
+            if (stdout || stderr) frames[i].agentId = pi;
+            if (stderr) frames[i].stderr = stderr;
+            if (stdout) frames[i].stdout = stdout;
+          }
+        }
+      }
+      const agents = data.agents.map(a => Object.assign(a, { avatarUrl: a.avatar }));
+      const tooltips = data.tooltips.map(JSON.stringify);
+      return { agents, frames, tooltips };
+    }
+
+    async function boot() {
+      const params = new URLSearchParams(window.location.search);
+      const replayFile = params.get('replay') || 'game.json';
+      const cgPlayer = window['cg-player'].default({
+        viewerUrl: new URL('./core/Drawer.js?game=ironblood-raid-overlord', window.location.href).href,
+        localStorageKey: 'ngStorage-gameParams-' + window.location.pathname,
+        src: './player.html?game=ironblood-raid-overlord',
+        libraries: { PIXI6: './lib/pixi6.js' }
+      });
+      cgPlayer.createIframe(document.getElementById('player-mount'));
+      cgPlayer.setOptions({
+        showConsole: false,
+        showRankings: false,
+        showSmallRankings: false,
+        asyncRendering: true,
+        shareable: false,
+        showReplayPrompt: false
+      });
+      const resp = await fetch(replayFile);
+      const data = await resp.json();
+      const gameInfo = convertFrameFormat(data);
+      await cgPlayer.sendFrames(gameInfo);
+      if (params.get('autoplay') === '1') {
+        cgPlayer.play();
+      }
+    }
+    boot();
+  </script>
+</body>
+</html>
