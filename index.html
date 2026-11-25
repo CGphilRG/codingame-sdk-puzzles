@@ -749,7 +749,7 @@
     <div class="topbar-brand">
       <span>🎮 CodinGame SDK Puzzles Hub</span>
       <span style="color:var(--text-muted); font-weight:500; font-size:0.82rem;">(@CGphilRG)</span>
-      <a href="./tile-editor.html" class="topbar-editor-btn">🗺️ RPG Tile &amp; Thin-Wall Editor</a>
+      <a href="./tile-editor.html" class="topbar-editor-btn" data-i18n="topbar_editor">🗺️ RPG Tile &amp; Thin-Wall Editor</a>
     </div>
     <div class="lang-switcher" role="group" aria-label="Language Selector">
       <button class="lang-btn active" data-lang="en" onclick="setLanguage('en')">🇬🇧 EN</button>
@@ -762,14 +762,14 @@
   <!-- HERO HEADER -->
   <header class="hero">
     <div class="hero-badge">CodinGame SDK v4.7.7 • Java 17 &amp; PixiJS v6</div>
-    <h1 data-i18n="hero_title">Catalogue des 8 Puzzles CodinGame &amp; Lecteur de Replays PixiJS</h1>
+    <h1 data-i18n="hero_title">CodinGame 8-Puzzle Showcase &amp; Live PixiJS Replay Theater</h1>
     <p data-i18n="hero_sub">
-      Retrouvez nos 8 créations communautaires développées avec le SDK officiel CodinGame :
-      <b>3 puzzles algorithmiques multijoueurs</b> et
-      <b>5 puzzles RPG tactiques</b> dotés d'un viewer PixiJS <b>Dual-Mode</b> (<i>RPG Sprites</i> vs <i>Geometric Debug</i>).
+      Explore our 8 community games built with the official CodinGame SDK:
+      <b>3 multiplayer algorithmic puzzles</b> and
+      <b>5 tactical RPG puzzles</b> featuring a real-time <b>Dual-Mode</b> PixiJS viewer (<i>RPG Sprites</i> vs <i>Geometric Debug</i>).
     </p>
     <nav class="nav-pills">
-      <a class="nav-pill" href="#replay-theater" data-i18n="nav_theater">🎬 Lecteur PixiJS Interactif</a>
+      <a class="nav-pill" href="#replay-theater" data-i18n="nav_theater">🎬 Interactive PixiJS Player</a>
       <a class="nav-pill" href="#chrono-tactics">1. Chrono-Tactics</a>
       <a class="nav-pill" href="#quantum-relay">2. Quantum Relay</a>
       <a class="nav-pill" href="#corsairs-maelstrom">3. Corsairs of the Maelstrom</a>
@@ -788,10 +788,10 @@
       <div class="theater-header">
         <div class="theater-title">
           <span class="live-dot"></span>
-          <h2 data-i18n="theater_title">Lecteur de Replays PixiJS en Direct (24 Matchs Embarqués)</h2>
+          <h2 data-i18n="theater_title">Live Embedded PixiJS Replay Player (24 Playable Matches)</h2>
         </div>
         <a id="open-full-inspector" class="btn btn-primary" href="replays/proving-grounds-nerdna/test.html?replay=replay3.json" target="_blank" rel="noopener" data-i18n="btn_inspector">
-          🔍 Ouvrir l'Inspecteur Complet (Console &amp; Logs)
+          🔍 Open Full Replay Inspector (Console &amp; Logs)
         </a>
       </div>
 
@@ -810,13 +810,13 @@
       <!-- Match Selector -->
       <div class="theater-subbar">
         <div class="match-group" id="theater-match-btns">
-          <span style="font-size:0.86rem; color:var(--text-muted); font-weight:600;" data-i18n="select_match_lbl">Sélectionner une partie :</span>
-          <button class="match-btn" data-match="1" onclick="switchMatch(1)" data-i18n="match1_btn">Match 1 (Bois 2 / Test 1)</button>
-          <button class="match-btn" data-match="2" onclick="switchMatch(2)" data-i18n="match2_btn">Match 2 (Bois 1 / Test 2)</button>
+          <span style="font-size:0.86rem; color:var(--text-muted); font-weight:600;" data-i18n="select_match_lbl">Select a match replay:</span>
+          <button class="match-btn" data-match="1" onclick="switchMatch(1)" data-i18n="match1_btn">Match 1 (Wood 2 / Test 1)</button>
+          <button class="match-btn" data-match="2" onclick="switchMatch(2)" data-i18n="match2_btn">Match 2 (Wood 1 / Test 2)</button>
           <button class="match-btn active" data-match="3" onclick="switchMatch(3)" data-i18n="match3_btn">Match 3 (Bronze+ / Test 3)</button>
         </div>
         <span id="current-replay-label" style="font-size:0.85rem; color:#fcd34d; font-weight:600;">
-          Proving Grounds of Nerdna — Match 3
+          Active Puzzle: 4. Proving Grounds of Nerdna — Match 3
         </span>
       </div>
 
@@ -826,8 +826,8 @@
       </div>
 
       <div class="theater-tip">
-        <span data-i18n="theater_tip">💡 <b>Astuce Dual-Mode (Puzzles RPG 4–8) :</b> cliquez sur l'icône <b>⚙️ Engrenage</b> en bas à droite du lecteur PixiJS pour basculer en temps réel entre <code>RPG SPRITES</code> et <code>GEOMETRIC DEBUG</code> !</span>
-        <span data-i18n="theater_controls">Contrôles : Lecture/Pause, Curseur tour par tour, Vitesse (1x à 10x) et Plein écran.</span>
+        <span data-i18n="theater_tip">💡 <b>Dual-Mode Tip (RPG Puzzles 4–8):</b> click the <b>⚙️ Gear icon</b> in the bottom-right corner of the PixiJS viewer to switch live between <code>RPG SPRITES</code> and <code>GEOMETRIC DEBUG</code>!</span>
+        <span data-i18n="theater_controls">Controls: Play/Pause, Turn-by-turn Scrubber, Speed (1x–10x), and Fullscreen.</span>
       </div>
     </section>
 
@@ -838,85 +838,85 @@
           <tr>
             <th>#</th>
             <th data-i18n="th_puzzle">Puzzle</th>
-            <th data-i18n="th_category">Catégorie</th>
-            <th data-i18n="th_mechanics">Thème &amp; Mécaniques Clés</th>
+            <th data-i18n="th_category">Category</th>
+            <th data-i18n="th_mechanics">Core Theme &amp; Mechanics</th>
             <th>GitHub (<code>@CGphilRG</code>)</th>
             <th>CodinGame</th>
-            <th>IDE Demo</th>
+            <th data-i18n="th_ide">IDE Demo</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td><b>1</b></td>
             <td><a href="#chrono-tactics"><b>Chrono-Tactics</b></a></td>
-            <td><span class="badge badge-multi">Bot Programming</span></td>
+            <td><span class="badge badge-multi" data-i18n="badge_bot">Bot Programming</span></td>
             <td data-i18n="td_desc_1">Arène 11×11 à effondrement progressif, <code>BOMB</code>, <code>PUSH</code>, Voronoï &amp; MCTS</td>
             <td><a href="https://github.com/CGphilRG/codingame-chrono-tactics" target="_blank">codingame-chrono-tactics</a></td>
-            <td><a href="https://www.codingame.com/contribute/view/15861375695065563529e288291b702e8df659" target="_blank">Contribution</a></td>
-            <td><a href="https://www.codingame.com/ide/demo/160565706ec1b3064e2be42d9cc50401b0ae417" target="_blank">IDE Demo</a></td>
+            <td><a href="https://www.codingame.com/contribute/view/15861375695065563529e288291b702e8df659" target="_blank" data-i18n="tbl_contrib">Contribution</a></td>
+            <td><a href="https://www.codingame.com/ide/demo/160565706ec1b3064e2be42d9cc50401b0ae417" target="_blank" data-i18n="tbl_ide">IDE Demo</a></td>
           </tr>
           <tr>
             <td><b>2</b></td>
             <td><a href="#quantum-relay"><b>Quantum Relay</b></a></td>
-            <td><span class="badge badge-multi">Bot Programming</span></td>
+            <td><span class="badge badge-multi" data-i18n="badge_bot">Bot Programming</span></td>
             <td data-i18n="td_desc_2">Arbres de relais d'énergie (<code>LINK</code>), surcharge (<code>OVERCHARGE</code>) &amp; intersections</td>
             <td><a href="https://github.com/CGphilRG/codingame-quantum-relay" target="_blank">codingame-quantum-relay</a></td>
-            <td><a href="https://www.codingame.com/contribute/view/15864612ee375b7372711a629aff1930a46f01" target="_blank">Contribution</a></td>
-            <td><a href="https://www.codingame.com/ide/demo/1605690daf156413f9393afba6e22199f0011bc" target="_blank">IDE Demo</a></td>
+            <td><a href="https://www.codingame.com/contribute/view/15864612ee375b7372711a629aff1930a46f01" target="_blank" data-i18n="tbl_contrib">Contribution</a></td>
+            <td><a href="https://www.codingame.com/ide/demo/1605690daf156413f9393afba6e22199f0011bc" target="_blank" data-i18n="tbl_ide">IDE Demo</a></td>
           </tr>
           <tr>
             <td><b>3</b></td>
             <td><a href="#corsairs-maelstrom"><b>Corsairs of the Maelstrom</b></a></td>
-            <td><span class="badge badge-multi">Bot Programming</span></td>
+            <td><span class="badge badge-multi" data-i18n="badge_bot">Bot Programming</span></td>
             <td data-i18n="td_desc_3">Physique inertielle à masse variable, vortex du Maelström, <code>ANCHOR</code> &amp; <code>FIRE</code></td>
             <td><a href="https://github.com/CGphilRG/codingame-corsairs-maelstrom" target="_blank">codingame-corsairs-maelstrom</a></td>
-            <td><a href="https://www.codingame.com/contribute/view/158647b537dec10e539706b149bde5a6c7442f" target="_blank">Contribution</a></td>
-            <td><a href="https://www.codingame.com/ide/demo/1605692ff7906372a45b3320918ac8fbdaaa75f" target="_blank">IDE Demo</a></td>
+            <td><a href="https://www.codingame.com/contribute/view/158647b537dec10e539706b149bde5a6c7442f" target="_blank" data-i18n="tbl_contrib">Contribution</a></td>
+            <td><a href="https://www.codingame.com/ide/demo/1605692ff7906372a45b3320918ac8fbdaaa75f" target="_blank" data-i18n="tbl_ide">IDE Demo</a></td>
           </tr>
           <tr>
             <td><b>4</b></td>
             <td><a href="#proving-grounds-nerdna"><b>Proving Grounds of Nerdna</b></a></td>
-            <td><span class="badge badge-rpg">RPG 1v1</span> <span class="badge badge-dual">Dual-Mode</span></td>
+            <td><span class="badge badge-rpg" data-i18n="badge_rpg_1v1">RPG 1v1</span> <span class="badge badge-dual" data-i18n="badge_dual_short">Dual-Mode</span></td>
             <td data-i18n="td_desc_4">Compagnie RPG (Fighter, Mage, Cleric), Gardiens Morts-Vivants &amp; Coffres de Reliques</td>
             <td><a href="https://github.com/CGphilRG/codingame-proving-grounds-nerdna" target="_blank">codingame-proving-grounds-nerdna</a></td>
-            <td><a href="https://www.codingame.com/contribute/view/15867946f675bf476dc7f164eb3db1d6ce58f6" target="_blank">Contribution</a></td>
-            <td><a href="https://www.codingame.com/ide/demo/1605773233912493b234f7c05aadee6e291708f" target="_blank">IDE Demo</a></td>
+            <td><a href="https://www.codingame.com/contribute/view/15867946f675bf476dc7f164eb3db1d6ce58f6" target="_blank" data-i18n="tbl_contrib">Contribution</a></td>
+            <td><a href="https://www.codingame.com/ide/demo/1605773233912493b234f7c05aadee6e291708f" target="_blank" data-i18n="tbl_ide">IDE Demo</a></td>
           </tr>
           <tr>
             <td><b>5</b></td>
             <td><a href="#ultima-dungeon-delver"><b>Ultima: Dungeon Delver</b></a></td>
-            <td><span class="badge badge-opti">Optimization</span> <span class="badge badge-dual">Dual-Mode</span></td>
+            <td><span class="badge badge-opti" data-i18n="badge_opti">Optimization</span> <span class="badge badge-dual" data-i18n="badge_dual_short">Dual-Mode</span></td>
             <td data-i18n="td_desc_5">Exploration solo d'Ultima IV, gestion Torche/PV/PM, sorts <code>FLAM_POR</code> &amp; <code>MANI</code></td>
             <td><a href="https://github.com/CGphilRG/codingame-ultima-dungeon-delver" target="_blank">codingame-ultima-dungeon-delver</a></td>
-            <td><a href="https://www.codingame.com/contribute/view/158680d08ca9d3d2323c3495364e30863bbe90" target="_blank">Contribution</a></td>
-            <td><a href="https://www.codingame.com/ide/demo/1605775f633efb9245a42848603a5d4018881dc" target="_blank">IDE Demo</a></td>
+            <td><a href="https://www.codingame.com/contribute/view/158680d08ca9d3d2323c3495364e30863bbe90" target="_blank" data-i18n="tbl_contrib">Contribution</a></td>
+            <td><a href="https://www.codingame.com/ide/demo/1605775f633efb9245a42848603a5d4018881dc" target="_blank" data-i18n="tbl_ide">IDE Demo</a></td>
           </tr>
           <tr>
             <td><b>6</b></td>
             <td><a href="#overlords-labyrinth"><b>Overlord's Labyrinth</b></a></td>
-            <td><span class="badge badge-rpg">RPG 1v1</span> <span class="badge badge-dual">Dual-Mode</span></td>
+            <td><span class="badge badge-rpg" data-i18n="badge_rpg_1v1">RPG 1v1</span> <span class="badge badge-dual" data-i18n="badge_dual_short">Dual-Mode</span></td>
             <td data-i18n="td_desc_6">Allocation de Gemmes d'Énergie, invocations sur Pentagrammes (Hound, Guard, Wraith)</td>
             <td><a href="https://github.com/CGphilRG/codingame-overlords-labyrinth" target="_blank">codingame-overlords-labyrinth</a></td>
-            <td><a href="https://www.codingame.com/contribute/view/1586818a88014df499301a39a4dbd615c75dfe" target="_blank">Contribution</a></td>
-            <td><a href="https://www.codingame.com/ide/demo/16057779640832b6c2b793a6dd8f1b789d4447d" target="_blank">IDE Demo</a></td>
+            <td><a href="https://www.codingame.com/contribute/view/1586818a88014df499301a39a4dbd615c75dfe" target="_blank" data-i18n="tbl_contrib">Contribution</a></td>
+            <td><a href="https://www.codingame.com/ide/demo/16057779640832b6c2b793a6dd8f1b789d4447d" target="_blank" data-i18n="tbl_ide">IDE Demo</a></td>
           </tr>
           <tr>
             <td><b>7</b></td>
             <td><a href="#ironblood-raid-heroes"><b>Ironblood: Captive's Raid - Heroes</b></a></td>
-            <td><span class="badge badge-opti">Optimization</span> <span class="badge badge-dual">Dual-Mode</span></td>
+            <td><span class="badge badge-opti" data-i18n="badge_opti">Optimization</span> <span class="badge badge-dual" data-i18n="badge_dual_short">Dual-Mode</span></td>
             <td data-i18n="td_desc_7">Escouade asymétrique par Zones, gemmes Réserve/Fatigue/Blessures, Gêne &amp; Boss</td>
             <td><a href="https://github.com/CGphilRG/codingame-ironblood-raid-heroes" target="_blank">codingame-ironblood-raid-heroes</a></td>
-            <td><a href="https://www.codingame.com/contribute/view/158844f920de66be1dc6f47b5aae512c58ccbb" target="_blank">Contribution</a></td>
-            <td><a href="https://www.codingame.com/ide/demo/1606583ac3c5fb148e53d66cf306033068e1182" target="_blank">IDE Demo</a></td>
+            <td><a href="https://www.codingame.com/contribute/view/158844f920de66be1dc6f47b5aae512c58ccbb" target="_blank" data-i18n="tbl_contrib">Contribution</a></td>
+            <td><a href="https://www.codingame.com/ide/demo/1606583ac3c5fb148e53d66cf306033068e1182" target="_blank" data-i18n="tbl_ide">IDE Demo</a></td>
           </tr>
           <tr>
             <td><b>8</b></td>
             <td><a href="#ironblood-raid-overlord"><b>Ironblood: Captive's Raid - Overlord</b></a></td>
-            <td><span class="badge badge-opti">Optimization</span> <span class="badge badge-dual">Dual-Mode</span></td>
+            <td><span class="badge badge-opti" data-i18n="badge_opti">Optimization</span> <span class="badge badge-dual" data-i18n="badge_dual_short">Dual-Mode</span></td>
             <td data-i18n="td_desc_8">Rivière Runique (6–8 tuiles), <i>dredging</i>, Renforts <code>EVENT</code> &amp; défense du Sanctuaire</td>
             <td><a href="https://github.com/CGphilRG/codingame-ironblood-raid-overlord" target="_blank">codingame-ironblood-raid-overlord</a></td>
-            <td><a href="https://www.codingame.com/contribute/view/158845b8c4e7c6304d50f4f79b36eafa544c73" target="_blank">Contribution</a></td>
-            <td><a href="https://www.codingame.com/ide/demo/1606585da9258ae0b4f82aa577b5ad11e6756a6" target="_blank">IDE Demo</a></td>
+            <td><a href="https://www.codingame.com/contribute/view/158845b8c4e7c6304d50f4f79b36eafa544c73" target="_blank" data-i18n="tbl_contrib">Contribution</a></td>
+            <td><a href="https://www.codingame.com/ide/demo/1606585da9258ae0b4f82aa577b5ad11e6756a6" target="_blank" data-i18n="tbl_ide">IDE Demo</a></td>
           </tr>
         </tbody>
       </table>
@@ -933,8 +933,8 @@
       <div class="puzzle-top">
         <div>
           <div class="puzzle-badges">
-            <span class="badge badge-multi">Bot Programming • 1v1</span>
-            <span class="badge badge-rpg">3 Leagues (Wood 2 → Bronze+)</span>
+            <span class="badge badge-multi" data-i18n="badge_multi_1v1">Bot Programming • 1v1</span>
+            <span class="badge badge-rpg" data-i18n="badge_3leagues">3 Leagues (Wood 2 → Bronze+)</span>
           </div>
           <h3 data-i18n="g1_title">1. Chrono-Tactics — Arène Temporelle &amp; Topologie Dynamique</h3>
         </div>
@@ -951,9 +951,9 @@
           <div class="replay-quick-bar">
             <span data-i18n="replays_avail">Replays disponibles :</span>
             <div>
-              <button class="btn" onclick="scrollToReplay('chrono-tactics', 1)">Match 1 (Wood 2)</button>
-              <button class="btn" onclick="scrollToReplay('chrono-tactics', 2)">Match 2 (Wood 1)</button>
-              <button class="btn" onclick="scrollToReplay('chrono-tactics', 3)">Match 3 (Bronze+)</button>
+              <button class="btn" onclick="scrollToReplay('chrono-tactics', 1)" data-i18n="card_m1">Match 1 (Wood 2)</button>
+              <button class="btn" onclick="scrollToReplay('chrono-tactics', 2)" data-i18n="card_m2">Match 2 (Wood 1)</button>
+              <button class="btn" onclick="scrollToReplay('chrono-tactics', 3)" data-i18n="card_m3">Match 3 (Bronze+)</button>
             </div>
           </div>
         </div>
@@ -966,8 +966,8 @@
       <div class="puzzle-top">
         <div>
           <div class="puzzle-badges">
-            <span class="badge badge-multi">Bot Programming • 1v1</span>
-            <span class="badge badge-rpg">3 Leagues (Wood 2 → Bronze+)</span>
+            <span class="badge badge-multi" data-i18n="badge_multi_1v1">Bot Programming • 1v1</span>
+            <span class="badge badge-rpg" data-i18n="badge_3leagues">3 Leagues (Wood 2 → Bronze+)</span>
           </div>
           <h3 data-i18n="g2_title">2. Quantum Relay — Réseaux Spatiaux &amp; Flots d'Énergie</h3>
         </div>
@@ -984,9 +984,9 @@
           <div class="replay-quick-bar">
             <span data-i18n="replays_avail">Replays disponibles :</span>
             <div>
-              <button class="btn" onclick="scrollToReplay('quantum-relay', 1)">Match 1 (Wood 2)</button>
-              <button class="btn" onclick="scrollToReplay('quantum-relay', 2)">Match 2 (Wood 1)</button>
-              <button class="btn" onclick="scrollToReplay('quantum-relay', 3)">Match 3 (Bronze+)</button>
+              <button class="btn" onclick="scrollToReplay('quantum-relay', 1)" data-i18n="card_m1">Match 1 (Wood 2)</button>
+              <button class="btn" onclick="scrollToReplay('quantum-relay', 2)" data-i18n="card_m2">Match 2 (Wood 1)</button>
+              <button class="btn" onclick="scrollToReplay('quantum-relay', 3)" data-i18n="card_m3">Match 3 (Bronze+)</button>
             </div>
           </div>
         </div>
@@ -999,8 +999,8 @@
       <div class="puzzle-top">
         <div>
           <div class="puzzle-badges">
-            <span class="badge badge-multi">Bot Programming • 1v1</span>
-            <span class="badge badge-rpg">3 Leagues (Wood 2 → Bronze+)</span>
+            <span class="badge badge-multi" data-i18n="badge_multi_1v1">Bot Programming • 1v1</span>
+            <span class="badge badge-rpg" data-i18n="badge_3leagues">3 Leagues (Wood 2 → Bronze+)</span>
           </div>
           <h3 data-i18n="g3_title">3. Corsairs of the Maelstrom — Inertie, Masse Variable &amp; Balistique</h3>
         </div>
@@ -1017,9 +1017,9 @@
           <div class="replay-quick-bar">
             <span data-i18n="replays_avail">Replays disponibles :</span>
             <div>
-              <button class="btn" onclick="scrollToReplay('corsairs-maelstrom', 1)">Match 1 (Wood 2)</button>
-              <button class="btn" onclick="scrollToReplay('corsairs-maelstrom', 2)">Match 2 (Wood 1)</button>
-              <button class="btn" onclick="scrollToReplay('corsairs-maelstrom', 3)">Match 3 (Bronze+)</button>
+              <button class="btn" onclick="scrollToReplay('corsairs-maelstrom', 1)" data-i18n="card_m1">Match 1 (Wood 2)</button>
+              <button class="btn" onclick="scrollToReplay('corsairs-maelstrom', 2)" data-i18n="card_m2">Match 2 (Wood 1)</button>
+              <button class="btn" onclick="scrollToReplay('corsairs-maelstrom', 3)" data-i18n="card_m3">Match 3 (Bronze+)</button>
             </div>
           </div>
         </div>
@@ -1038,8 +1038,8 @@
       <div class="puzzle-top">
         <div>
           <div class="puzzle-badges">
-            <span class="badge badge-rpg">Tactical Party RPG • 1v1</span>
-            <span class="badge badge-dual">PixiJS Dual-Mode (Sprites / Debug)</span>
+            <span class="badge badge-rpg" data-i18n="badge_tactical_rpg">Tactical Party RPG • 1v1</span>
+            <span class="badge badge-dual" data-i18n="badge_dual_full">PixiJS Dual-Mode (Sprites / Debug)</span>
           </div>
           <h3 data-i18n="g4_title">4. Proving Grounds of Nerdna — Compagnie RPG (Fighter, Mage, Cleric)</h3>
         </div>
@@ -1055,17 +1055,17 @@
           <div class="screenshot-tabs">
             <span data-i18n="dual_preview">Aperçu du Rendu Dual-Mode :</span>
             <div class="mode-switch-btns">
-              <button class="mode-btn active" onclick="switchScreenshot('nerdna-img', 'screenshots/proving-grounds-nerdna-sprites.png', this)">🎨 RPG SPRITES</button>
-              <button class="mode-btn" onclick="switchScreenshot('nerdna-img', 'screenshots/proving-grounds-nerdna-debug.png', this)">📐 GEOMETRIC DEBUG</button>
+              <button class="mode-btn active" onclick="switchScreenshot('nerdna-img', 'screenshots/proving-grounds-nerdna-sprites.png', this)"data-i18n="mode_sprites">🎨 RPG SPRITES</button>
+              <button class="mode-btn" onclick="switchScreenshot('nerdna-img', 'screenshots/proving-grounds-nerdna-debug.png', this)"data-i18n="mode_debug">📐 GEOMETRIC DEBUG</button>
             </div>
           </div>
           <img id="nerdna-img" src="screenshots/proving-grounds-nerdna-sprites.png" alt="Proving Grounds of Nerdna" loading="lazy" />
           <div class="replay-quick-bar">
             <span data-i18n="replays_avail">Replays disponibles :</span>
             <div>
-              <button class="btn" onclick="scrollToReplay('proving-grounds-nerdna', 1)">Match 1 (Wood 2)</button>
-              <button class="btn" onclick="scrollToReplay('proving-grounds-nerdna', 2)">Match 2 (Wood 1)</button>
-              <button class="btn" onclick="scrollToReplay('proving-grounds-nerdna', 3)">Match 3 (Bronze+)</button>
+              <button class="btn" onclick="scrollToReplay('proving-grounds-nerdna', 1)" data-i18n="card_m1">Match 1 (Wood 2)</button>
+              <button class="btn" onclick="scrollToReplay('proving-grounds-nerdna', 2)" data-i18n="card_m2">Match 2 (Wood 1)</button>
+              <button class="btn" onclick="scrollToReplay('proving-grounds-nerdna', 3)" data-i18n="card_m3">Match 3 (Bronze+)</button>
             </div>
           </div>
         </div>
@@ -1078,8 +1078,8 @@
       <div class="puzzle-top">
         <div>
           <div class="puzzle-badges">
-            <span class="badge badge-opti">Solo Optimization • Score = Gold</span>
-            <span class="badge badge-dual">PixiJS Dual-Mode (Sprites / Debug)</span>
+            <span class="badge badge-opti" data-i18n="badge_solo_gold">Solo Optimization • Score = Gold</span>
+            <span class="badge badge-dual" data-i18n="badge_dual_full">PixiJS Dual-Mode (Sprites / Debug)</span>
           </div>
           <h3 data-i18n="g5_title">5. Ultima: Dungeon Delver — Exploration Solo &amp; Sorts Runiques</h3>
         </div>
@@ -1095,17 +1095,17 @@
           <div class="screenshot-tabs">
             <span data-i18n="dual_preview">Aperçu du Rendu Dual-Mode :</span>
             <div class="mode-switch-btns">
-              <button class="mode-btn active" onclick="switchScreenshot('ultima-img', 'screenshots/ultima-dungeon-delver-sprites.png', this)">🎨 RPG SPRITES</button>
-              <button class="mode-btn" onclick="switchScreenshot('ultima-img', 'screenshots/ultima-dungeon-delver-debug.png', this)">📐 GEOMETRIC DEBUG</button>
+              <button class="mode-btn active" onclick="switchScreenshot('ultima-img', 'screenshots/ultima-dungeon-delver-sprites.png', this)"data-i18n="mode_sprites">🎨 RPG SPRITES</button>
+              <button class="mode-btn" onclick="switchScreenshot('ultima-img', 'screenshots/ultima-dungeon-delver-debug.png', this)"data-i18n="mode_debug">📐 GEOMETRIC DEBUG</button>
             </div>
           </div>
           <img id="ultima-img" src="screenshots/ultima-dungeon-delver-sprites.png" alt="Ultima: Dungeon Delver" loading="lazy" />
           <div class="replay-quick-bar">
             <span data-i18n="replays_avail">Replays disponibles :</span>
             <div>
-              <button class="btn" onclick="scrollToReplay('ultima-dungeon-delver', 1)">Dungeon 1 (Shrine)</button>
-              <button class="btn" onclick="scrollToReplay('ultima-dungeon-delver', 2)">Dungeon 2 (Vault)</button>
-              <button class="btn" onclick="scrollToReplay('ultima-dungeon-delver', 3)">Dungeon 3 (Gauntlet)</button>
+              <button class="btn" onclick="scrollToReplay('ultima-dungeon-delver', 1)" data-i18n="card_d1">Dungeon 1 (Shrine)</button>
+              <button class="btn" onclick="scrollToReplay('ultima-dungeon-delver', 2)" data-i18n="card_d2">Dungeon 2 (Vault)</button>
+              <button class="btn" onclick="scrollToReplay('ultima-dungeon-delver', 3)" data-i18n="card_d3">Dungeon 3 (Gauntlet)</button>
             </div>
           </div>
         </div>
@@ -1118,8 +1118,8 @@
       <div class="puzzle-top">
         <div>
           <div class="puzzle-badges">
-            <span class="badge badge-rpg">Overlord Board Duel • 1v1</span>
-            <span class="badge badge-dual">PixiJS Dual-Mode (Sprites / Debug)</span>
+            <span class="badge badge-rpg" data-i18n="badge_overlord_duel">Overlord Board Duel • 1v1</span>
+            <span class="badge badge-dual" data-i18n="badge_dual_full">PixiJS Dual-Mode (Sprites / Debug)</span>
           </div>
           <h3 data-i18n="g6_title">6. Overlord's Labyrinth — Gemmes d'Énergie &amp; Pentagrammes d'Invocation</h3>
         </div>
@@ -1135,17 +1135,17 @@
           <div class="screenshot-tabs">
             <span data-i18n="dual_preview">Aperçu du Rendu Dual-Mode :</span>
             <div class="mode-switch-btns">
-              <button class="mode-btn active" onclick="switchScreenshot('overlord-img', 'screenshots/overlords-labyrinth-sprites.png', this)">🎨 RPG SPRITES</button>
-              <button class="mode-btn" onclick="switchScreenshot('overlord-img', 'screenshots/overlords-labyrinth-debug.png', this)">📐 GEOMETRIC DEBUG</button>
+              <button class="mode-btn active" onclick="switchScreenshot('overlord-img', 'screenshots/overlords-labyrinth-sprites.png', this)"data-i18n="mode_sprites">🎨 RPG SPRITES</button>
+              <button class="mode-btn" onclick="switchScreenshot('overlord-img', 'screenshots/overlords-labyrinth-debug.png', this)"data-i18n="mode_debug">📐 GEOMETRIC DEBUG</button>
             </div>
           </div>
           <img id="overlord-img" src="screenshots/overlords-labyrinth-sprites.png" alt="Overlord's Labyrinth" loading="lazy" />
           <div class="replay-quick-bar">
             <span data-i18n="replays_avail">Replays disponibles :</span>
             <div>
-              <button class="btn" onclick="scrollToReplay('overlords-labyrinth', 1)">Match 1 (Wood 2)</button>
-              <button class="btn" onclick="scrollToReplay('overlords-labyrinth', 2)">Match 2 (Wood 1)</button>
-              <button class="btn" onclick="scrollToReplay('overlords-labyrinth', 3)">Match 3 (Bronze+)</button>
+              <button class="btn" onclick="scrollToReplay('overlords-labyrinth', 1)" data-i18n="card_m1">Match 1 (Wood 2)</button>
+              <button class="btn" onclick="scrollToReplay('overlords-labyrinth', 2)" data-i18n="card_m2">Match 2 (Wood 1)</button>
+              <button class="btn" onclick="scrollToReplay('overlords-labyrinth', 3)" data-i18n="card_m3">Match 3 (Bronze+)</button>
             </div>
           </div>
         </div>
@@ -1164,8 +1164,8 @@
       <div class="puzzle-top">
         <div>
           <div class="puzzle-badges">
-            <span class="badge badge-opti">Solo Optimization • Score</span>
-            <span class="badge badge-dual">PixiJS Dual-Mode (Sprites / Debug)</span>
+            <span class="badge badge-opti" data-i18n="badge_solo_score">Solo Optimization • Score</span>
+            <span class="badge badge-dual" data-i18n="badge_dual_full">PixiJS Dual-Mode (Sprites / Debug)</span>
           </div>
           <h3 data-i18n="g7_title">7. Ironblood: Captive's Raid - Heroes — Escouade, Gemmes &amp; Gêne</h3>
         </div>
@@ -1181,17 +1181,17 @@
           <div class="screenshot-tabs">
             <span data-i18n="dual_preview">Aperçu du Rendu Dual-Mode :</span>
             <div class="mode-switch-btns">
-              <button class="mode-btn active" onclick="switchScreenshot('ironblood-heroes-img', 'screenshots/ironblood-raid-heroes-sprites.png', this)">🎨 RPG SPRITES</button>
-              <button class="mode-btn" onclick="switchScreenshot('ironblood-heroes-img', 'screenshots/ironblood-raid-heroes-debug.png', this)">📐 GEOMETRIC DEBUG</button>
+              <button class="mode-btn active" onclick="switchScreenshot('ironblood-heroes-img', 'screenshots/ironblood-raid-heroes-sprites.png', this)"data-i18n="mode_sprites">🎨 RPG SPRITES</button>
+              <button class="mode-btn" onclick="switchScreenshot('ironblood-heroes-img', 'screenshots/ironblood-raid-heroes-debug.png', this)"data-i18n="mode_debug">📐 GEOMETRIC DEBUG</button>
             </div>
           </div>
           <img id="ironblood-heroes-img" src="screenshots/ironblood-raid-heroes-sprites.png" alt="Ironblood: Captive's Raid - Heroes" loading="lazy" />
           <div class="replay-quick-bar">
             <span data-i18n="replays_avail">Replays disponibles :</span>
             <div>
-              <button class="btn" onclick="scrollToReplay('ironblood-raid-heroes', 1)">Test 1 (Tier 1)</button>
-              <button class="btn" onclick="scrollToReplay('ironblood-raid-heroes', 2)">Test 2 (Tier 2)</button>
-              <button class="btn" onclick="scrollToReplay('ironblood-raid-heroes', 3)">Test 3 (Tier 2)</button>
+              <button class="btn" onclick="scrollToReplay('ironblood-raid-heroes', 1)" data-i18n="card_t1">Test 1 (Tier 1)</button>
+              <button class="btn" onclick="scrollToReplay('ironblood-raid-heroes', 2)" data-i18n="card_t2">Test 2 (Tier 2)</button>
+              <button class="btn" onclick="scrollToReplay('ironblood-raid-heroes', 3)" data-i18n="card_t3">Test 3 (Tier 2)</button>
             </div>
           </div>
         </div>
@@ -1204,9 +1204,9 @@
       <div class="puzzle-top">
         <div>
           <div class="puzzle-badges">
-            <span class="badge badge-opti">Solo Optimization • Score</span>
-            <span class="badge badge-rpg">Asymmetric Defense</span>
-            <span class="badge badge-dual">PixiJS Dual-Mode (Sprites / Debug)</span>
+            <span class="badge badge-opti" data-i18n="badge_solo_score">Solo Optimization • Score</span>
+            <span class="badge badge-rpg" data-i18n="badge_asym_def">Asymmetric Defense</span>
+            <span class="badge badge-dual" data-i18n="badge_dual_full">PixiJS Dual-Mode (Sprites / Debug)</span>
           </div>
           <h3 data-i18n="g8_title">8. Ironblood: Captive's Raid - Overlord — Rivière Runique &amp; Renforts</h3>
         </div>
@@ -1222,17 +1222,17 @@
           <div class="screenshot-tabs">
             <span data-i18n="dual_preview">Aperçu du Rendu Dual-Mode :</span>
             <div class="mode-switch-btns">
-              <button class="mode-btn active" onclick="switchScreenshot('ironblood-overlord-img', 'screenshots/ironblood-raid-overlord-sprites.png', this)">🎨 RPG SPRITES</button>
-              <button class="mode-btn" onclick="switchScreenshot('ironblood-overlord-img', 'screenshots/ironblood-raid-overlord-debug.png', this)">📐 GEOMETRIC DEBUG</button>
+              <button class="mode-btn active" onclick="switchScreenshot('ironblood-overlord-img', 'screenshots/ironblood-raid-overlord-sprites.png', this)"data-i18n="mode_sprites">🎨 RPG SPRITES</button>
+              <button class="mode-btn" onclick="switchScreenshot('ironblood-overlord-img', 'screenshots/ironblood-raid-overlord-debug.png', this)"data-i18n="mode_debug">📐 GEOMETRIC DEBUG</button>
             </div>
           </div>
           <img id="ironblood-overlord-img" src="screenshots/ironblood-raid-overlord-sprites.png" alt="Ironblood: Captive's Raid - Overlord" loading="lazy" />
           <div class="replay-quick-bar">
             <span data-i18n="replays_avail">Replays disponibles :</span>
             <div>
-              <button class="btn" onclick="scrollToReplay('ironblood-raid-overlord', 1)">Test 1 (Tier 1)</button>
-              <button class="btn" onclick="scrollToReplay('ironblood-raid-overlord', 2)">Test 2 (Tier 2)</button>
-              <button class="btn" onclick="scrollToReplay('ironblood-raid-overlord', 3)">Test 3 (Tier 2)</button>
+              <button class="btn" onclick="scrollToReplay('ironblood-raid-overlord', 1)" data-i18n="card_t1">Test 1 (Tier 1)</button>
+              <button class="btn" onclick="scrollToReplay('ironblood-raid-overlord', 2)" data-i18n="card_t2">Test 2 (Tier 2)</button>
+              <button class="btn" onclick="scrollToReplay('ironblood-raid-overlord', 3)" data-i18n="card_t3">Test 3 (Tier 2)</button>
             </div>
           </div>
         </div>
@@ -1246,41 +1246,25 @@
       <div class="puzzle-top" style="margin-bottom: 1rem;">
         <div>
           <div class="puzzle-badges">
-            <span class="badge badge-multi">GitHub Discussions • Free DB</span>
+            <span class="badge badge-multi" data-i18n="badge_giscus">GitHub Discussions • Free DB</span>
             <span class="badge badge-dual">Giscus</span>
           </div>
-          <h3 data-i18n="comments_title">💬 Commentaires &amp; Retours de la Communauté</h3>
+          <h3 data-i18n="comments_title">💬 Community Comments &amp; Feedback</h3>
         </div>
         <a class="btn" href="https://github.com/CGphilRG/codingame-sdk-puzzles/discussions" target="_blank" rel="noopener">
           🗣️ GitHub Discussions
         </a>
       </div>
       <p style="color:var(--text-muted); font-size:0.92rem; margin-bottom:1.2rem;" data-i18n="comments_sub">
-        Partagez vos retours, stratégies de bots ou suggestions sur les 8 puzzles ! Les commentaires sont stockés gratuitement via <b>GitHub Discussions (Giscus)</b>.
+        Share your feedback, bot strategies, or balance suggestions for any of the 8 puzzles! Comments are stored for free via <b>GitHub Discussions (Giscus)</b>.
       </p>
-      <div id="giscus-container">
-        <script src="https://giscus.app/client.js"
-          data-repo="CGphilRG/codingame-sdk-puzzles"
-          data-repo-id="R_kgDOV6sXJg"
-          data-category="General"
-          data-category-id="DIC_kwDOV6sXJs4DL5aj"
-          data-mapping="pathname"
-          data-strict="0"
-          data-reactions-enabled="1"
-          data-emit-metadata="0"
-          data-input-position="top"
-          data-theme="dark_dimmed"
-          data-lang="fr"
-          crossorigin="anonymous"
-          async>
-        </script>
-      </div>
+      <div id="giscus-container"></div>
     </section>
   </main>
 
   <footer>
     <p data-i18n="footer_text">
-      Développé avec <b>CodinGame Game Engine SDK v4.7.7</b> (Java 17 &amp; PixiJS v6) • Organisation GitHub
+      Built with <b>CodinGame Game Engine SDK v4.7.7</b> (Java 17 &amp; PixiJS v6) • GitHub Organization
       <a href="https://github.com/CGphilRG" target="_blank" rel="noopener">@CGphilRG</a>
     </p>
   </footer>
@@ -1288,6 +1272,8 @@
   <script>
     const I18N = {
       fr: {
+        page_title: "CodinGame SDK Puzzles Hub — 8 Puzzles & Replays PixiJS (FR)",
+        topbar_editor: "🗺️ Éditeur de Tuiles RPG &amp; Cloisons",
         hero_title: "Catalogue des 8 Puzzles CodinGame & Lecteur de Replays PixiJS",
         hero_sub: "Retrouvez nos 8 créations communautaires développées avec le SDK officiel CodinGame : <b>3 puzzles algorithmiques multijoueurs</b> et <b>5 puzzles RPG tactiques</b> dotés d'un viewer PixiJS <b>Dual-Mode</b> (<i>RPG Sprites</i> vs <i>Geometric Debug</i>).",
         nav_theater: "🎬 Lecteur PixiJS Interactif",
@@ -1302,6 +1288,33 @@
         th_puzzle: "Puzzle",
         th_category: "Catégorie",
         th_mechanics: "Thème & Mécaniques Clés",
+        th_ide: "Démo IDE",
+        badge_bot: "Bot Programming",
+        badge_rpg_1v1: "RPG 1v1",
+        badge_opti: "Optimisation",
+        badge_dual_short: "Dual-Mode",
+        tbl_contrib: "Contribution",
+        tbl_ide: "Démo IDE",
+        badge_multi_1v1: "Bot Programming • 1v1",
+        badge_3leagues: "3 Ligues (Bois 2 → Bronze+)",
+        badge_tactical_rpg: "RPG Tactique • 1v1",
+        badge_dual_full: "PixiJS Dual-Mode (Sprites / Debug)",
+        badge_solo_gold: "Optimisation Solo • Score = Or",
+        badge_overlord_duel: "Duel Plateau Overlord • 1v1",
+        badge_solo_score: "Optimisation Solo • Score",
+        badge_asym_def: "Défense Asymétrique",
+        badge_giscus: "GitHub Discussions • Base Gratuite",
+        mode_sprites: "🎨 SPRITES RPG",
+        mode_debug: "📐 DEBUG GÉOMÉTRIQUE",
+        card_m1: "Match 1 (Bois 2)",
+        card_m2: "Match 2 (Bois 1)",
+        card_m3: "Match 3 (Bronze+)",
+        card_d1: "Donjon 1 (Sanctuaire)",
+        card_d2: "Donjon 2 (Crypte)",
+        card_d3: "Donjon 3 (Gantelet)",
+        card_t1: "Test 1 (Palier 1)",
+        card_t2: "Test 2 (Palier 2)",
+        card_t3: "Test 3 (Palier 2)",
         td_desc_1: "Arène 11×11 à effondrement progressif, <code>BOMB</code>, <code>PUSH</code>, Voronoï & MCTS",
         td_desc_2: "Arbres de relais d'énergie (<code>LINK</code>), surcharge (<code>OVERCHARGE</code>) & intersections",
         td_desc_3: "Physique inertielle à masse variable, vortex du Maelström, <code>ANCHOR</code> & <code>FIRE</code>",
@@ -1396,6 +1409,8 @@
       },
 
       en: {
+        page_title: "CodinGame SDK Puzzles Hub — 8 Puzzles & Live PixiJS Replays",
+        topbar_editor: "🗺️ RPG Tile &amp; Thin-Wall Editor",
         hero_title: "CodinGame 8-Puzzle Showcase & Live PixiJS Replay Theater",
         hero_sub: "Explore our 8 community games built with the official CodinGame SDK: <b>3 multiplayer algorithmic puzzles</b> and <b>5 tactical RPG puzzles</b> featuring a real-time <b>Dual-Mode</b> PixiJS viewer (<i>RPG Sprites</i> vs <i>Geometric Debug</i>).",
         nav_theater: "🎬 Interactive PixiJS Player",
@@ -1410,6 +1425,33 @@
         th_puzzle: "Puzzle",
         th_category: "Category",
         th_mechanics: "Core Theme & Mechanics",
+        th_ide: "IDE Demo",
+        badge_bot: "Bot Programming",
+        badge_rpg_1v1: "RPG 1v1",
+        badge_opti: "Optimization",
+        badge_dual_short: "Dual-Mode",
+        tbl_contrib: "Contribution",
+        tbl_ide: "IDE Demo",
+        badge_multi_1v1: "Bot Programming • 1v1",
+        badge_3leagues: "3 Leagues (Wood 2 → Bronze+)",
+        badge_tactical_rpg: "Tactical Party RPG • 1v1",
+        badge_dual_full: "PixiJS Dual-Mode (Sprites / Debug)",
+        badge_solo_gold: "Solo Optimization • Score = Gold",
+        badge_overlord_duel: "Overlord Board Duel • 1v1",
+        badge_solo_score: "Solo Optimization • Score",
+        badge_asym_def: "Asymmetric Defense",
+        badge_giscus: "GitHub Discussions • Free DB",
+        mode_sprites: "🎨 RPG SPRITES",
+        mode_debug: "📐 GEOMETRIC DEBUG",
+        card_m1: "Match 1 (Wood 2)",
+        card_m2: "Match 2 (Wood 1)",
+        card_m3: "Match 3 (Bronze+)",
+        card_d1: "Dungeon 1 (Shrine)",
+        card_d2: "Dungeon 2 (Vault)",
+        card_d3: "Dungeon 3 (Gauntlet)",
+        card_t1: "Test 1 (Tier 1)",
+        card_t2: "Test 2 (Tier 2)",
+        card_t3: "Test 3 (Tier 2)",
         td_desc_1: "11×11 collapsing arena, <code>BOMB</code>, <code>PUSH</code>, Voronoi partitioning & MCTS",
         td_desc_2: "Energy relay spanning trees (<code>LINK</code>), node <code>OVERCHARGE</code> & segment intersection",
         td_desc_3: "Variable-mass inertial physics, Maelstrom vortex vector field, <code>ANCHOR</code> & <code>FIRE</code>",
@@ -1504,6 +1546,8 @@
       },
 
       de: {
+        page_title: "CodinGame SDK Puzzles Hub — 8 Puzzles & PixiJS-Replays (DE)",
+        topbar_editor: "🗺️ RPG-Kachel- &amp; Wand-Editor",
         hero_title: "CodinGame 8-Puzzle-Katalog & Interaktiver PixiJS-Replay-Player",
         hero_sub: "Entdecken Sie unsere 8 mit dem offiziellen CodinGame-SDK entwickelten Community-Spiele: <b>3 algorithmische Multiplayer-Puzzles</b> und <b>5 taktische RPG-Puzzles</b> mit einem <b>Dual-Mode</b> PixiJS-Viewer (<i>RPG Sprites</i> vs. <i>Geometric Debug</i>).",
         nav_theater: "🎬 Interaktiver PixiJS-Player",
@@ -1518,6 +1562,33 @@
         th_puzzle: "Puzzle",
         th_category: "Kategorie",
         th_mechanics: "Thema & Kernmechaniken",
+        th_ide: "IDE-Demo",
+        badge_bot: "Bot-Programmierung",
+        badge_rpg_1v1: "RPG 1v1",
+        badge_opti: "Optimierung",
+        badge_dual_short: "Dual-Mode",
+        tbl_contrib: "Beitrag",
+        tbl_ide: "IDE-Demo",
+        badge_multi_1v1: "Bot-Programmierung • 1v1",
+        badge_3leagues: "3 Ligen (Holz 2 → Bronze+)",
+        badge_tactical_rpg: "Taktisches Gruppen-RPG • 1v1",
+        badge_dual_full: "PixiJS Dual-Mode (Sprites / Debug)",
+        badge_solo_gold: "Solo-Optimierung • Score = Gold",
+        badge_overlord_duel: "Overlord-Brettduell • 1v1",
+        badge_solo_score: "Solo-Optimierung • Score",
+        badge_asym_def: "Asymmetrische Verteidigung",
+        badge_giscus: "GitHub Discussions • Kostenlose DB",
+        mode_sprites: "🎨 RPG-SPRITES",
+        mode_debug: "📐 GEOMETRISCH-DEBUG",
+        card_m1: "Match 1 (Holz 2)",
+        card_m2: "Match 2 (Holz 1)",
+        card_m3: "Match 3 (Bronze+)",
+        card_d1: "Dungeon 1 (Schrein)",
+        card_d2: "Dungeon 2 (Gruft)",
+        card_d3: "Dungeon 3 (Spießrutenlauf)",
+        card_t1: "Test 1 (Stufe 1)",
+        card_t2: "Test 2 (Stufe 2)",
+        card_t3: "Test 3 (Stufe 2)",
         td_desc_1: "11×11 einstürzende Arena, <code>BOMB</code>, <code>PUSH</code>, Voronoi-Partitionierung & MCTS",
         td_desc_2: "Energierelais-Spannbäume (<code>LINK</code>), Knoten-<code>OVERCHARGE</code> & Schnittpunktprüfung",
         td_desc_3: "Trägheitsphysik mit variabler Masse, Maelström-Vektorfeld, <code>ANCHOR</code> & <code>FIRE</code>",
@@ -1612,6 +1683,8 @@
       },
 
       jp: {
+        page_title: "CodinGame SDK パズルハブ — 8作品 & PixiJS リプレイシアター",
+        topbar_editor: "🗺️ RPGタイル &amp; 薄壁エディタ",
         hero_title: "CodinGame 8パズル・ショーケース & PixiJS ライブ・リプレイシアター",
         hero_sub: "公式 CodinGame SDK で開発された8つのコミュニティゲーム集：<b>3つのマルチプレイヤー・アルゴリズムパズル</b>と、リアルタイム <b>Dual-Mode</b> PixiJS ビューア（<i>RPG Sprites</i> vs <i>Geometric Debug</i>）を搭載した <b>5つのタクティカルRPGパズル</b>。",
         nav_theater: "🎬 インタラクティブ PixiJS プレイヤー",
@@ -1626,6 +1699,33 @@
         th_puzzle: "パズル名",
         th_category: "カテゴリ",
         th_mechanics: "テーマ & 主要メカニクス",
+        th_ide: "IDEデモ",
+        badge_bot: "Bot開発",
+        badge_rpg_1v1: "RPG 1v1",
+        badge_opti: "最適化",
+        badge_dual_short: "Dual-Mode",
+        tbl_contrib: "コントリビューション",
+        tbl_ide: "IDEデモ",
+        badge_multi_1v1: "Bot開発 • 1v1",
+        badge_3leagues: "3リーグ (Wood 2 → Bronze+)",
+        badge_tactical_rpg: "タクティカルRPG • 1v1",
+        badge_dual_full: "PixiJS Dual-Mode (表示切替)",
+        badge_solo_gold: "ソロ最適化 • スコア = Gold",
+        badge_overlord_duel: "Overlordボード対決 • 1v1",
+        badge_solo_score: "ソロ最適化 • スコア",
+        badge_asym_def: "非対称防衛",
+        badge_giscus: "GitHub Discussions • 無料DB",
+        mode_sprites: "🎨 RPGスプライト",
+        mode_debug: "📐 幾何学デバッグ",
+        card_m1: "マッチ 1 (Wood 2)",
+        card_m2: "マッチ 2 (Wood 1)",
+        card_m3: "マッチ 3 (Bronze+)",
+        card_d1: "ダンジョン 1 (神殿)",
+        card_d2: "ダンジョン 2 (宝物庫)",
+        card_d3: "ダンジョン 3 (試練)",
+        card_t1: "テスト 1 (Tier 1)",
+        card_t2: "テスト 2 (Tier 2)",
+        card_t3: "テスト 3 (Tier 2)",
         td_desc_1: "11×11 崩壊アリーナ、<code>BOMB</code>、<code>PUSH</code>、ボロノイ分割 & MCTS",
         td_desc_2: "エネルギーリレー全域木 (<code>LINK</code>)、<code>OVERCHARGE</code> & 線分交差判定",
         td_desc_3: "可変質量慣性物理、メイルストロム渦ベクトル場、<code>ANCHOR</code> & <code>FIRE</code>",
@@ -1731,9 +1831,60 @@
       'ironblood-raid-overlord': "8. Ironblood: Captive's Raid - Overlord"
     };
 
+    const SOLO_SLUGS = new Set([
+      'ultima-dungeon-delver',
+      'ironblood-raid-heroes',
+      'ironblood-raid-overlord'
+    ]);
+
     let currentLang = 'en';
     let currentSlug = 'proving-grounds-nerdna';
     let currentMatch = 3;
+    let lastGiscusLang = null;
+
+    function toGiscusLang(lang) {
+      return lang === 'jp' ? 'ja' : lang;
+    }
+
+    function mountGiscus(lang) {
+      const container = document.getElementById('giscus-container');
+      if (!container || container.querySelector('script')) return;
+      const gLang = toGiscusLang(lang);
+      const s = document.createElement('script');
+      s.src = 'https://giscus.app/client.js';
+      s.setAttribute('data-repo', 'CGphilRG/codingame-sdk-puzzles');
+      s.setAttribute('data-repo-id', 'R_kgDOV6sXJg');
+      s.setAttribute('data-category', 'General');
+      s.setAttribute('data-category-id', 'DIC_kwDOV6sXJs4DL5aj');
+      s.setAttribute('data-mapping', 'pathname');
+      s.setAttribute('data-strict', '0');
+      s.setAttribute('data-reactions-enabled', '1');
+      s.setAttribute('data-emit-metadata', '0');
+      s.setAttribute('data-input-position', 'top');
+      s.setAttribute('data-theme', 'dark_dimmed');
+      s.setAttribute('data-lang', gLang);
+      s.crossOrigin = 'anonymous';
+      s.async = true;
+      lastGiscusLang = gLang;
+      container.appendChild(s);
+    }
+
+    function syncGiscusLanguage(lang) {
+      const gLang = toGiscusLang(lang);
+      const giscusFrame = document.querySelector('iframe.giscus-frame');
+      if (giscusFrame && giscusFrame.contentWindow) {
+        giscusFrame.contentWindow.postMessage({ giscus: { setConfig: { lang: gLang } } }, 'https://giscus.app');
+        lastGiscusLang = gLang;
+      }
+    }
+
+    window.addEventListener('message', event => {
+      if (event.origin === 'https://giscus.app' && event.data && event.data.giscus) {
+        if (lastGiscusLang !== toGiscusLang(currentLang)) {
+          syncGiscusLanguage(currentLang);
+        }
+      }
+    });
 
     function setLanguage(lang) {
       if (!I18N[lang]) lang = 'en';
@@ -1741,6 +1892,9 @@
       document.documentElement.lang = lang === 'jp' ? 'ja' : lang;
 
       const dict = I18N[lang];
+      if (dict.page_title) {
+        document.title = dict.page_title;
+      }
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
         if (dict[key] !== undefined) {
@@ -1752,10 +1906,7 @@
         btn.classList.toggle('active', btn.dataset.lang === lang);
       });
 
-      const giscusFrame = document.querySelector('iframe.giscus-frame');
-      if (giscusFrame && giscusFrame.contentWindow) {
-        giscusFrame.contentWindow.postMessage({ giscus: { setConfig: { lang: lang === 'jp' ? 'ja' : lang } } }, 'https://giscus.app');
-      }
+      syncGiscusLanguage(lang);
       updateActiveReplayLabel();
       try {
         localStorage.setItem('cg_hub_lang', lang);
@@ -1772,7 +1923,10 @@
         de: 'Aktives Puzzle:',
         jp: '選択中のパズル：'
       }[currentLang] || 'Active Puzzle:';
-      const matchWord = currentLang === 'jp' ? 'マッチ' : 'Match';
+      const isSolo = SOLO_SLUGS.has(currentSlug);
+      const matchWord = currentLang === 'jp'
+        ? (isSolo ? 'テスト' : 'マッチ')
+        : (isSolo ? 'Test' : 'Match');
       document.getElementById('current-replay-label').textContent =
         `${prefix} ${GAME_TITLES[currentSlug]} — ${matchWord} ${currentMatch}`;
     }
@@ -1821,6 +1975,7 @@
       try { saved = localStorage.getItem('cg_hub_lang'); } catch (e) {}
       const initial = I18N[qLang] ? qLang : (I18N[saved] ? saved : 'en');
       setLanguage(initial);
+      mountGiscus(initial);
     })();
   </script>
 </body>
